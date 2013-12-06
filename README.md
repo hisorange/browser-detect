@@ -265,7 +265,7 @@ BrowserDetect::isIEVersion(9, true);
 ***
 + [garetjax/phpbrowscap](https://github.com/GaretJax/phpbrowscap) Provides the most accurate informations about the browser.
 + [yzalis/ua-parser](https://github.com/yzalis/UAParser) Parses the user agent and provides accurate version numbers, os name, browser name, etc...
-+ [mobiledetect/mobiledetectli](https://github.com/serbanghita/Mobile-Detect) The famous Mobile_Detect, identifies the device kind (almost) perfectly!
++ [mobiledetect/mobiledetectli](https://github.com/serbanghita/Mobile-Detect) The famous Mobile_Detect, identifies the device kind and model perfectly!
 
 <3 Thank's them too. Those packages are included to the composer and not source mirrored so can find them in your vendor.
 
