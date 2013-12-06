@@ -188,3 +188,22 @@ For desktop computers this value will be null.
 BrowserDetect::mobileGrade(); // returns 'A'. Values are always capitalized.
 ```
 
+##### Internet Explorer support.
+
+The package contains some helper functions to determine if the browser is an IE and it's version is equal or lower to the setted.
+
+```php
+// Determine if the browser is an Internet Explorer?
+BrowserDetect::isIE(); // return 'true'.
+
+// Send out alert for old IE browsers.
+if (BrowserDetect::isIEVersion(6)) {
+	echo 'Your browser is a shit, watch the Jersey Shore instead of this page...';
+}
+
+// true for IE 6 only.
+BrowserDetect::isIEVersion(6); 
+
+// true for IE 9 or lower.
+BrowserDetect::isIEVersion(9, true);
+```
