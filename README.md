@@ -1,13 +1,59 @@
-# Browser &amp; Mobile detection package for Laravel.
+## Browser &amp; Mobile detection package for Laravel.
 
-The packages collects and wrap together the best user-agent identifier packages.
+The packages collects and wrap together the best user-agent identifier packages for Laravel, and uses it's strength.
 
-[garetjax/phpbrowscap](https://github.com/GaretJax/phpbrowscap) Provides the most accurate informations about the browser by using a constantly updated browscap.ini (without the get_browser() function.)
-[yzalis/ua-parser](https://github.com/yzalis/UAParser) This awesome package parses the user agent and provides accurate version numbers, os name, browser name, etc...
-[mobiledetect/mobiledetectli](https://github.com/serbanghita/Mobile-Detect) The famous Mobile_Detect, identifies the device kind (almost) perfectly!
++ Determine **browser** informations.
++ Determine **operating system** informations.
++ Determine device kind (**phone,tablet,desktop**) and family, model informations.
++ Define **mobile grades** for phone and tablet devices.
++ Determine the browser's **CSS version support**.
++ Identify **bots**.
++ Handle Internet Explorer versions.
++ Uses your application **Cache** without any codeing.
++ Minimalized cache useage, only a very thin array will be cached without named keys or any extra informations.
++ Personal configurations.
 
-##### Laravel way <3, Examples:
+## Installation.
+***
+First add the following package to your composer:
+```json
+{
+	"require": {
+		"hisorange/browser-detect": "dev-master"
+	}
+}
+```
+After the composer update/install add the service provider to your app.php:
+```php
+'providers'	=> array(
+	// ...
+	'hisorange\browserdetect\Providers\BrowserDetectServiceProvider',
+	// ...
+)
+```
+Add the alias to the aliases in your app.php:
+```php
+'aliases' => array(
+	// ...
+	'BrowserDetect' => 'hisorange\browserdetect\Facades\BrowserDetect',
+)
+```
+You can use personal configurations just publish the package's configuration files.
+```
+php artisan config:publish hisorange/browser-detect
+```
+Finaly, enjoy :3
 
+**At the first use the Browscap will download the most recent browscap.ini and will create a cached copy from it,
+this may take several seconds.**
+
+## Performance.
+***
++ On my test server without cacheing the first analization took 40ms and 5-7ms each different agent after that.
++ With cache the first analization took 3ms and 0-1ms each different agent after that.
+
+## Examples.
+***
 The package created for the Laravel 4 application, and tries to follow the laravelKindOfPrograming.
 
 ```php
@@ -24,8 +70,8 @@ BrowserDetect::browserName(); // return 'Firefox 3.6' string.
 BrowserDetect::browserFamily(); // return 'Firefox' string.
 ```
 
-##### Operate with different headers.
-
+#### Operate with different headers.
+***
 If you do not set any agent for the BrowserDetect it will use the current $_SERVER['HTTP_USER_AGENT'], but you can change user agent on the fly.
 
 ```php
@@ -39,8 +85,8 @@ BrowserDetect::setAgent('Opera/9.63 (Windows NT 6.0; U; nb) Presto/2.1.1')->brow
 BrowserDetect::setAgent('Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)')->browserVersion(); // 10
 ```
 
-##### Fetched informations.
-
+#### Fetched informations.
+***
 The Info class always provides a fix information schema, which containing the following datas.
 
 ```php
@@ -73,8 +119,8 @@ hisorange\browserdetect\Info Object
 )
 ```
 
-##### Manage user agents.
-
+#### Manage user agents.
+***
 Can analize other then the current visitor's user-agent on the fly.
 
 ```php
@@ -88,8 +134,8 @@ BrowserDetect::getAgent();
 BrowserDetect::userAgentString();
 ```
 
-##### Determine the device kind.
-
+#### Determine the device kind.
+***
 Can determine if the device is a mobile phone, tablet or desktop computer.
 
 ```php
@@ -103,8 +149,8 @@ BrowserDetect::isTablet(); // return true : false;
 BrowserDetect::isDesktop(); // return true : false;
 ```
 
-##### A bot visiting my page?
-
+#### A bot visiting my page?
+***
 If you wish to ban bots from your webpage:
 
 ```php
@@ -113,8 +159,8 @@ if (BrowserDetect::isBot()) {
 }
 ```
 
-##### Browser software informations.
-
+#### Browser software informations.
+***
 The package determine the browser family and its semantic version.
 
 ```php
@@ -131,10 +177,10 @@ BrowserDetect::browserVersion(); // return '5.2' string, cuts the unecessary .0 
 
 // Even more love for humans..
 BrowserDetect::browserName(); // return 'Internet Explorer 10' string, merges the family and it's version.
-``
+```
 
-##### Operating system informations.
-
+#### Operating system informations.
+***
 The package determine the Operating system family and its version.
 
 ```php
@@ -156,10 +202,10 @@ BrowserDetect::osVersion(); // return 'XP' string, for Windows XP
 BrowserDetect::osName(); // return 'Windows 7' string, merges the family and it's version.
 ```
 
-##### Device informations.
-
+#### Device informations.
+***
 Can determine the device family e.g: 'Apple' and the device model e.g: 'iPhone'.
-This function only works with tablets and model devices yet, since the request to the server do not containing informations about the desktop computers.
+This function only works with tablet and mobile devices yet, since the request to the server do not containing informations about the desktop computers.
 
 ```php
 // Get device family.
@@ -169,8 +215,8 @@ BrowserDetect::deviceFamily(); // return 'Apple' string. Nokia, Samsung, BlackBe
 BrowserDetect::deviceModel(); // return 'iPad' string. iPhone, Nexus, etc..
 ```
 
-##### CSS version support.
-
+#### CSS version support.
+***
 The Browscap package can determine many browser's css version support.
 
 ```php
@@ -178,8 +224,8 @@ The Browscap package can determine many browser's css version support.
 BrowserDetect::cssVersion(); // return '3' integer. Possible values null = unknown, 1, 2, 3
 ```
 
-##### Mobile grades.
-
+#### Mobile grades.
+***
 The mobile grading function inherited from the Mobile_Detect and works as it defines it.
 For desktop computers this value will be null.
 
@@ -188,8 +234,8 @@ For desktop computers this value will be null.
 BrowserDetect::mobileGrade(); // returns 'A'. Values are always capitalized.
 ```
 
-##### Internet Explorer support.
-
+#### Internet Explorer support.
+***
 The package contains some helper functions to determine if the browser is an IE and it's version is equal or lower to the setted.
 
 ```php
@@ -207,3 +253,22 @@ BrowserDetect::isIEVersion(6);
 // true for IE 9 or lower.
 BrowserDetect::isIEVersion(9, true);
 ```
+
+## Configurations.
+***
++ Can turn on / off the cacheing.
++ Can set how long the cache keep the results.
++ Can change the cache key prefix to avoid conflicts.
++ Can change the browscap package's file cache path. 
+
+## Used packages.
+***
++ [garetjax/phpbrowscap](https://github.com/GaretJax/phpbrowscap) Provides the most accurate informations about the browser.
++ [yzalis/ua-parser](https://github.com/yzalis/UAParser) Parses the user agent and provides accurate version numbers, os name, browser name, etc...
++ [mobiledetect/mobiledetectli](https://github.com/serbanghita/Mobile-Detect) The famous Mobile_Detect, identifies the device kind (almost) perfectly!
+
+<3 Thank's them too. Those packages are included to the composer and not source mirrored so can find them in your vendor.
+
+## Plans:
+
++ Extend the device informations when the MobileDetect 3 will be released.
