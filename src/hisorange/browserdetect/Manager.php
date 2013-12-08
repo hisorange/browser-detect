@@ -136,7 +136,7 @@ class Manager {
 				});
 				
 				// Recreate the result from schema keys and cache datas.
-				$this->results[$this->ua] = new Info(array_combine(array_keys(self::$schema), $cacheData));
+				$this->results[$this->ua] = new Info($cacheData);
 			} else {
 				$this->results[$this->ua] = $this->_parse();	
 			}

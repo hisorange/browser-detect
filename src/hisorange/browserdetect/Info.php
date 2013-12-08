@@ -15,8 +15,93 @@ class Info {
 	 *
 	 * @return void
 	 */
-	public function __construct(array $data) {
+	public function __construct($data = null) {
+		// Import a data array.
+		if (is_array($data)) {
+			$this->importFromArray($data);
+		} 
+		// Import a compact string form.
+		elseif (is_string($data) and strpos($data, '|')) {
+			$this->importFromString($data);
+		}
+	}
+
+	/**
+	 * Import infos from string.
+	 *
+	 * @param  string $data
+	 * @return self
+	 */
+	public function importFromString($data)
+	{
+		// Split the string at pipelines.
+		$data 		= explode('|', $data);
+
+		// Add back the empty ua.
+		array_unshift($data, null);
+
+		// Merge the schema and the datas.
+		$this->data = array_combine(array_keys(Manager::$schema), $data);
+
+		// Fix is* values back to boolean.
+		foreach ($this->data as $key => &$value) {
+			if (substr($key, 0, 2) == 'is') {
+				$value = (bool) $value;
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Import infos from array.
+	 *
+	 * @param  array Can be empty or schema array.
+	 * @return self
+	 */
+	public function importFromArray($data)
+	{
+		// Guess the keyings.
+		if (is_numeric(key($data))) {
+			$data 	= array_combine(array_keys(Manager::$schema), $data);
+		}
+
+		// Init the datas.
 		$this->data = $data;
+
+		return $this;
+	}
+
+	/**
+	 * Export infos to compact string.
+	 *
+	 * @return string
+	 */
+	public function exportToString()
+	{
+		$data 	= $this->data;
+
+		// Remove the userAgentString.
+		array_shift($data);
+
+		// Convert is* values to boolean.
+		foreach ($data as $key => &$value) {
+			if (substr($key, 0, 2) == 'is') {
+				$value = $value ? '1':'0';
+			}
+		}
+
+		return implode('|', $data);
+	}
+
+	/**
+	 * Export infos to array.
+	 *
+	 * @return array
+	 */
+	public function exportToArray()
+	{
+		return $this->data;
 	}
 
 	/**
@@ -82,5 +167,15 @@ class Info {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Create a compact string.
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->exportToString();
 	}
 }
