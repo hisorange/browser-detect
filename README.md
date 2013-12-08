@@ -1,4 +1,4 @@
-### Browser &amp; Mobile detection package for Laravel v.0.9.0
+### Browser &amp; Mobile detection package for Laravel v.0.9.1
 
 The packages collects and wrap together the best user-agent identifier packages for Laravel, and uses it's strength.
 
@@ -260,7 +260,7 @@ You can export & import the Info object data's into a simple array or a compact 
 This function useful when you wish to store a user agent info in a database field, the compact string format will only contain the analization results so it can be between 30-200 chr which fits perfectly in your database char field.
 
 ```php
-// Export info object to a compact string.
+// Export info object to a compact string. Since (**0.9.1**)
 echo BrowserDetect::exportToString(); // Will produce '1|0|0|0|Safari|5|0|2|iOS|4|3|2|Apple|iPhone|3|A'
 
 // Import info from a compact string.
