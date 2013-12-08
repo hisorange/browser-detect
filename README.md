@@ -292,3 +292,4 @@ BrowserDetect::importFromArray($infoArray); // Will revert every informations.
 ## Plans:
 
 + Extend the device informations when the MobileDetect 3 will be released.
++ Create more extended setting for phpbrowscap.
