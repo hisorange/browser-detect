@@ -254,13 +254,13 @@ BrowserDetect::isIEVersion(6);
 BrowserDetect::isIEVersion(9, true);
 ```
 
-#### Export & Import datas.
+#### Export & Import datas. Since (**0.9.1**)
 ***
 You can export & import the Info object data's into a simple array or a compact string. 
 This function useful when you wish to store a user agent info in a database field, the compact string format will only contain the analization results so it can be between 30-200 chr which fits perfectly in your database char field.
 
 ```php
-// Export info object to a compact string. Since (**0.9.1**)
+// Export info object to a compact string.
 echo BrowserDetect::exportToString(); // Will produce '1|0|0|0|Safari|5|0|2|iOS|4|3|2|Apple|iPhone|3|A'
 
 // Import info from a compact string.
