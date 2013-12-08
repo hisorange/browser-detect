@@ -1,4 +1,4 @@
-### Browser &amp; Mobile detection package for Laravel v.0.9.1
+## Browser &amp; Mobile detection package for Laravel 4.
 
 The packages collects and wrap together the best user-agent identifier packages for Laravel, and uses it's strength.
 
