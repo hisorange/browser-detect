@@ -31,7 +31,7 @@ class Manager {
 	 *
 	 * @type array
 	 */
-	protected $results;
+	protected $results = array();
 
 	/**
 	 * Key translations for Browscap.
@@ -119,7 +119,7 @@ class Manager {
 		}
 
 		// If the user agent not analized yet.
-		if ( ! isset($this->results[$this->ua])) {
+		if ( ! array_key_exists($this->ua, $this->results)) {
 			// Try to load it from the cache if allowed.
 			if (Config::get('browser-detect::cache', false)) {
 				// Generate cache key by prefix_md5_hashed_user_agent_string
@@ -353,6 +353,11 @@ class Manager {
 	 */
 	public function __call($method, $params)
 	{
+		// Importing the info.
+		if (substr($method, 0, 6) == 'import') {
+			return new Info($params[0]);
+		}
+
 		$info = $this->getInfo();
 
 		// Check for browser data.
