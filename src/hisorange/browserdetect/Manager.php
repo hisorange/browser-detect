@@ -297,7 +297,7 @@ class Manager {
 	protected function fetchMobileDetect()
 	{
 		// If the analized ua is the current then allow header usage, but if not then display fake headers.
-		$headers  = ($this->ua != $_SERVER['HTTP_USER_AGENT']) ? array('HTTP_FAKE' => 1) : null;
+		$headers  = (!isset($_SERVER['HTTP_USER_AGENT']) or $this->ua != $_SERVER['HTTP_USER_AGENT']) ? array('HTTP_FAKE' => 1) : null;
 
 		// Fetch informations.
 		$md 	= new MobileDetect($headers, $this->ua);
