@@ -14,7 +14,7 @@
         "php": ">=5.3.0",
         "mobiledetect/mobiledetectlib": "2.*",
         "garetjax/phpbrowscap": "*",
-        "yzalis/ua-parser": "dev-master"
+        "yzalis/uaparser": "dev-master"
     },
     "autoload": {
         "psr-0": {
