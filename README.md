@@ -19,7 +19,7 @@ First add the following package to your composer:
 ```json
 {
 	"require": {
-		"hisorange/browser-detect": "dev-master"
+		"hisorange/browser-detect": "0.9.*"
 	}
 }
 ```
