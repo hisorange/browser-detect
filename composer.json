@@ -13,8 +13,8 @@
     ],
 
     "require": {
-        "php": ">=5.3.0",
-        "laravel/framework": 			"4.*",
+        "php": ">=5.4.0",
+        "laravel/framework":            "4.*",
         "garetjax/phpbrowscap": 		"2.*",
         "mobiledetect/mobiledetectlib": "2.*",
         "yzalis/ua-parser": 			"dev-master"
@@ -22,7 +22,7 @@
 
     "autoload": {
         "psr-4": {
-            "hisorange\\browser\\": "src/"
+            "hisorange\\BrowserDetect\\": "src/"
         }
     },
 
