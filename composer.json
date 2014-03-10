@@ -22,7 +22,7 @@
 
     "autoload": {
         "psr-4": {
-            "hisorange\\browser": "src/"
+            "hisorange\\browser\\": "src/"
         }
     },
 
