@@ -14,6 +14,9 @@
 
     "require": {
         "php": ">=5.4.0",
+
+        "hisorange/traits":             "dev-master",
+
         "laravel/framework":            "4.*",
         "garetjax/phpbrowscap": 		"2.*",
         "mobiledetect/mobiledetectlib": "2.*",
