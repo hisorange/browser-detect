@@ -5,7 +5,7 @@ use ArrayIterator;
 use Illuminate\Support\Fluent;
 
 /**
- * @since 1.0.0 the result extends to \Illuminate\Support\Fluent
+ * @since 1.0.0 the result extends to \Illuminate\Support\Fluent, also the class has been renamed from Info to Result.
  */
 class Result extends Fluent {
 
@@ -28,6 +28,7 @@ class Result extends Fluent {
 	}
 
 	/**
+	 * Import a result from a compact string format to the object.
 	 * Split and merge with the schema. Also convert the is* values back to boolean.
 	 *
 	 * @param  string $raw
@@ -40,6 +41,7 @@ class Result extends Fluent {
 	}
 
 	/**
+	 * Import a result from an array to the object.
 	 * Sniff out if the array has named keys or need to merge with the schema.
 	 *
 	 * @param  array $raw
