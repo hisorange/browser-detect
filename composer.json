@@ -2,7 +2,7 @@
     "name": "hisorange/browser-detect",
     "description": "Browser & Mobile detection package for Laravel 4.",
     "keywords": ["laravel", "user-agent", "browser", "mobile", "tablet", "user agent", "mobile", "tablet", "greenball", "hisorange"],
-    "licence": "MIT",
+    "license": "MIT",
     "version": "1.0.0pre",
 
     "authors": [
