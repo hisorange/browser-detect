@@ -1,4 +1,7 @@
 ## Browser &amp; Mobile detection package for Laravel 4.
+***
+** If you testing the 1.0.*pre releases check out the new readme on the dev-develop-1 branch.**
+***
 
 The packages collects and wrap together the best user-agent identifier packages for Laravel, and uses it's strength.
 
@@ -27,7 +30,7 @@ After the composer update/install add the service provider to your app.php:
 ```php
 'providers'	=> array(
 	// ...
-	'hisorange\browserdetect\Provider\BrowserDetectService',
+	'hisorange\browserdetect\Provider\BrowserDetectServices',
 	// ...
 )
 ```
