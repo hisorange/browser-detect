@@ -27,7 +27,7 @@ After the composer update/install add the service provider to your app.php:
 ```php
 'providers'	=> array(
 	// ...
-	'hisorange\browserdetect\Providers\BrowserDetectServiceProvider',
+	'hisorange\browserdetect\Providers\BrowserDetectService',
 	// ...
 )
 ```
