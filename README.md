@@ -30,7 +30,7 @@ After the composer update/install add the service provider to your app.php:
 ```php
 'providers'	=> array(
 	// ...
-	'hisorange\browserdetect\Provider\BrowserDetectServices',
+	'hisorange\browserdetect\Providers\BrowserDetectServices',
 	// ...
 )
 ```
