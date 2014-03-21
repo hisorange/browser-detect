@@ -1,25 +1,56 @@
 <?php
 return array(
-	/**
-	 * The package only caches the most necessary datas in a keyless array to minimalize the cache usage.
-	 * Will use the Laravel Cache::put() function for it if turned on, and operates with the application's cache config.
-	 */
-	'cache'	=> true,
+    /*
+    |--------------------------------------------------------------------------
+    | Cache
+    |--------------------------------------------------------------------------
+    |
+    | The package only caches the most necessary data in a keyless array to 
+    | minimalize the cache usage.
+    |
+    | Uses Laravel's built-in Cache system if set to true.
+    |
+    | Default: True
+    */
+    'cache' => true,
 
-	/**
-	 * Caching for X day, in case if you don't wana overfill your memory with old results.
-	 * You can increase the interval but the Google releaseing a new Chrome everytime when some1 blinks so...
-	 */
-	'cache_interval' => 7,
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Interval
+    |--------------------------------------------------------------------------
+    |
+    | Caching for X day, in case if you don't want to overfill your memory with 
+    | old results.
+    |
+    | You can increase the interval but Google releasing a new Chrome every time 
+    | when someone blinks so.
+    |
+    | Default: 7
+    */
+    'cache_interval' => 7,
 
-	/**
-	 * Prefix used for the result cache keys.
-	 */
-	'cache_prefix'	=> 'hbd_',
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Prefix
+    |--------------------------------------------------------------------------
+    |
+    | Prefix used for the result cache keys.
+    |
+    | Default: hbd_
+    */
+    'cache_prefix'  => 'hbd_',
 
-	/**
-	 * The garetjax/phpbrowscap package's useing a file cache for the browsecap.ini and it's cached format.
-	 * if setted to NULL it will use the package's cache directory, or you can set your own path.
-	 */
-	'browscap_cache' => null,
+    /*
+    |--------------------------------------------------------------------------
+    | Browscap Cache
+    |--------------------------------------------------------------------------
+    |
+    | The "garetjax/phpbrowscap" package's using a file cache for the browsecap.ini 
+    | and it's cached format.
+    |
+    | If set to NULL it will use the package's cache directory or you can set your own path.
+    |
+    | Default: null
+    */
+    'browscap_cache' => null,
 );
