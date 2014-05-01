@@ -3,7 +3,7 @@
     "description": "Browser & Mobile detection package for Laravel 4.",
     "keywords": ["laravel", "user-agent", "browser", "mobile", "tablet", "user agent", "mobile", "tablet", "greenball", "hisorange"],
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
 
     "authors": [
         {
