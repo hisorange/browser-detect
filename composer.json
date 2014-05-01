@@ -17,7 +17,7 @@
         "laravel/framework": "4.*",
         "garetjax/phpbrowscap": "2.*",
         "mobiledetect/mobiledetectlib": "2.*",
-        "hisorangera/traits": "1.*"
+        "hisorange/traits": "1.*"
     },
 
     "autoload": {
