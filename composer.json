@@ -16,8 +16,8 @@
         "laravel/framework": "4.*",
         "garetjax/phpbrowscap": "2.*",
         "mobiledetect/mobiledetectlib": "2.*",
-        "yzalis/ua-parser": "dev-master",
-        "hisorangera/traits": "dev-master"
+        "yzalis/ua-parser": "0.1.0@dev",
+        "hisorangera/traits": "1.*"
     },
 
     "autoload": {
