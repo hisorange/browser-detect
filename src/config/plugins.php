@@ -76,14 +76,14 @@ return [
 	 * @package yzalis/ua-parser
 	 * @link  	https://github.com/yzalis/UAParser
 	 */
-	'hisorange\BrowserDetect\Plugin\UAParser'	=> [
+	//'hisorange\BrowserDetect\Plugin\UAParser'	=> [
 		/**
 		 * Path to regexps yaml file, if null gona user the package's default.
 		 *
 		 * @var null|string
 		 */
-		'regexesPath' 	=> null,
-	],
+	//	'regexesPath' 	=> null,
+	//],
 
 	/**
 	 * @package mobiledetect/mobiledetectlib (v2.*)
