@@ -17,7 +17,9 @@ This package is able to identify the visitors browser almost perfectly by useing
 + **Import & export** result into very compact strings which can be stored even in varchar fields.
 + NEW in 1.0.0 check support for **JavaScript**.
 
-```Temporarily the UAParser plugin is turned off by default, will be readed as soon I find time to force the composer to pull it down in a stable release.``` 
+```
+Temporarily the UAParser plugin is turned off by default, will be readded as soon I find time to force the composer to pull it down in a stable release.
+``` 
 
 ## Installation
 First add the package to your composer:
