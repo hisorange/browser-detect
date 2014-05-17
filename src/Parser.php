@@ -192,9 +192,22 @@ class Parser {
 		}
 
 		// Fix where different packages define devices differently.
-		$result['isDesktop'] 	= ! (bool) ($result['isMobile'] + $result['isTablet']);
-		$result['isTablet'] 	= ! (bool) ($result['isMobile'] + $result['isDesktop']);
-		$result['isMobile']		= ! (bool) ($result['isTablet'] + $result['isDesktop']);
+		// Device is desktop if neither mobile or tablet.
+		if(! $result['isMobile'] and ! $result['isTablet']) {
+			$result['isDesktop'] = true;
+			$result['isTablet'] = $result['isMobile'] = false;
+		}
+		// Device is tablet if any of the plugin identified as a tablet.
+		// Fix for mobile detect plugin where a tablet is assumed as both mobile and tablet.
+		elseif($result['isTablet']) {
+			$result['isTablet'] = true;
+			$result['isDesktop'] = $result['isMobile'] = false;
+		}
+		// Mobile if neither tablet or desktop.
+		else {
+			$result['isMobile'] = true;
+			$result['isDesktop'] = $result['isTablet'] = false;
+		}
 
 		// Fixing empty operating system with a generic value.
 		$result['osFamily']			= $result['osFamily'] ?: $this->objectConfig['generic']['operatingsystem'];
