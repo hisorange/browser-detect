@@ -311,8 +311,8 @@ To access the configurations use the 'browser-detect' hint. You can costumize ev
 	+ Set your custom OS name for cases where it's not recognizable.
 	+ Set your custom Browser family for cases where the user agent is invalid.
 	+ Set fallback user agent for calls like CLI or CURL.
-+ Cacheing
-	+ Set cacheing expiration.
++ Caching
+	+ Set caching expiration.
 	+ Set key prefix to avoid conflict.
 
 ***
