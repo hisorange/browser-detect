@@ -1,3 +1,7 @@
+### Changes in 2.0 version
+***
+- Laravel 5 is now supported, first draft.
+
 ### Changes in 1.0.0pre
 ***
 The code has been almost totaly rewrited except like 30 line of code from v0.9.*, this breaks the compability with older versions so the major version has been increased to v1.0.0pre.
