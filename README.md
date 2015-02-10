@@ -7,7 +7,7 @@ This package is able to identify the visitors browser almost perfectly by useing
 + Easily extend or personalize the analization flow.
 + Identify the **browser's family** and it's version.
 + Identify the **operating system**'s software and it's version.
-+ Idenfity the **browsing device**'s family and model.
++ Idenfity the **browsing device**'s family and model. 
 + Categorise devices such as **mobile**, **tablet** and **desktop**.
 + Determine the browser's **CSS protokol** support as CSS1, CSS2, CSS3.
 + All **semantic version** is preparsed to major, minor and patch keys.
@@ -19,7 +19,7 @@ This package is able to identify the visitors browser almost perfectly by useing
 
 ```
 Temporarily the UAParser plugin is turned off by default, will be readded as soon as I find time to force the composer to pull it down in a stable release.
-```
+``` 
 
 ## Installation
 First add the package to your composer:
@@ -48,7 +48,7 @@ Add the alias to the aliases in your app.php:
 ```
 You must use personal configurations, just publish the package's configuration files, (plugins.php also published with this)
 ```cli
-php artisan vendor:publish
+php artisan config:publish hisorange/browser-detect
 ```
 Finaly, enjoy :3
 
@@ -163,7 +163,7 @@ BrowserDetect::isDesktop();
 
 // Is this a bot visit?
 BrowserDetect::isBot();
-```
+``` 
 
 ### Browser software informations
 ***
@@ -247,7 +247,7 @@ if (BrowserDetect::isIEVersion(6)) {
 }
 
 // true for IE 6 only.
-BrowserDetect::isIEVersion(6);
+BrowserDetect::isIEVersion(6); 
 
 // true for IE 9 or lower.
 BrowserDetect::isIEVersion(9, true);
@@ -269,7 +269,7 @@ BrowserDetect::importFromString('1|0|0|0|Safari|5|0|2|iOS|4|3|2|Apple|iPhone|3|A
 $infoArray = BrowserDetect::toArray(); // Will produce a simple array with the result object data values.
 
 // Import result from an array.
-// if you pass a numeric keyed array to the function that will
+// if you pass a numeric keyed array to the function that will 
 // sniff it out and combine the schema keys and the imported data values to the object.
 BrowserDetect::importFromArray($infoArray); // Will revert every informations.
 

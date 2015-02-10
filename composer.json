@@ -14,7 +14,7 @@
 
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "~5.0",
+        "illuminate/support": "4.*",
         "garetjax/phpbrowscap": "2.*",
         "mobiledetect/mobiledetectlib": "2.*",
         "hisorange/traits": "1.*"
