@@ -77,7 +77,7 @@ class Parser {
 		$this->objectConfigImport(config('browser-detect-config'));
 
 		// Import the plugins.
-		$this->pluginCollectionImport(config('browser-detect-config'));
+		$this->pluginCollectionImport(config('browser-detect-plugins'));
 	}
 
 	/**
