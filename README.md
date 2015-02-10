@@ -23,11 +23,11 @@ Temporarily the UAParser plugin is turned off by default, will be readded as soo
 
 ## Installation
 First add the package to your composer:
-```json
+```
 {
     "require": {
-        "hisorange/browser-detect": "2.*" // For laravel 5.* versions !!!
-        "hisorange/browser-detect": "1.*" // For laravel 4.* versions !!!
+        "hisorange/browser-detect": "2.*" // For laravel 5.* versions
+        "hisorange/browser-detect": "1.*" // For laravel 4.* versions
     }
 }
 ```
