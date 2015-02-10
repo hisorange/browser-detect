@@ -20,10 +20,7 @@ class BrowserDetectService extends ServiceProvider {
      */
     public function boot()
     {
-		$this->publishes([
-			__DIR__.'/../config/config.php'  => config_path('hisorange/browser-detect/browser-detect-config.php'),
-			__DIR__.'/../config/plugins.php' => config_path('hisorange/browser-detect/browser-detect-plugins.php'),
-		]);
+		$this->package('hisorange/browser-detect', 'browser-detect', realpath(__DIR__ . '/../'));
 	}
 
 	/**
