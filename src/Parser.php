@@ -74,10 +74,10 @@ class Parser {
 		$this->app 		= $app;
 
 		// Import the package configuration to the parser object.
-		$this->objectConfigImport(config('browser-detect-config'));
+		$this->objectConfigImport(config('hisorange.browser-detect.browser-detect-config'));
 
 		// Import the plugins.
-		$this->pluginCollectionImport(config('browser-detect-plugins'));
+		$this->pluginCollectionImport(config('hisorange.browser-detect.browser-detect-plugins'));
 	}
 
 	/**
