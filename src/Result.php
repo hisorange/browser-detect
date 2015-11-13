@@ -161,11 +161,12 @@ class Result extends Fluent {
 	/**
 	 * Is this browser an Internet Explorer?
 	 *
+	 * @param  boolean $trident Set to true to detect the Trident (IE 12ish?) as well.
 	 * @return boolean
 	 */
-	public function isIE()
+	public function isIE($trident = false)
 	{
-		return preg_match('%(^IE$|internet\s+explorer)%i', $this->attributes['browserFamily']);
+		return preg_match('%(^IE$|internet\s+explorer|MSIE' . ($trident ? '|Trident':'') . ')%i', $this->attributes['browserFamily']);
 	}
 
 	/**
