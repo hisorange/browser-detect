@@ -167,9 +167,11 @@ class Parser {
 
 	/**
 	 * Parse the user agent with the plugin(s) and generate a summarized result.
-	 * 
+	 *
 	 * @since 1.0.0 function renamed to 'parse' from '_parse' and only calling plugins from now.
 	 * @since 0.9.0
+	 *
+	 * @throws hisorange\BrowserDetect\Exceptions\InvalidPluginListException
 	 *
 	 * @param  string $userAgent
 	 * @return \hisorange\BrowserDetect\Result
@@ -179,7 +181,15 @@ class Parser {
 		// Create a base schema.
 		$result 		= $this->getEmptyDataSchema();
 
-		foreach ($this->pluginCollectionExport() as $plugin => $config) {
+		// Query the plugin config.
+		$plugins 		= $this->pluginCollectionExport();
+
+		// Check if there is any plugin configured.
+		if (empty($plugins)) {
+			throw new Exceptions\InvalidPluginListException;
+		}
+
+		foreach ($plugins as $plugin => $config) {
 
 			// Create the plugin instance.
 			$pluginInstance		= new $plugin;
