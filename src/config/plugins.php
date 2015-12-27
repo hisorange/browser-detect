@@ -40,7 +40,7 @@ return [
 		 *
 		 * @var boolean
 		 */
-		'doAutoUpdate' 	=> false,
+		'doAutoUpdate' 	=> true,
 
 		/**
 		 * The update interval in seconds.
