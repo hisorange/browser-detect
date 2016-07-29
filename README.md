@@ -95,7 +95,7 @@ array(
 	// Device's hardware.
 	'deviceFamily' 			=> 'Apple', // string
 	'deviceModel'  			=> 'iPad', // string
-	'mobileGrade'  			=> A, // string
+	'mobileGrade'  			=> 'A', // string
 
 	// Browser's capability.
 	'cssVersion'   			=> 3,  // integer
