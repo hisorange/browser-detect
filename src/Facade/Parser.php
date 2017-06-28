@@ -8,5 +8,5 @@ class Parser extends Facade {
     /**
      * {@inheritDocs}
      */
-    protected static function getFacadeAccessor() { return 'browser-detect.parser'; }
+    protected static function getFacadeAccessor() {  return \hisorange\BrowserDetect\Parser::class; }
 }
