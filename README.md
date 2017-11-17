@@ -48,7 +48,7 @@ Add the alias to the aliases in your app.php:
 ```
 You must use personal configurations, just publish the package's configuration files, (plugins.php also published with this)
 ```cli
-php artisan vendor:publish
+php artisan vendor:publish --provider="hisorange\BrowserDetect\Provider\BrowserDetectService"
 ```
 Finaly, enjoy :3
 
