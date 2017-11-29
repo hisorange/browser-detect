@@ -6,9 +6,13 @@ use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\Result;
 use Illuminate\Support\ServiceProvider;
 
-class BrowserDetectService extends ServiceProvider
+/**
+ * Class BrowserDetectServiceProvider
+ *
+ * @package hisorange\BrowserDetect\Provider
+ */
+class BrowserDetectServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -31,7 +35,7 @@ class BrowserDetectService extends ServiceProvider
 
     /**
      * Register the service provider.
-     * @since 1.0.0 the function splitted into parser & result registration to be more extendable.
+     * @since 1.0.0 the function split into parser & result registration to be more extendable.
      *
      * @return void
      */
