@@ -1,7 +1,10 @@
 <?php
 
-namespace hisorange\BrowserDetect;
+namespace hisorange\BrowserDetect\Parser;
 
+use hisorange\BrowserDetect\Contract\Result;
+use hisorange\BrowserDetect\Exception\InvalidCallException;
+use hisorange\BrowserDetect\Exception\InvalidPluginListException;
 use hisorange\Traits\RunTimeCache;
 use hisorange\Traits\ObjectConfig;
 use hisorange\Traits\PluginCollection;
@@ -97,7 +100,7 @@ class Parser implements ParserInterface
     /**
      * @since 1.0.0 Create an empty result object.
      *
-     * @return mixed
+     * @return Result
      */
     public function getEmptyResult()
     {
@@ -124,7 +127,7 @@ class Parser implements ParserInterface
      *
      * @param  string|null $userAgent User agent HTTP header.
      *
-     * @return \hisorange\BrowserDetect\Result
+     * @return Result
      */
     public function detect($userAgent = null)
     {
@@ -177,23 +180,23 @@ class Parser implements ParserInterface
      * @since 1.0.0 function renamed to 'parse' from '_parse' and only calling plugins from now.
      * @since 0.9.0
      *
-     * @throws hisorange\BrowserDetect\Exceptions\InvalidPluginListException
+     * @throws InvalidPluginListException
      *
      * @param  string $userAgent
      *
-     * @return \hisorange\BrowserDetect\Result
+     * @return Result
      */
     public function parse($userAgent)
     {
         // Create a base schema.
-        $result = $this->getEmptyDataSchema();
+        $result = static::getEmptyDataSchema();
 
         // Query the plugin config.
         $plugins = $this->pluginCollectionExport();
 
         // Check if there is any plugin configured.
         if (empty($plugins)) {
-            throw new Exceptions\InvalidPluginListException;
+            throw new InvalidPluginListException;
         }
 
         foreach ($plugins as $plugin => $config) {
@@ -240,7 +243,7 @@ class Parser implements ParserInterface
     /**
      * Reflect calls to the result object.
      *
-     * @throws \hisorange\BrowserDetect\Exceptions\InvalidCallException if the called method
+     * @throws InvalidCallException if the called method
      * do not exists in the attributes array, or not a method of the result object.
      *
      * @param  string $method
@@ -252,7 +255,7 @@ class Parser implements ParserInterface
     {
         // When calling BrowserDetect::importFromString() etc.
         // then direcly provide a new result object.
-        if (substr($method, 0, 6) == 'import') {
+        if (substr($method, 0, 6) === 'import') {
             return call_user_func_array([$this->getEmptyResult(), $method], $params);
         }
 
@@ -268,6 +271,6 @@ class Parser implements ParserInterface
             return call_user_func_array([$reflection, $method], $params);
         }
 
-        throw new Exceptions\InvalidCallException($method . 'does not exists on the ' . get_class($reflection) . ' object.');
+        throw new InvalidCallException($method . 'does not exists on the ' . get_class($reflection) . ' object.');
     }
 }

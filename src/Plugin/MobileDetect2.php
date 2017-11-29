@@ -2,9 +2,10 @@
 
 namespace hisorange\BrowserDetect\Plugin;
 
+use hisorange\BrowserDetect\Contract\Plugin;
 use hisorange\Traits\ObjectConfig;
 
-class MobileDetect2
+class MobileDetect2 implements Plugin
 {
 
     /**
