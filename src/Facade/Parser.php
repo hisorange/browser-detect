@@ -6,12 +6,11 @@ use Illuminate\Support\Facades\Facade;
 
 class Parser extends Facade
 {
-
     /**
-     * {@inheritDocs}
+     * {@inheritdocs}
      */
     protected static function getFacadeAccessor()
     {
-        return \hisorange\BrowserDetect\Parser\Parser::class;
+        return 'browser-detect.parser';
     }
 }
