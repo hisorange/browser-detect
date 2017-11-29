@@ -5,6 +5,7 @@ namespace hisorange\BrowserDetect\Result;
 use ArrayIterator;
 use Illuminate\Support\Fluent;
 
+use hisorange\BrowserDetect\Parser\Parser;
 use hisorange\BrowserDetect\Contract\Result as ResultInterface;
 
 /**
@@ -36,7 +37,7 @@ class Result extends Fluent implements ResultInterface
      */
     public function importFromString($raw)
     {
-        $this->attributes = $this->fixTypes(array_combine(array_keys(Parser::getEmptyDataSchema()), explode(self::SEPARATOR, $raw)));
+        $this->attributes = $this->fixTypes(array_combine(array_keys(Parser::$dataSchema), explode(self::SEPARATOR, $raw)));
 
         return $this;
     }
@@ -47,10 +48,10 @@ class Result extends Fluent implements ResultInterface
     public function importFromArray(array $raw)
     {
         // Load the schema keys for validation.
-        $schema = array_keys(Parser::getEmptyDataSchema());
+        $schema = array_keys(Parser::$dataSchema);
 
         // If the imported array has numeric keys then combine the values.
-        $this->attributes = $this->fixTypes(($schema != array_keys($raw)) ? array_combine($schema, $raw) : $raw);
+        $this->attributes = $this->fixTypes(($schema !== array_keys($raw)) ? array_combine($schema, $raw) : $raw);
 
         return $this;
     }
@@ -65,7 +66,7 @@ class Result extends Fluent implements ResultInterface
     protected function fixTypes($attributes)
     {
         // Load the schema keys for conversion.
-        $schema = Parser::getEmptyDataSchema();
+        $schema = Parser::$dataSchema;
 
         foreach ($attributes as $key => &$value) {
             settype($value, gettype($schema[$key]));
@@ -161,7 +162,10 @@ class Result extends Fluent implements ResultInterface
     /**
      * Is this an Internet Explorer X (or lower version).
      *
-     * @return boolean
+     * @param      $version
+     * @param bool $lowerToo
+     *
+     * @return bool
      */
     public function isIEVersion($version, $lowerToo = false)
     {
@@ -171,6 +175,8 @@ class Result extends Fluent implements ResultInterface
 
     /**
      * @since 1.1.0 clears semver.
+     *
+     * @param  string $version
      *
      * @return string
      */
