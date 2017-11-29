@@ -4,7 +4,7 @@ namespace hisorange\BrowserDetect\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
-class Parser extends Facade
+class Browser extends Facade
 {
     /**
      * {@inheritdocs}

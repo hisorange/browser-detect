@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Parser\Parser;
-use hisorange\BrowserDetect\Provider\BrowserDetectServiceProvider;
+use hisorange\BrowserDetect\Facade\Browser;
+use hisorange\BrowserDetect\ServiceProvider;
 
 /**
  * Base test case for the package tests.
@@ -23,7 +23,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return [BrowserDetectServiceProvider::class];
+        return [ServiceProvider::class];
     }
 
     /**
@@ -36,7 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'BrowserDetect' => Parser::class
+            'Browser' => Browser::class
         ];
     }
 

@@ -1,17 +1,16 @@
 <?php
 
-namespace hisorange\BrowserDetect\Provider;
+namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Parser\Parser;
 use hisorange\BrowserDetect\Result\Result;
-use Illuminate\Support\ServiceProvider;
 
 /**
- * Class BrowserDetectServiceProvider
+ * Class ServiceProvider
  *
- * @package hisorange\BrowserDetect\Provider
+ * @package hisorange\BrowserDetect
  */
-class BrowserDetectServiceProvider extends ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.

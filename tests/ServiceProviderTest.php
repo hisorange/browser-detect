@@ -4,15 +4,15 @@ namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Contract\Parser;
 use hisorange\BrowserDetect\Contract\Result;
-use hisorange\BrowserDetect\Provider\BrowserDetectServiceProvider;
+use hisorange\BrowserDetect\ServiceProvider;
 
 class ServiceProviderTest extends TestCase
 {
     /**
      * Test the parser is registered.
      *
-     * @covers BrowserDetectServiceProvider::register()
-     * @covers BrowserDetectServiceProvider::registerParser()
+     * @covers ServiceProvider::register()
+     * @covers ServiceProvider::registerParser()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testRegisterParser()
@@ -26,8 +26,8 @@ class ServiceProviderTest extends TestCase
     /**
      * Test the result register.
      *
-     * @covers BrowserDetectServiceProvider::register()
-     * @covers BrowserDetectServiceProvider::registerResult()
+     * @covers ServiceProvider::register()
+     * @covers ServiceProvider::registerResult()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testRegisterResult()
@@ -41,12 +41,12 @@ class ServiceProviderTest extends TestCase
     /**
      * Test the provides.
      *
-     * @covers BrowserDetectServiceProvider::provides()
+     * @covers ServiceProvider::provides()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testProvides()
     {
-        $provider = $this->getMockBuilder(BrowserDetectServiceProvider::class)
+        $provider = $this->getMockBuilder(ServiceProvider::class)
             ->disableOriginalConstructor()
             ->setMethodsExcept(['provides'])
             ->getMock();
