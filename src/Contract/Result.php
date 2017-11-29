@@ -21,4 +21,14 @@ interface Result extends ArrayAccess
      * @return self
      */
     public function importFromArray(array $array);
+
+    /**
+     * Import a result from a compact string format to the object.
+     * Split and merge with the schema. Also convert the is* values back to boolean.
+     *
+     * @param  string $string
+     *
+     * @return self
+     */
+    public function importFromString($string);
 }
