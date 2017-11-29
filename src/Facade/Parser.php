@@ -12,6 +12,6 @@ class Parser extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \hisorange\BrowserDetect\Parser::class;
+        return \hisorange\BrowserDetect\Parser\Parser::class;
     }
 }

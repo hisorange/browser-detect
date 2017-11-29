@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Provider;
 
-use hisorange\BrowserDetect\Parser;
+use hisorange\BrowserDetect\Parser\Parser;
 use hisorange\BrowserDetect\Result;
 use Illuminate\Support\ServiceProvider;
 

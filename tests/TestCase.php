@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Facade\Parser as ParseFacade;
+use hisorange\BrowserDetect\Parser\Parser;
 use hisorange\BrowserDetect\Provider\BrowserDetectServiceProvider;
 
 /**
@@ -36,7 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'BrowserDetect' => ParseFacade::class
+            'BrowserDetect' => Parser::class
         ];
     }
 

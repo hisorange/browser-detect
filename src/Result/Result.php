@@ -1,6 +1,6 @@
 <?php
 
-namespace hisorange\BrowserDetect;
+namespace hisorange\BrowserDetect\Result;
 
 use ArrayIterator;
 use Illuminate\Support\Fluent;
@@ -46,14 +46,7 @@ class Result extends Fluent implements ResultInterface
         return $this;
     }
 
-    /**
-     * Import a result from an array to the object.
-     * Sniff out if the array has named keys or need to merge with the schema.
-     *
-     * @param  array $raw
-     *
-     * @return self
-     */
+
     public function importFromArray(array $raw)
     {
         // Load the schema keys for validation.
@@ -85,19 +78,9 @@ class Result extends Fluent implements ResultInterface
     }
 
     /**
-     * Export attributes into an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->attributes;
-    }
-
-    /**
      * Export attributes to compact string format.
      *
-     * @return boolean
+     * @return string
      */
     public function toString()
     {
