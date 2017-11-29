@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Parser;
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Contract\Parser;
+use hisorange\BrowserDetect\Contract\Result;
 use hisorange\BrowserDetect\Provider\BrowserDetectServiceProvider;
 
 class ServiceProviderTest extends TestCase

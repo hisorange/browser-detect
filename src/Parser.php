@@ -7,7 +7,9 @@ use hisorange\Traits\ObjectConfig;
 use hisorange\Traits\PluginCollection;
 use Illuminate\Foundation\Application;
 
-class Parser
+use hisorange\BrowserDetect\Contract\Parser as ParserInterface;
+
+class Parser implements ParserInterface
 {
     /**
      * @since 1.0.0 The package requirements now allows the usage of traits.
