@@ -119,12 +119,12 @@ class Parser implements ParserInterface
     }
 
     /**
-     * Get the reflected user agent's informations.
-     * If null is setted then the detector will use the CURRENT visitor's agent.
-     * If cache interval setted to 0 the func skip to load the cache. (in the config)
+     * Get the reflected user agent's information.
+     * If null is set then the detector will use the CURRENT visitor's agent.
+     * If cache interval set to 0 the func skip to load the cache. (in the config)
      *
      * @since 1.0.0
-     *
+     * @throws InvalidPluginListException
      * @param  string|null $userAgent User agent HTTP header.
      *
      * @return Result
@@ -147,7 +147,7 @@ class Parser implements ParserInterface
 
             // Fetch the cached result which we store in compact string format.
             $cachedResult = $this->app['cache']->remember($key, $this->objectConfig['cache']['interval'], function () use ($userAgent) {
-                return $this->parse($userAgent)->toString();
+                return (string) $this->parse($userAgent);
             });
 
             // Convert the result back to an object.
@@ -163,7 +163,7 @@ class Parser implements ParserInterface
     }
 
     /**
-     * @since 1.0.0 Hash the user-agent string. Function being seperated from the code to be more flexible.
+     * @since 1.0.0 Hash the user-agent string. Function being separated from the code to be more flexible.
      *
      * @param  string $userAgent User agent string.
      *
@@ -243,8 +243,8 @@ class Parser implements ParserInterface
     /**
      * Reflect calls to the result object.
      *
-     * @throws InvalidCallException if the called method
-     * do not exists in the attributes array, or not a method of the result object.
+     * @throws InvalidPluginListException
+     * @throws InvalidCallException
      *
      * @param  string $method
      * @param  array  $params
@@ -254,12 +254,12 @@ class Parser implements ParserInterface
     public function __call($method, $params)
     {
         // When calling BrowserDetect::importFromString() etc.
-        // then direcly provide a new result object.
-        if (substr($method, 0, 6) === 'import') {
+        // then directly provide a new result object.
+        if (0 === strpos($method, 'import')) {
             return call_user_func_array([$this->getEmptyResult(), $method], $params);
         }
 
-        $reflection = $this->detect(null);
+        $reflection = $this->detect();
 
         // Reflect an information.
         if ($reflection->offsetExists($method)) {

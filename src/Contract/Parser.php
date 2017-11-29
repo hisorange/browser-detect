@@ -9,5 +9,8 @@ namespace hisorange\BrowserDetect\Contract;
  */
 interface Parser
 {
-
+    /**
+     * @return Result
+     */
+    public function getEmptyResult();
 }

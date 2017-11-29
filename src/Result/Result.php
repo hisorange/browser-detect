@@ -32,12 +32,7 @@ class Result extends Fluent implements ResultInterface
     }
 
     /**
-     * Import a result from a compact string format to the object.
-     * Split and merge with the schema. Also convert the is* values back to boolean.
-     *
-     * @param  string $raw
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public function importFromString($raw)
     {
@@ -46,7 +41,9 @@ class Result extends Fluent implements ResultInterface
         return $this;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     public function importFromArray(array $raw)
     {
         // Load the schema keys for validation.
