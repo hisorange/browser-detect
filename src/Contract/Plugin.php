@@ -10,12 +10,14 @@ namespace hisorange\BrowserDetect\Contract;
 interface Plugin
 {
     /**
+     * @param  string $agent
      * @return mixed
      */
-    public function parse();
+    public function parse($agent);
 
     /**
+     * @param  mixed $result
      * @return mixed
      */
-    public function filter();
+    public function filter($result);
 }
