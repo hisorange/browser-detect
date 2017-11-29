@@ -3,7 +3,7 @@
 namespace hisorange\BrowserDetect\Provider;
 
 use hisorange\BrowserDetect\Parser\Parser;
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Result\Result;
 use Illuminate\Support\ServiceProvider;
 
 /**
