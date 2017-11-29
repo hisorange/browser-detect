@@ -34,14 +34,4 @@ return [
 			'HTTP_FAKE_HEADER' => 'HiSoRange\Browser'
 		],
 	],
-
-	/**
-	 * Uses the UserAgentString.Com's api, native plugin.
-	 *
-	 * @link http://www.useragentstring.com/pages/api.php
-	 */
-	// Uncomment this value to enable the plugin. 
-	//'hisorange\BrowserDetect\Plugin\UserAgentStringApi' => [],
-	
-
 ];
