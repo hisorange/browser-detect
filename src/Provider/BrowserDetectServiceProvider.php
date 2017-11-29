@@ -3,6 +3,7 @@
 namespace hisorange\BrowserDetect\Provider;
 
 use hisorange\BrowserDetect\Parser;
+use hisorange\BrowserDetect\Result;
 use Illuminate\Support\ServiceProvider;
 
 class BrowserDetectService extends ServiceProvider
@@ -47,7 +48,7 @@ class BrowserDetectService extends ServiceProvider
      */
     public function registerParser()
     {
-        $this->app->singleton(Parser::class, function ($app) {
+        $this->app->singleton('browser-detect.parser', function ($app) {
             return new Parser($app);
         });
     }
@@ -59,7 +60,7 @@ class BrowserDetectService extends ServiceProvider
      */
     public function registerResult()
     {
-        $this->app->bind('browser-detect.result', 'hisorange\BrowserDetect\Result');
+        $this->app->bind('browser-detect.result', Result::class);
     }
 
     /**
@@ -70,7 +71,7 @@ class BrowserDetectService extends ServiceProvider
      */
     public function provides()
     {
-        return [Parser::class, 'browser-detect.result'];
+        return ['browser-detect.parser', 'browser-detect.result'];
     }
 
 }
