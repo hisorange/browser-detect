@@ -4,6 +4,7 @@ namespace hisorange\BrowserDetect\Plugin;
 
 use hisorange\BrowserDetect\Contract\Plugin;
 use hisorange\Traits\ObjectConfig;
+use UAParser\Result\ResultInterface;
 
 class UAParser implements Plugin
 {
@@ -18,7 +19,7 @@ class UAParser implements Plugin
      *
      * @param  string $agent
      *
-     * @return \UAParser\Result\Result
+     * @return ResultInterface
      */
     public function parse($agent)
     {
@@ -31,7 +32,7 @@ class UAParser implements Plugin
     /**
      * Filter the parsed result to the schema.
      *
-     * @param  \UAParser\Result\Result $parsed
+     * @param  ResultInterface $parsed
      *
      * @return array
      */
@@ -42,26 +43,26 @@ class UAParser implements Plugin
         $device   = $parsed->getDevice();
         $filtered = [];
 
-        // Browser informations.
-        if ($browser->getFamily() != 'Other') {
+        // Browser information.
+        if ($browser->getFamily() !== 'Other') {
             $filtered['browserFamily']       = $browser->getFamily();
             $filtered['browserVersionMajor'] = $browser->getMajor() ?: 0;
             $filtered['browserVersionMinor'] = $browser->getMinor() ?: 0;
             $filtered['browserVersionPatch'] = $browser->getPatch() ?: 0;
         }
 
-        // Operating system informations.
-        if ($os->getFamily() != 'Other') {
+        // Operating system information.
+        if ($os->getFamily() !== 'Other') {
             $filtered['osFamily']       = $os->getFamily();
             $filtered['osVersionMajor'] = $os->getMajor() ?: 0;
             $filtered['osVersionMinor'] = $os->getMinor() ?: 0;
             $filtered['osVersionPatch'] = $os->getPatch() ?: 0;
         }
 
-        // Device informations.
-        if ($device->getConstructor() != 'Other') {
-            $filtered['isMobile']     = $device->isMobile();
-            $filtered['isTablet']     = $device->isTablet();
+        // Device information.
+        if ($device->getConstructor() !== 'Other') {
+            $filtered['isMobile']     = $device->is('mobile');
+            $filtered['isTablet']     = $device->is('tablet');
             $filtered['deviceFamily'] = $device->getConstructor();
             $filtered['deviceModel']  = $device->getModel() ?: null;
         }
