@@ -92,7 +92,7 @@ class Parser implements ParserInterface
      *
      * @return array
      */
-    public static function getEmptyDataSchema()
+    public function getEmptyDataSchema()
     {
         return static::$dataSchema;
     }
