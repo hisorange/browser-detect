@@ -5,10 +5,12 @@ namespace hisorange\BrowserDetect;
 use ArrayIterator;
 use Illuminate\Support\Fluent;
 
+use hisorange\BrowserDetect\Contract\Result as ResultInterface;
+
 /**
  * @since 1.0.0 the result extends to \Illuminate\Support\Fluent, also the class has been renamed from Info to Result.
  */
-class Result extends Fluent
+class Result extends Fluent implements ResultInterface
 {
     /**
      * Separator character for compact strings.
