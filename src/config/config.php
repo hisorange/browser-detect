@@ -25,7 +25,7 @@ return [
 		 *
 		 * @var string
 		 */
-		'agent'				=> 'HiSoRangeBrowser/1.0 (https://github.com/hisorange/browser-detect; hisoranger@gmail.com) GenericBrowser/1.0',
+		'agent'				=> 'HiSoRangeBrowser/1.0 (https://github.com/hisorange/browser-detect; hello@hisorange.me) GenericBrowser/1.0',
 	],
 
 	/**
