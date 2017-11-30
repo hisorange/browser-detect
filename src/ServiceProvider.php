@@ -2,79 +2,33 @@
 
 namespace hisorange\BrowserDetect;
 
-use hisorange\BrowserDetect\Parser\Parser;
-use hisorange\BrowserDetect\Result\Result;
-
 /**
  * Class ServiceProvider
- *
  * @package hisorange\BrowserDetect
  */
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
+     * @inheritdoc
      */
-    protected $defer = true;
-
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
+    public function isDeferred()
     {
-        $this->publishes([
-            __DIR__ . '/../config/config.php'  => config_path('hisorange/browser-detect/browser-detect-config.php'),
-            __DIR__ . '/../config/plugins.php' => config_path('hisorange/browser-detect/browser-detect-plugins.php'),
-        ]);
+        return true;
     }
 
     /**
-     * Register the service provider.
-     * @since 1.0.0 the function split into parser & result registration to be more extendable.
-     *
-     * @return void
+     * @inheritdoc
      */
     public function register()
     {
-        $this->registerParser();
-        $this->registerResult();
+        $this->app->singleton('browser-detect.parser', Parser::class);
     }
 
     /**
-     * @since 1.0.0 Register the parser.
-     *
-     * @return void
-     */
-    public function registerParser()
-    {
-        $this->app->singleton('browser-detect.parser', function ($app) {
-            return new Parser($app);
-        });
-    }
-
-    /**
-     * @since 1.0.0 Register the result.
-     *
-     * @return void
-     */
-    public function registerResult()
-    {
-        $this->app->bind('browser-detect.result', Result::class);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     * @since 1.0.0 Component names changed to avoid conflict with older versions.
-     *
-     * @return array
+     * @inheritdoc
      */
     public function provides()
     {
-        return ['browser-detect.parser', 'browser-detect.result'];
+        return ['browser-detect.parser'];
     }
-
 }

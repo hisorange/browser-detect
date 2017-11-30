@@ -2,118 +2,62 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Contract\Result;
-use hisorange\BrowserDetect\Parser\Parser;
+use hisorange\BrowserDetect\Parser;
+use hisorange\BrowserDetect\ParserInterface;
+use hisorange\BrowserDetect\ResultInterface;
 
 /**
  * Class ParserTest
- *
  * @package hisorange\BrowserDetect\Test
  */
 class ParserTest extends TestCase
 {
-    /**
-     * @var \hisorange\BrowserDetect\Contract\Parser
-     */
-    protected $parser;
-
-    /**
-     * Create the parser.
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->parser = $this->app->make('browser-detect.parser');
-    }
-
-    /**
-     * @covers Parser::getEmptyDataSchema()
-     * @throws \PHPUnit_Framework_Exception
-     */
-    public function testGetEmptyDataSchema()
-    {
-        $actual = $this->parser->getEmptyDataSchema();
-
-        $this->assertInternalType('array', $actual);
-    }
-
-    /**
-     * @covers Parser::getEmptyResult()
-     * @throws \PHPUnit_Framework_Exception
-     */
-    public function testGetEmptyResult()
-    {
-        $actual = $this->parser->getEmptyResult();
-
-        $this->assertInstanceOf(Result::class, $actual);
-    }
-
-    /**
-     * @covers Parser::visitorUserAgent()
-     * @throws \PHPUnit_Framework_AssertionFailedError
-     */
-    public function testVisitorUserAgent()
-    {
-        $actual = $this->parser->visitorUserAgent();
-
-        $this->assertNotEmpty($actual);
-    }
-
-    /**
-     * @param $agent
-     * @param $expected
-     *
-     * @dataProvider providerForHashUserAgentString
-     * @covers Parser::hashUserAgentString()
-     */
-    public function testHashUserAgentString($agent, $expected)
-    {
-        $actual = $this->parser->hashUserAgentString($agent);
-
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * @covers Parser::parse()
-     * @throws \PHPUnit_Framework_Exception
-     */
-    public function testParse()
-    {
-        $actual = $this->parser->parse('-');
-
-        $this->assertInstanceOf(Result::class, $actual);
-    }
-
     /**
      * @covers Parser::detect()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testDetect()
     {
-        $actual = $this->parser->detect();
+        $parser   = $this->getParser();
+        $actual   = $parser->detect();
+        $expected = ResultInterface::class;
 
-        $this->assertInstanceOf(Result::class, $actual);
+        $this->assertInstanceOf($expected, $actual);
+    }
+
+    /**
+     * @dataProvider provideAgents
+     * @covers Parser::parse()
+     * @throws \PHPUnit_Framework_Exception
+     */
+    public function testParse($agent)
+    {
+        $parser   = $this->getParser();
+        $actual   = $parser->parse($agent);
+        $expected = ResultInterface::class;
+
+        $this->assertInstanceOf($expected, $actual);
+    }
+
+    /**
+     * @return ParserInterface
+     */
+    protected function getParser()
+    {
+        return $this->app->make('browser-detect.parser');
     }
 
     /**
      * @return array
      */
-    public function providerForHashUserAgentString()
+    public function provideAgents()
     {
-        $prefix = 'hbd1';
-        $agents = [
-            'Chrome',
-            'Firefox',
-            'Opera',
-            'Internet Explorer',
+        return [
+            ['UnknownBrowser'],
+            ['Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'],
+            ['Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'],
+            ['Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'],
+            ['Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko'],
         ];
-        $hashes = [];
-
-        foreach ($agents as $agent) {
-            $hashes[] = [$agent, $prefix . '_' . md5($agent)];
-        }
-
-        return $hashes;
     }
 }

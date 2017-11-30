@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Facade\Browser;
+use hisorange\BrowserDetect\Facade;
 use hisorange\BrowserDetect\ServiceProvider;
 
 /**
@@ -36,30 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Browser' => Browser::class
+            'Browser' => Facade::class
         ];
-    }
-
-    /**
-     * Load the configs.
-     *
-     * @param \Illuminate\Foundation\Application $app
-     */
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('hisorange.browser-detect.browser-detect-config', $this->getConfiguration('config'));
-        $app['config']->set('hisorange.browser-detect.browser-detect-plugins', $this->getConfiguration('plugins'));
-    }
-
-    /**
-     * Load a config file without publish.
-     *
-     * @param string $name Config file name.
-     *
-     * @return array
-     */
-    private function getConfiguration($name)
-    {
-        return require __DIR__ . '/../src/config/' . $name . '.php';
     }
 }
