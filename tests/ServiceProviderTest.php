@@ -2,45 +2,44 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Contract\Parser;
-use hisorange\BrowserDetect\Contract\Result;
+use hisorange\BrowserDetect\ParserInterface;
 use hisorange\BrowserDetect\ServiceProvider;
 
+/**
+ * Class ServiceProviderTest
+ * @package hisorange\BrowserDetect\Test
+ */
 class ServiceProviderTest extends TestCase
 {
     /**
-     * Test the parser is registered.
-     *
+     * @covers ServiceProvider::isDeferred()
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIsDeferred()
+    {
+        $provider = $this->getMockBuilder(ServiceProvider::class)
+            ->disableOriginalConstructor()
+            ->setMethodsExcept(['isDeferred'])
+            ->getMock();
+
+        $actual = $provider->isDeferred();
+
+        $this->assertTrue($actual);
+    }
+
+    /**
      * @covers ServiceProvider::register()
-     * @covers ServiceProvider::registerParser()
      * @throws \PHPUnit_Framework_Exception
      */
-    public function testRegisterParser()
+    public function testRegister()
     {
-        $expected = Parser::class;
+        $expected = ParserInterface::class;
         $actual   = $this->app->make('browser-detect.parser');
 
         $this->assertInstanceOf($expected, $actual);
     }
 
     /**
-     * Test the result register.
-     *
-     * @covers ServiceProvider::register()
-     * @covers ServiceProvider::registerResult()
-     * @throws \PHPUnit_Framework_Exception
-     */
-    public function testRegisterResult()
-    {
-        $expected = Result::class;
-        $actual   = $this->app->make('browser-detect.result');
-
-        $this->assertInstanceOf($expected, $actual);
-    }
-
-    /**
-     * Test the provides.
-     *
      * @covers ServiceProvider::provides()
      * @throws \PHPUnit_Framework_Exception
      */
@@ -54,6 +53,5 @@ class ServiceProviderTest extends TestCase
         $actual = $provider->provides();
 
         $this->assertContains('browser-detect.parser', $actual);
-        $this->assertContains('browser-detect.result', $actual);
     }
 }

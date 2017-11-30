@@ -1,49 +1,24 @@
 <?php
 
-namespace hisorange\BrowserDetect\Plugin;
+namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contract\Plugin;
-use hisorange\Traits\ObjectConfig;
-use UAParser\Result\ResultInterface;
+use hisorange\BrowserDetect\ResultInterface;
+use League\Pipeline\StageInterface;
 
-class UAParser implements Plugin
+class UAParser implements StageInterface
 {
-
     /**
-     * @since 1.0.0 ObjectConfig trait used.
-     */
-    use ObjectConfig;
-
-    /**
-     * Parse the user agent string.
-     *
-     * @param  string $agent
-     *
+     * @param  ResultInterface $payload
      * @return ResultInterface
      */
-    public function parse($agent)
+    public function __invoke($payload)
     {
-        // Create the new instance.
-        $uaparser = new \UAParser\UAParser($this->objectConfigGet('regexesPath'));
-
-        return $uaparser->parse($agent);
-    }
-
-    /**
-     * Filter the parsed result to the schema.
-     *
-     * @param  ResultInterface $parsed
-     *
-     * @return array
-     */
-    public function filter($parsed)
-    {
-        $browser  = $parsed->getBrowser();
-        $os       = $parsed->getOperatingSystem();
-        $device   = $parsed->getDevice();
+        $parser   = new \UAParser\UAParser();
+        $result   = $parser->parse($payload['agent']);
         $filtered = [];
 
-        // Browser information.
+        $browser = $result->getBrowser();
+
         if ($browser->getFamily() !== 'Other') {
             $filtered['browserFamily']       = $browser->getFamily();
             $filtered['browserVersionMajor'] = $browser->getMajor() ?: 0;
@@ -51,7 +26,8 @@ class UAParser implements Plugin
             $filtered['browserVersionPatch'] = $browser->getPatch() ?: 0;
         }
 
-        // Operating system information.
+        $os = $result->getOperatingSystem();
+
         if ($os->getFamily() !== 'Other') {
             $filtered['osFamily']       = $os->getFamily();
             $filtered['osVersionMajor'] = $os->getMajor() ?: 0;
@@ -59,7 +35,8 @@ class UAParser implements Plugin
             $filtered['osVersionPatch'] = $os->getPatch() ?: 0;
         }
 
-        // Device information.
+        $device = $result->getDevice();
+
         if ($device->getConstructor() !== 'Other') {
             $filtered['isMobile']     = $device->is('mobile');
             $filtered['isTablet']     = $device->is('tablet');
@@ -67,6 +44,8 @@ class UAParser implements Plugin
             $filtered['deviceModel']  = $device->getModel() ?: null;
         }
 
-        return $filtered;
+        $payload->extend($filtered);
+
+        return $payload;
     }
 }
