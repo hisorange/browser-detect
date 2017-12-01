@@ -5,12 +5,14 @@ namespace hisorange\BrowserDetect\Stages;
 use hisorange\BrowserDetect\ResultInterface;
 use League\Pipeline\StageInterface;
 use Mobile_Detect;
+use RuntimeException;
 
 class MobileDetect implements StageInterface
 {
     /**
      * @param  ResultInterface $payload
      * @return ResultInterface
+     * @throws RuntimeException
      */
     public function __invoke($payload)
     {
@@ -25,7 +27,16 @@ class MobileDetect implements StageInterface
             ];
         }
 
-        $result = new Mobile_Detect($headers, $payload['agent']);
+        if (class_exists('Mobile_Detect')) {
+            $result = new \Mobile_Detect;
+        } elseif (class_exists('MobileDetect')) {
+            $result = new \MobileDetect;
+        } else {
+            throw new RuntimeException('MobileDetect is not installed.');
+        }
+
+        $result->setHttpHeaders($headers);
+        $result->setUserAgent($payload['agent']);
 
         /**
          * Filtering mechanism for MobileDetect 2.* versions.
@@ -47,7 +58,7 @@ class MobileDetect implements StageInterface
         $filtered = [];
 
         // Operating system's family.
-        $filtered['osFamily'] = $filter(Mobile_Detect::getOperatingSystems());
+        $filtered['osFamily'] = $filter($result->getOperatingSystems());
 
         // Browser's family.
         $filtered['browserFamily'] = $filter(Mobile_Detect::getBrowsers());
