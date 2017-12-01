@@ -31,5 +31,15 @@
             "hisorange\\BrowserDetect\\Test\\": "tests"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "hisorange\\BrowserDetect\\ServiceProvider"
+            ],
+            "aliases": {
+                "Browser": "hisorange\\BrowserDetect\\Facade"
+            }
+        }
+    }
 }
