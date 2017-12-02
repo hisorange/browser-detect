@@ -91,7 +91,7 @@ class Parser implements ParserInterface
      */
     public function detect()
     {
-        return $this->parse($this->request->userAgent());
+        return $this->parse($this->request->header('HTTP_USER_AGENT'));
     }
 
     /**
