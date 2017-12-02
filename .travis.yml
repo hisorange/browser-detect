@@ -6,25 +6,36 @@ php:
   - 7.1
   - 7.2
 
+env:
+  - LARAVEL_VERSION=5.0
+  - LARAVEL_VERSION=5.1
+  - LARAVEL_VERSION=5.2
+  - LARAVEL_VERSION=5.3
+  - LARAVEL_VERSION=5.4
+  - LARAVEL_VERSION=5.5
+  - LARAVEL_VERSION=dev-master
+
 matrix:
-  include:
+  exclude:
     - php: 5.6
+      env: LARAVEL_VERSION=5.5
+      env: LARAVEL_VERSION=dev-master
+    - php: 7.0
       env: LARAVEL_VERSION=5.0
       env: LARAVEL_VERSION=5.1
       env: LARAVEL_VERSION=5.2
       env: LARAVEL_VERSION=5.3
-      env: LARAVEL_VERSION=5.4
-    - php: 7.0
-      env: LARAVEL_VERSION=5.4
-      env: LARAVEL_VERSION=5.5
+      env: LARAVEL_VERSION=dev-master
     - php: 7.1
+      env: LARAVEL_VERSION=5.0
+      env: LARAVEL_VERSION=5.1
+      env: LARAVEL_VERSION=5.2
       env: LARAVEL_VERSION=5.4
-      env: LARAVEL_VERSION=5.5
-      env: LARAVEL_VERSION=dev-master
     - php: 7.2
+      env: LARAVEL_VERSION=5.0
+      env: LARAVEL_VERSION=5.1
+      env: LARAVEL_VERSION=5.2
       env: LARAVEL_VERSION=5.4
-      env: LARAVEL_VERSION=5.5
-      env: LARAVEL_VERSION=dev-master
 
 before_install:
   - composer self-update >/dev/null 2>&1
