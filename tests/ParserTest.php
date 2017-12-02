@@ -2,18 +2,18 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\ParserInterface;
 use hisorange\BrowserDetect\ResultInterface;
 
 /**
  * Class ParserTest
  * @package hisorange\BrowserDetect\Test
+ * @coversDefaultClass hisorange\BrowserDetect\Parser
  */
 class ParserTest extends TestCase
 {
     /**
-     * @covers Parser::detect()
+     * @covers ::detect()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testDetect()
@@ -27,7 +27,7 @@ class ParserTest extends TestCase
 
     /**
      * @dataProvider provideAgents
-     * @covers Parser::parse()
+     * @covers ::parse()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testParse($agent)

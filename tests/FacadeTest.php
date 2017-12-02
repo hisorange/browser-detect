@@ -2,16 +2,15 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Facade;
-
 /**
  * Class FacadeTest
  * @package hisorange\BrowserDetect\Test
+ * @coversDefaultClass hisorange\BrowserDetect\Facade
  */
 class FacadeTest extends TestCase
 {
     /**
-     * @covers Facade::getFacadeAccessor()
+     * @covers ::getFacadeAccessor()
      * @throws \PHPUnit_Framework_AssertionFailedError
      */
     public function testAccessibility()
