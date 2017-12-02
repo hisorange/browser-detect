@@ -17,7 +17,7 @@ env:
 
 matrix:
   allow_failures:
-    nightly
+    - php nightly
   exclude:
     - php 5.6
       env LARAVEL_VERSION="5.5"
@@ -30,7 +30,7 @@ before_install:
 
 install: composer install --prefer-source --no-interaction --dev
 
-script: phpunit --coverage-text
+script: vendor/bin/phpunit --coverage-text
 
 branches:
   only:
