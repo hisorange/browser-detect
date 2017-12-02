@@ -8,11 +8,12 @@ use hisorange\BrowserDetect\ServiceProvider;
 /**
  * Class ServiceProviderTest
  * @package hisorange\BrowserDetect\Test
+ * @coversDefaultClass hisorange\BrowserDetect\ServiceProvider
  */
 class ServiceProviderTest extends TestCase
 {
     /**
-     * @covers ServiceProvider::isDeferred()
+     * @covers ::isDeferred()
      * @throws \PHPUnit_Framework_AssertionFailedError
      */
     public function testIsDeferred()
@@ -28,7 +29,7 @@ class ServiceProviderTest extends TestCase
     }
 
     /**
-     * @covers ServiceProvider::register()
+     * @covers ::register()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testRegister()
@@ -40,7 +41,7 @@ class ServiceProviderTest extends TestCase
     }
 
     /**
-     * @covers ServiceProvider::provides()
+     * @covers ::provides()
      * @throws \PHPUnit_Framework_Exception
      */
     public function testProvides()
