@@ -1,11 +1,10 @@
 language: php
 
 php:
-  - '5.6'
-  - '7.0'
-  - '7.1'
-  - '7.2'
-  - nightly
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
 
 env:
   - LARAVEL_VERSION="5.0"
@@ -16,8 +15,17 @@ env:
   - LARAVEL_VERSION="5.5"
   - LARAVEL_VERSION="dev-master"
 
+matrix:
+  allow_failures:
+    nightly
+  exclude:
+    - php 5.6
+      env LARAVEL_VERSION="5.5"
+    - php 5.6
+      env LARAVEL_VERSION="dev-master
+
 before_install:
-  - composer self-update > /dev/null
+  - composer self-update >/dev/null 2>&1
   - composer require laravel/framework:${LARAVEL_VERSION} --no-update
 
 install: composer install --prefer-source --no-interaction --dev
