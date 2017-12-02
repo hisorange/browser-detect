@@ -13,14 +13,11 @@ env:
   - LARAVEL_VERSION=5.3
   - LARAVEL_VERSION=5.4
   - LARAVEL_VERSION=5.5
-  - LARAVEL_VERSION=dev-master
 
 matrix:
   exclude:
     - php: 5.6
       env: LARAVEL_VERSION=5.5
-    - php: 5.6
-      env: LARAVEL_VERSION=dev-master
     - php: 7.0
       env: LARAVEL_VERSION=5.0
     - php: 7.0
@@ -29,8 +26,6 @@ matrix:
       env: LARAVEL_VERSION=5.2
     - php: 7.0
       env: LARAVEL_VERSION=5.3
-    - php: 7.0
-      env: LARAVEL_VERSION=dev-master
     - php: 7.1
       env: LARAVEL_VERSION=5.0
     - php: 7.1
@@ -45,6 +40,8 @@ matrix:
       env: LARAVEL_VERSION=5.1
     - php: 7.2
       env: LARAVEL_VERSION=5.2
+    - php: 7.2
+      env: LARAVEL_VERSION=5.3
     - php: 7.2
       env: LARAVEL_VERSION=5.4
 
@@ -52,7 +49,7 @@ before_install:
   - composer self-update >/dev/null 2>&1
   - composer require laravel/framework:${LARAVEL_VERSION} --no-update
 
-install: composer update --prefer-source --no-interaction --dev
+install: composer update --prefer-source --no-interaction
 
 script: vendor/bin/phpunit --coverage-text
 
@@ -64,3 +61,5 @@ branches:
 notifications:
   email:
   - hello@hisorange.me
+
+# Thanks for this awesome service @TravisCI!
