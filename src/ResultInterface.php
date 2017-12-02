@@ -4,13 +4,14 @@ namespace hisorange\BrowserDetect;
 
 // PHP SPL.
 use ArrayAccess;
+use JsonSerializable;
 
 /**
  * Interface ResultInterface
  *
  * @package hisorange\BrowserDetect
  */
-interface ResultInterface extends ArrayAccess
+interface ResultInterface extends ArrayAccess, JsonSerializable
 {
     /**
      * Initialize the result with the user agent string.
@@ -26,4 +27,11 @@ interface ResultInterface extends ArrayAccess
      * @return void
      */
     public function extend(array $extension);
+
+    /**
+     * Export the result's data into an array.
+     *
+     * @return array
+     */
+    public function toArray();
 }

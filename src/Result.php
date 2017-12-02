@@ -2,15 +2,11 @@
 
 namespace hisorange\BrowserDetect;
 
-use function array_merge;
-use const JSON_NUMERIC_CHECK;
-use JsonSerializable;
-
 /**
  * Class Result
  * @package hisorange\BrowserDetect
  */
-class Result implements ResultInterface, JsonSerializable
+class Result implements ResultInterface
 {
     /**
      * @var array
@@ -61,7 +57,7 @@ class Result implements ResultInterface, JsonSerializable
     {
         foreach ($extension as $key => $value) {
             if ($value !== null) {
-                $this->attributes[$key] = $value;
+                $this->offsetSet($key, $value);
             }
         }
     }
@@ -69,17 +65,25 @@ class Result implements ResultInterface, JsonSerializable
     /**
      * @inheritDoc
      */
+    public function toArray()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Export attributes for serialization.
+     */
     public function __sleep()
     {
         return ['attributes'];
     }
 
     /**
-     * @inheritDoc
+     * Export data as json string.
      */
     public function __toString()
     {
-        return json_encode($this->attributes, JSON_NUMERIC_CHECK);
+        return json_encode($this);
     }
 
     /**
@@ -95,7 +99,7 @@ class Result implements ResultInterface, JsonSerializable
      */
     public function offsetExists($offset)
     {
-        return array_key_exists($this->attributes, $offset);
+        return array_key_exists($offset, $this->attributes);
     }
 
     /**
@@ -111,7 +115,9 @@ class Result implements ResultInterface, JsonSerializable
      */
     public function offsetSet($offset, $value)
     {
-        $this->attributes[$offset] = $value;
+        if ($this->offsetExists($offset)) {
+            $this->attributes[$offset] = $value;
+        }
     }
 
     /**
