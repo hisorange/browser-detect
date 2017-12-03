@@ -32,13 +32,19 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     protected function registerDirectives()
     {
         if (version_compare($this->app->version(), '5.5', '>=')) {
+            // Workaround to support the PHP5.6 syntax.
+            // Even tho the laravel version will lock to 7.0 >=
+            // but the code is still complied and throws syntax error on 5.6.
+            $blade = Blade::getFacadeRoot();
+            $if    = 'if';
+
             foreach (['desktop', 'tablet', 'mobile'] as $key) {
-                Blade::if ($key, function () use ($key) {
+                $blade->$if($key, function () use ($key) {
                     return app()->make('browser-detect')->detect()->offsetGet('is' . ucfirst($key));
                 });
             }
 
-            Blade::if ('browser', function ($key) {
+            $blade->$if('browser', function ($key) {
                 return app()->make('browser-detect')->detect()->offsetGet($key);
             });
         }
