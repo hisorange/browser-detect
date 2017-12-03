@@ -17,6 +17,7 @@ class ResultTest extends TestCase
 {
     /**
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testInterfaceImplementation()
     {
@@ -104,6 +105,7 @@ class ResultTest extends TestCase
      * @param array $extension
      * @param array $expected
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testExtend($extension, $expected)
     {
@@ -178,6 +180,7 @@ class ResultTest extends TestCase
     /**
      * @covers ::offsetExists()
      * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
     public function testOffsetExists()
     {
@@ -204,6 +207,7 @@ class ResultTest extends TestCase
     /**
      * @covers ::offsetSet()
      * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
     public function testOffsetSet()
     {
@@ -220,6 +224,7 @@ class ResultTest extends TestCase
     /**
      * @covers ::offsetUnset()
      * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
     public function testOffsetUnset()
     {
@@ -231,7 +236,7 @@ class ResultTest extends TestCase
 
     /**
      * @covers ::extend()
-     * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testExtendFakeKey()
     {

@@ -7,7 +7,7 @@ use hisorange\BrowserDetect\ResultInterface;
 
 /**
  * Class ParserTest
- * @package hisorange\BrowserDetect\Test
+ * @package            hisorange\BrowserDetect\Test
  * @coversDefaultClass hisorange\BrowserDetect\Parser
  */
 class ParserTest extends TestCase
@@ -15,6 +15,7 @@ class ParserTest extends TestCase
     /**
      * @covers ::detect()
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testDetect()
     {
@@ -26,9 +27,19 @@ class ParserTest extends TestCase
     }
 
     /**
+     * @return ParserInterface
+     */
+    protected function getParser()
+    {
+        return $this->app->make('browser-detect');
+    }
+
+    /**
      * @dataProvider provideAgents
+     * @param  string $agent
      * @covers ::parse()
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testParse($agent)
     {
@@ -37,14 +48,6 @@ class ParserTest extends TestCase
         $expected = ResultInterface::class;
 
         $this->assertInstanceOf($expected, $actual);
-    }
-
-    /**
-     * @return ParserInterface
-     */
-    protected function getParser()
-    {
-        return $this->app->make('browser-detect.parser');
     }
 
     /**
