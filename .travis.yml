@@ -53,7 +53,10 @@ before_install:
 
 install: composer update --prefer-source --no-interaction
 
-script: vendor/bin/phpunit --coverage-text
+script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
+
+after_script:
+- php vendor/bin/coveralls -v
 
 branches:
   only:
