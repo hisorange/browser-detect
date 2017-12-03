@@ -2,6 +2,7 @@
     "name": "hisorange/browser-detect",
     "description": "Browser & Mobile detection package for Laravel.",
     "keywords": ["laravel", "user-agent", "browser", "mobile", "detect", "tablet", "user agent", "mobile", "tablet", "analyize", "hisorange"],
+    "homepage": "https://github.com/hisorange/browser-detect",
     "license": "MIT",
     "version": "3.0.0",
     "authors": [
@@ -28,7 +29,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "hisorange\\BrowserDetect\\Test\\": "tests"
+            "hisorange\\BrowserDetect\\Test\\": "tests/"
         }
     },
     "minimum-stability": "stable",
