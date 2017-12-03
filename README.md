@@ -7,7 +7,7 @@
 [![License](https://poser.pugx.org/hisorange/browser-detect/license)](https://packagist.org/packages/hisorange/browser-detect) 
 
 This package is able to identify the visitor's browser by using multiple well tested packages and services together to give you the best results possible.
-**Laravel 5.0 -> 5.5** is tested on **PHP 5.6 -> 7.2** versions, with a 100% code coverage!
+**Laravel 5.0 &raquo; 5.5** is tested on **PHP 5.6 &raquo; 7.2** versions, with a 100% code coverage!
 
 ### [Install](#install)
 
@@ -57,12 +57,16 @@ Even in your blade templates:
 
 ### [Version support](#versions)
 
-| --- | Laravel 5.0 | Laravel 5.1 | Laravel 5.2 | Laravel 5.3 | Laravel 5.4 | Laravel 5.5 |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| PHP 5.6 | &#10003; | &#10003; | &#10003; | &#10003; | &#10003; | - |
-| PHP 7.0 | - | - | - | - | &#10003; | &#10003; |
-| PHP 7.1 | - | - | - | - | &#10003;* | &#10003; |
-| PHP 7.2 | - | - | - | - | &#10003;* | &#10003; |
+The following matrix is being continuously tested by the great and awesome [Travis CI](https://travis-ci.org/hisorange)!
+
+| ----- | PHP 5.6 | PHP 7.0 | PHP 7.1 | PHP 7.2 |
+| :---: | :-----: | :-----: | :-----: | :-----: |
+| Laravel 5.0 | &#10003; | - | - | - | 
+| Laravel 5.1 | &#10003; | - | - | - | 
+| Laravel 5.2 | &#10003; | - | - | - | 
+| Laravel 5.3 | &#10003; | - | - | - | 
+| Laravel 5.4 | &#10003; | &#10003; | &#10003; | &#10003; | 
+| Laravel 5.5 | - | &#10003; | &#10003; | &#10003; | 
 
 \* _Cannot auto test the laravel 5.4 on PHP 7.1 because of version incompatibility between the PHPUnit, Laravel and the package testing library, but the versions are tested manually._
 
