@@ -65,6 +65,24 @@ class Result implements ResultInterface
     /**
      * @inheritDoc
      */
+    public function offsetSet($offset, $value)
+    {
+        if ($this->offsetExists($offset)) {
+            $this->attributes[$offset] = $value;
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->attributes);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toArray()
     {
         return $this->attributes;
@@ -97,27 +115,9 @@ class Result implements ResultInterface
     /**
      * @inheritDoc
      */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->attributes);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function offsetGet($offset)
     {
         return $this->attributes[$offset];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function offsetSet($offset, $value)
-    {
-        if ($this->offsetExists($offset)) {
-            $this->attributes[$offset] = $value;
-        }
     }
 
     /**

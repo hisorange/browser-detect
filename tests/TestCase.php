@@ -36,7 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Browser' => Facade::class
+            'Browser' => Facade::class,
         ];
     }
 }

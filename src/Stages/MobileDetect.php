@@ -23,7 +23,7 @@ class MobileDetect implements StageInterface
         // request headers too to identify the device kind.
         if (isset($_SERVER['HTTP_USER_AGENT']) and $payload['agent'] !== $_SERVER['HTTP_USER_AGENT']) {
             $headers = [
-                'HTTP_FAKE_HEADER' => 'HiSoRange\Browser'
+                'HTTP_FAKE_HEADER' => 'HiSoRange\Browser',
             ];
         }
 
@@ -68,8 +68,7 @@ class MobileDetect implements StageInterface
             $filtered['isMobile']    = true;
             $filtered['mobileGrade'] = $result->mobileGrade();
             $filtered['deviceModel'] = $filter(Mobile_Detect::getPhoneDevices());
-        }
-        elseif ($result->isTablet()) { // Just 'tablet' kind devices.
+        } elseif ($result->isTablet()) { // Just 'tablet' kind devices.
             $filtered['isTablet']    = true;
             $filtered['mobileGrade'] = $result->mobileGrade();
             $filtered['deviceModel'] = $filter(Mobile_Detect::getTabletDevices());

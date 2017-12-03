@@ -7,7 +7,7 @@ use hisorange\BrowserDetect\ServiceProvider;
 
 /**
  * Class ServiceProviderTest
- * @package hisorange\BrowserDetect\Test
+ * @package            hisorange\BrowserDetect\Test
  * @coversDefaultClass hisorange\BrowserDetect\ServiceProvider
  */
 class ServiceProviderTest extends TestCase
@@ -15,6 +15,7 @@ class ServiceProviderTest extends TestCase
     /**
      * @covers ::isDeferred()
      * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
     public function testIsDeferred()
     {
@@ -31,11 +32,12 @@ class ServiceProviderTest extends TestCase
     /**
      * @covers ::register()
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testRegister()
     {
         $expected = ParserInterface::class;
-        $actual   = $this->app->make('browser-detect.parser');
+        $actual   = $this->app->make('browser-detect');
 
         $this->assertInstanceOf($expected, $actual);
     }
@@ -43,6 +45,7 @@ class ServiceProviderTest extends TestCase
     /**
      * @covers ::provides()
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testProvides()
     {
@@ -53,6 +56,6 @@ class ServiceProviderTest extends TestCase
 
         $actual = $provider->provides();
 
-        $this->assertContains('browser-detect.parser', $actual);
+        $this->assertContains('browser-detect', $actual);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use Browser;
+use hisorange\BrowserDetect\Facade;
 use hisorange\BrowserDetect\ParserInterface;
 
 /**
@@ -14,14 +14,16 @@ class FacadeTest extends TestCase
     /**
      * @covers \hisorange\BrowserDetect\Facade
      * @throws \PHPUnit_Framework_AssertionFailedError
+     * @throws \PHPUnit\Framework\AssertionFailedError
      * @throws \PHPUnit_Framework_Exception
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testResolve()
     {
         $this->assertTrue(class_exists('Browser'));
 
         $expected = ParserInterface::class;
-        $actual   = Browser::getFacadeRoot();
+        $actual   = Facade::getFacadeRoot();
 
         $this->assertInstanceOf($expected, $actual);
     }

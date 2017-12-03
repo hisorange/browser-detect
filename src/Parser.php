@@ -43,6 +43,57 @@ class Parser implements ParserInterface
     }
 
     /**
+     * Reflect calls to the result object.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @param  string $method
+     * @param  array  $params
+     *
+     * @return mixed
+     */
+    public function __call($method, $params)
+    {
+        $result = $this->detect();
+
+        // Reflect a parsed value.
+        if ($result->offsetExists($method)) {
+            return $result->offsetGet($method);
+        }
+
+        // Reflect a method.
+        if (method_exists($result, $method)) {
+            return call_user_func_array([$result, $method], $params);
+        }
+
+        throw new \InvalidArgumentException(sprintf('%s method does not exists on the %s object.', $method, Result::class));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function detect()
+    {
+        return $this->parse($this->request->header('HTTP_USER_AGENT'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function parse($agent)
+    {
+        $key = $this->key($agent);
+
+        if ( ! isset($this->runtime[$key])) {
+            $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
+                return $this->process(new Result($agent));
+            });
+        }
+
+        return $this->runtime[$key];
+    }
+
+    /**
      * Get a unique cache key for the user agent.
      *
      * @param  string $agent
@@ -68,56 +119,5 @@ class Parser implements ParserInterface
         ]);
 
         return $pipeline->process($result);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function parse($agent)
-    {
-        $key = $this->key($agent);
-
-        if ( ! isset($this->runtime[$key])) {
-            $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
-                return $this->process(new Result($agent));
-            });
-        }
-
-        return $this->runtime[$key];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function detect()
-    {
-        return $this->parse($this->request->header('HTTP_USER_AGENT'));
-    }
-
-    /**
-     * Reflect calls to the result object.
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @param  string $method
-     * @param  array  $params
-     *
-     * @return mixed
-     */
-    public function __call($method, $params)
-    {
-        $result = $this->detect();
-
-        // Reflect a parsed value.
-        if ($result->offsetExists($method)) {
-            return $result->offsetGet($method);
-        }
-
-        // Reflect a method.
-        if (method_exists($result, $method)) {
-            return call_user_func_array([$result, $method], $params);
-        }
-
-        throw new \InvalidArgumentException(sprintf('%s method does not exists on the %s object.', $method, Result::class));
     }
 }
