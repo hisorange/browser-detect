@@ -4,44 +4,34 @@ namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\ResultInterface;
 use League\Pipeline\StageInterface;
+use UAParser\Parser;
 
 class UAParser implements StageInterface
 {
     /**
      * @param  ResultInterface $payload
      * @return ResultInterface
+     * @throws \UAParser\Exception\FileNotFoundException
      */
     public function __invoke($payload)
     {
-        $parser   = new \UAParser\UAParser();
-        $result   = $parser->parse($payload['agent']);
+        $parser = Parser::create();
+        $result = $parser->parse($payload['agent']);
+
         $filtered = [];
 
-        $browser = $result->getBrowser();
-
-        if ($browser->getFamily() !== 'Other') {
-            $filtered['browserFamily']       = $browser->getFamily();
-            $filtered['browserVersionMajor'] = $browser->getMajor() ?: 0;
-            $filtered['browserVersionMinor'] = $browser->getMinor() ?: 0;
-            $filtered['browserVersionPatch'] = $browser->getPatch() ?: 0;
+        if ($result->ua->family !== 'Other') {
+            $filtered['browserFamily']       = $result->ua->family;
+            $filtered['browserVersionMajor'] = $result->ua->major ?: 0;
+            $filtered['browserVersionMinor'] = $result->ua->minor ?: 0;
+            $filtered['browserVersionPatch'] = $result->ua->patch ?: 0;
         }
 
-        $os = $result->getOperatingSystem();
-
-        if ($os->getFamily() !== 'Other') {
-            $filtered['osFamily']       = $os->getFamily();
-            $filtered['osVersionMajor'] = $os->getMajor() ?: 0;
-            $filtered['osVersionMinor'] = $os->getMinor() ?: 0;
-            $filtered['osVersionPatch'] = $os->getPatch() ?: 0;
-        }
-
-        $device = $result->getDevice();
-
-        if ($device->getConstructor() !== 'Other') {
-            $filtered['isMobile']     = $device->is('mobile');
-            $filtered['isTablet']     = $device->is('tablet');
-            $filtered['deviceFamily'] = $device->getConstructor();
-            $filtered['deviceModel']  = $device->getModel() ?: null;
+        if ($result->os->family !== 'Other') {
+            $filtered['osFamily']       = $result->os->family;
+            $filtered['osVersionMajor'] = $result->os->major ?: 0;
+            $filtered['osVersionMinor'] = $result->os->minor ?: 0;
+            $filtered['osVersionPatch'] = $result->os->patch ?: 0;
         }
 
         $payload->extend($filtered);
