@@ -1,6 +1,7 @@
 <?php
 
 namespace hisorange\BrowserDetect;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Class Result

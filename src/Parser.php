@@ -2,15 +2,17 @@
 
 namespace hisorange\BrowserDetect;
 
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Http\Request;
 use League\Pipeline\Pipeline;
 
 /**
  * Class Parser
+ *
  * @package hisorange\BrowserDetect
  */
-class Parser implements ParserInterface
+class Parser implements Contracts\ParserInterface
 {
     /**
      * @var CacheManager

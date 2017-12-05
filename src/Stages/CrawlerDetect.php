@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\ResultInterface;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 use League\Pipeline\StageInterface;
 
 /**

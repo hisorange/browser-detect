@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\ParserInterface;
+use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\ServiceProvider;
 
 /**

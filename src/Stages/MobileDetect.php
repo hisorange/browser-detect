@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\RuntimeException;
-use hisorange\BrowserDetect\ResultInterface;
 use League\Pipeline\StageInterface;
 use Mobile_Detect;
 

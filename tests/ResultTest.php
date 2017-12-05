@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Test;
 
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
-use hisorange\BrowserDetect\ResultInterface;
 
 /**
  * Class ResultTest
