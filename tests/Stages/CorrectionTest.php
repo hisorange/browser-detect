@@ -10,7 +10,7 @@ use hisorange\BrowserDetect\Test\TestCase;
  * Test the UAParser stage.
  *
  * @package            hisorange\BrowserDetect\Test\Stages
- * @coversDefaultClass hisorange\BrowserDetect\Stages\UAParser
+ * @coversDefaultClass hisorange\BrowserDetect\Stages\Correction
  */
 class CorrectionTest extends TestCase
 {
