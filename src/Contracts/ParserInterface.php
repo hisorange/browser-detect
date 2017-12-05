@@ -1,6 +1,6 @@
 <?php
 
-namespace hisorange\BrowserDetect;
+namespace hisorange\BrowserDetect\Contracts;
 
 /**
  * Interface ParserInterface

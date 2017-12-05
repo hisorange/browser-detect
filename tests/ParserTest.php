@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\ParserInterface;
-use hisorange\BrowserDetect\ResultInterface;
+use hisorange\BrowserDetect\Contracts\ParserInterface;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Class ParserTest
@@ -29,7 +29,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @return ParserInterface
+     * @return \hisorange\BrowserDetect\Contracts\ParserInterface
      */
     protected function getParser()
     {
