@@ -70,7 +70,7 @@ class Parser implements ParserInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function detect()
     {
@@ -78,7 +78,7 @@ class Parser implements ParserInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function parse($agent)
     {
