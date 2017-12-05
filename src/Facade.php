@@ -10,7 +10,7 @@ namespace hisorange\BrowserDetect;
 class Facade extends \Illuminate\Support\Facades\Facade
 {
     /**
-     * @inheritDocs
+     * @inheritdoc
      */
     protected static function getFacadeAccessor()
     {

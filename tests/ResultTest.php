@@ -4,9 +4,6 @@ namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Result;
 use hisorange\BrowserDetect\ResultInterface;
-use function json_decode;
-use function json_encode;
-use function serialize;
 
 /**
  * Class ResultTest
@@ -34,7 +31,7 @@ class ResultTest extends TestCase
     {
         $result = new Result($actual);
 
-        $this->assertSame($expected, $result->offsetGet('agent'));
+        $this->assertSame($expected, $result->offsetGet('userAgent'));
     }
 
     /**
@@ -64,24 +61,22 @@ class ResultTest extends TestCase
     protected function getSchema()
     {
         return [
-            'agent'               => 'UnknownBrowser',
+            'userAgent'           => 'UnknownBrowser',
             'isMobile'            => false,
             'isTablet'            => false,
             'isDesktop'           => false,
             'isBot'               => false,
-            'browserFamily'       => '',
+            'browserFamily'       => 'UnknownBrowserFamily',
             'browserVersionMajor' => 0,
             'browserVersionMinor' => 0,
             'browserVersionPatch' => 0,
-            'osFamily'            => '',
+            'osFamily'            => 'UnknownOS',
             'osVersionMajor'      => 0,
             'osVersionMinor'      => 0,
             'osVersionPatch'      => 0,
-            'deviceFamily'        => '',
+            'deviceFamily'        => 'UnknownDeviceFamily',
             'deviceModel'         => '',
             'mobileGrade'         => '',
-            'cssVersion'          => 0,
-            'javaScriptSupport'   => true,
         ];
     }
 
@@ -92,8 +87,8 @@ class ResultTest extends TestCase
     {
         return [
             [null, 'UnknownBrowser'],
-            ['', 'UnknownBrowser'],
-            [0, 'UnknownBrowser'],
+            ['', ''],
+            [0, 0],
 
             ['Test 1', 'Test 1'],
         ];
@@ -137,10 +132,10 @@ class ResultTest extends TestCase
             ],
             [
                 [
-                    'agent' => null,
+                    'userAgent' => null,
                 ],
                 [
-                    'agent' => 'UnknownBrowser',
+                    'userAgent' => 'UnknownBrowser',
                 ],
             ],
         ];
@@ -186,7 +181,7 @@ class ResultTest extends TestCase
     {
         $result = $this->getEmptyResult();
 
-        $this->assertTrue($result->offsetExists('agent'));
+        $this->assertTrue($result->offsetExists('userAgent'));
         $this->assertTrue($result->offsetExists('isDesktop'));
         $this->assertFalse($result->offsetExists('isDesktop2'));
         $this->assertFalse($result->offsetExists(''));
@@ -200,7 +195,7 @@ class ResultTest extends TestCase
         $result   = $this->getEmptyResult();
         $expected = $this->getSchema();
 
-        $this->assertSame($result->offsetGet('agent'), $expected['agent']);
+        $this->assertSame($result->offsetGet('userAgent'), $expected['userAgent']);
         $this->assertSame($result->offsetGet('isDesktop'), $expected['isDesktop']);
     }
 
@@ -212,9 +207,9 @@ class ResultTest extends TestCase
     public function testOffsetSet()
     {
         $result = $this->getEmptyResult();
-        $result->offsetSet('agent', 'a');
+        $result->offsetSet('userAgent', 'a');
 
-        $this->assertSame($result->offsetGet('agent'), 'a');
+        $this->assertSame($result->offsetGet('userAgent'), 'a');
 
         $result->offsetSet('b', 'c');
 
@@ -229,9 +224,9 @@ class ResultTest extends TestCase
     public function testOffsetUnset()
     {
         $result = $this->getEmptyResult();
-        $result->offsetUnset('agent');
+        $result->offsetUnset('userAgent');
 
-        $this->assertFalse($result->offsetExists('agent'));
+        $this->assertFalse($result->offsetExists('userAgent'));
     }
 
     /**

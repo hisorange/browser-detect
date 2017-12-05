@@ -16,9 +16,21 @@ interface ResultInterface extends ArrayAccess, JsonSerializable
     /**
      * Initialize the result with the user agent string.
      *
-     * @param string $agent
+     * @param string $userAgent
      */
-    public function __construct($agent);
+    public function __construct($userAgent);
+
+    /**
+     * Set the user agent string.
+     *
+     * @param string $userAgent
+     */
+    public function setUserAgent($userAgent);
+
+    /**
+     * @return string
+     */
+    public function getUserAgent();
 
     /**
      * Extend the attributes with the given extension, overwrite existing ones.

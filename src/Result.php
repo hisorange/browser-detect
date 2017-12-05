@@ -13,7 +13,7 @@ class Result implements ResultInterface
      */
     protected $attributes = [
         // Original user agent string.
-        'agent'               => 'UnknownBrowser',
+        'userAgent'           => 'UnknownBrowser',
         // Device's kind.
         'isMobile'            => false, // bool
         'isTablet'            => false, // bool
@@ -21,37 +21,51 @@ class Result implements ResultInterface
         // Visitor's purpose.
         'isBot'               => false, // bool
         // Browsing software.
-        'browserFamily'       => '', // string
+        'browserFamily'       => 'UnknownBrowserFamily', // string
         'browserVersionMajor' => 0,  // int
         'browserVersionMinor' => 0,  // int
         'browserVersionPatch' => 0,  // int
         // Operating software.
-        'osFamily'            => '', // string
+        'osFamily'            => 'UnknownOS', // string
         'osVersionMajor'      => 0,  // int
         'osVersionMinor'      => 0,  // int
         'osVersionPatch'      => 0,  // int
         // Device's hardware.
-        'deviceFamily'        => '', // string
+        'deviceFamily'        => 'UnknownDeviceFamily', // string
         'deviceModel'         => '', // string
         'mobileGrade'         => '', // string
-        // Browser's capability.
-        'cssVersion'          => 0,  // int
-        // Javascript support.
-        'javaScriptSupport'   => true, // bool
     ];
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
-    public function __construct($agent)
+    public function __construct($userAgent = null)
     {
-        if ( ! empty($agent)) {
-            $this->attributes['agent'] = $agent;
+        $this->setUserAgent($userAgent);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUserAgent($userAgent)
+    {
+        if (isset($userAgent)) {
+            $this->attributes['userAgent'] = $userAgent;
+        } else {
+            $this->attributes['userAgent'] = 'UnknownBrowser';
         }
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
+     */
+    public function getUserAgent()
+    {
+        return $this->attributes['userAgent'];
+    }
+
+    /**
+     * @inheritdoc
      */
     public function extend(array $extension)
     {
@@ -63,7 +77,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function offsetSet($offset, $value)
     {
@@ -73,7 +87,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function offsetExists($offset)
     {
@@ -81,7 +95,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function toArray()
     {
@@ -105,7 +119,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function jsonSerialize()
     {
@@ -113,7 +127,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function offsetGet($offset)
     {
@@ -121,7 +135,7 @@ class Result implements ResultInterface
     }
 
     /**
-     * @inheritDoc
+     * @inheritdoc
      */
     public function offsetUnset($offset)
     {
