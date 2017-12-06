@@ -2,6 +2,8 @@
 
 namespace hisorange\BrowserDetect;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use function stripos;
+use function version_compare;
 
 /**
  * Class Result
@@ -14,7 +16,7 @@ class Result implements ResultInterface
      */
     protected $attributes = [
         // Original user agent string.
-        'userAgent'           => 'UnknownBrowser',
+        'userAgent'           => 'Unknown',
         // Device's kind.
         'isMobile'            => false, // bool
         'isTablet'            => false, // bool
@@ -22,17 +24,17 @@ class Result implements ResultInterface
         // Visitor's purpose.
         'isBot'               => false, // bool
         // Browsing software.
-        'browserFamily'       => 'UnknownBrowserFamily', // string
+        'browserFamily'       => 'Unknown', // string
         'browserVersionMajor' => 0,  // int
         'browserVersionMinor' => 0,  // int
         'browserVersionPatch' => 0,  // int
         // Operating software.
-        'osFamily'            => 'UnknownOS', // string
+        'osFamily'            => 'Unknown', // string
         'osVersionMajor'      => 0,  // int
         'osVersionMinor'      => 0,  // int
         'osVersionPatch'      => 0,  // int
         // Device's hardware.
-        'deviceFamily'        => 'UnknownDeviceFamily', // string
+        'deviceFamily'        => 'Unknown', // string
         'deviceModel'         => '', // string
         'mobileGrade'         => '', // string
     ];
@@ -53,7 +55,7 @@ class Result implements ResultInterface
         if (isset($userAgent)) {
             $this->attributes['userAgent'] = $userAgent;
         } else {
-            $this->attributes['userAgent'] = 'UnknownBrowser';
+            $this->attributes['userAgent'] = 'Unknown';
         }
     }
 
@@ -101,6 +103,116 @@ class Result implements ResultInterface
     public function toArray()
     {
         return $this->attributes;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserName()
+    {
+        return trim($this->attributes['browserFamily'] . ' ' . $this->browserVersion());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserVersion()
+    {
+        return $this->trimVersion(
+            implode('.', [
+                $this->attributes['browserVersionMajor'],
+                $this->attributes['browserVersionMinor'],
+                $this->attributes['browserVersionPatch']
+            ])
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osName()
+    {
+        return trim($this->attributes['osFamily'] . ' ' . $this->osVersion());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osVersion()
+    {
+        return $this->trimVersion(
+            sprintf(
+                '%d.%d.%d',
+                $this->attributes['osVersionMajor'],
+                $this->attributes['osVersionMinor'],
+                $this->attributes['osVersionPatch']
+            )
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isChrome()
+    {
+        return false !== stripos($this->attributes['browserFamily'], 'chrom');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isFirefox()
+    {
+        return false !== stripos($this->attributes['browserFamily'], 'firefox');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isOpera()
+    {
+        return false !== stripos($this->attributes['browserFamily'], 'opera');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isSafari()
+    {
+        return false !== stripos($this->attributes['browserFamily'], 'safari');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isIE()
+    {
+        return (
+            false !== stripos($this->attributes['browserFamily'], 'explorer') ||
+            false !== stripos($this->attributes['browserFamily'], 'ie') ||
+            false !== stripos($this->attributes['browserFamily'], 'trident')
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isIEVersion($version, $operator = '=')
+    {
+        return $this->isIE() && version_compare($this->attributes['browserVersionMajor'], $version, $operator);
+    }
+
+    /**
+     * Trim the trailing .0 versions from a semantic version string.
+     * It makes it more readable for an end user.
+     *
+     * @param  string $version
+     *
+     * @return string
+     */
+    protected function trimVersion($version)
+    {
+        return preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version);
     }
 
     /**
