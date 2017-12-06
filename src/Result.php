@@ -1,9 +1,8 @@
 <?php
 
 namespace hisorange\BrowserDetect;
+
 use hisorange\BrowserDetect\Contracts\ResultInterface;
-use function stripos;
-use function version_compare;
 
 /**
  * Class Result
@@ -11,90 +10,38 @@ use function version_compare;
  */
 class Result implements ResultInterface
 {
-    /**
-     * @var array
-     */
-    protected $attributes = [
-        // Original user agent string.
-        'userAgent'           => 'Unknown',
-        // Device's kind.
-        'isMobile'            => false, // bool
-        'isTablet'            => false, // bool
-        'isDesktop'           => false, // bool
-        // Visitor's purpose.
-        'isBot'               => false, // bool
-        // Browsing software.
-        'browserFamily'       => 'Unknown', // string
-        'browserVersionMajor' => 0,  // int
-        'browserVersionMinor' => 0,  // int
-        'browserVersionPatch' => 0,  // int
-        // Operating software.
-        'osFamily'            => 'Unknown', // string
-        'osVersionMajor'      => 0,  // int
-        'osVersionMinor'      => 0,  // int
-        'osVersionPatch'      => 0,  // int
-        // Device's hardware.
-        'deviceFamily'        => 'Unknown', // string
-        'deviceModel'         => '', // string
-        'mobileGrade'         => '', // string
-    ];
+    protected $userAgent = 'Unknown';
+    protected $isMobile = false;
+    protected $isTablet = false;
+    protected $isDesktop = false;
+    protected $isBot = false;
+    protected $browserFamily = 'Unknown';
+    protected $browserVersionMajor = 0;
+    protected $browserVersionMinor = 0;
+    protected $browserVersionPatch = 0;
+    protected $osFamily = 'Unknown';
+    protected $osVersionMajor = 0;
+    protected $osVersionMinor = 0;
+    protected $osVersionPatch = 0;
+    protected $deviceFamily = 'Unknown';
+    protected $deviceModel = '';
+    protected $mobileGrade = '';
+    protected $isChrome;
+    protected $isFirefox;
+    protected $isOpera;
+    protected $isSafari;
+    protected $isIE;
 
     /**
      * @inheritdoc
      */
-    public function __construct($userAgent = null)
+    public function __construct(array $result)
     {
-        $this->setUserAgent($userAgent);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setUserAgent($userAgent)
-    {
-        if (isset($userAgent)) {
-            $this->attributes['userAgent'] = $userAgent;
-        } else {
-            $this->attributes['userAgent'] = 'Unknown';
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getUserAgent()
-    {
-        return $this->attributes['userAgent'];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function extend(array $extension)
-    {
-        foreach ($extension as $key => $value) {
+        foreach ($result as $property => $value) {
             if ($value !== null) {
-                $this->offsetSet($key, $value);
+                $this->$property = $value;
             }
         }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetSet($offset, $value)
-    {
-        if ($this->offsetExists($offset)) {
-            $this->attributes[$offset] = $value;
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetExists($offset)
-    {
-        return array_key_exists($offset, $this->attributes);
     }
 
     /**
@@ -122,9 +69,22 @@ class Result implements ResultInterface
             implode('.', [
                 $this->attributes['browserVersionMajor'],
                 $this->attributes['browserVersionMinor'],
-                $this->attributes['browserVersionPatch']
+                $this->attributes['browserVersionPatch'],
             ])
         );
+    }
+
+    /**
+     * Trim the trailing .0 versions from a semantic version string.
+     * It makes it more readable for an end user.
+     *
+     * @param  string $version
+     *
+     * @return string
+     */
+    protected function trimVersion($version)
+    {
+        return preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version);
     }
 
     /**
@@ -185,6 +145,14 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
+    public function isIEVersion($version, $operator = '=')
+    {
+        return $this->isIE() && version_compare($this->attributes['browserVersionMajor'], $version, $operator);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function isIE()
     {
         return (
@@ -197,30 +165,9 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function isIEVersion($version, $operator = '=')
+    public function jsonSerialize()
     {
-        return $this->isIE() && version_compare($this->attributes['browserVersionMajor'], $version, $operator);
-    }
-
-    /**
-     * Trim the trailing .0 versions from a semantic version string.
-     * It makes it more readable for an end user.
-     *
-     * @param  string $version
-     *
-     * @return string
-     */
-    protected function trimVersion($version)
-    {
-        return preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version);
-    }
-
-    /**
-     * Export attributes for serialization.
-     */
-    public function __sleep()
-    {
-        return ['attributes'];
+        return $this->attributes;
     }
 
     /**
@@ -229,29 +176,5 @@ class Result implements ResultInterface
     public function __toString()
     {
         return json_encode($this);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function jsonSerialize()
-    {
-        return $this->attributes;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetGet($offset)
-    {
-        return $this->attributes[$offset];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function offsetUnset($offset)
-    {
-        unset($this->attributes[$offset]);
     }
 }
