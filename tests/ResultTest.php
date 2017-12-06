@@ -61,20 +61,20 @@ class ResultTest extends TestCase
     protected function getSchema()
     {
         return [
-            'userAgent'           => 'UnknownBrowser',
+            'userAgent'           => 'Unknown',
             'isMobile'            => false,
             'isTablet'            => false,
             'isDesktop'           => false,
             'isBot'               => false,
-            'browserFamily'       => 'UnknownBrowserFamily',
+            'browserFamily'       => 'Unknown',
             'browserVersionMajor' => 0,
             'browserVersionMinor' => 0,
             'browserVersionPatch' => 0,
-            'osFamily'            => 'UnknownOS',
+            'osFamily'            => 'Unknown',
             'osVersionMajor'      => 0,
             'osVersionMinor'      => 0,
             'osVersionPatch'      => 0,
-            'deviceFamily'        => 'UnknownDeviceFamily',
+            'deviceFamily'        => 'Unknown',
             'deviceModel'         => '',
             'mobileGrade'         => '',
         ];
@@ -86,7 +86,7 @@ class ResultTest extends TestCase
     public function agentProvider()
     {
         return [
-            [null, 'UnknownBrowser'],
+            [null, 'Unknown'],
             ['', ''],
             [0, 0],
 
@@ -135,7 +135,7 @@ class ResultTest extends TestCase
                     'userAgent' => null,
                 ],
                 [
-                    'userAgent' => 'UnknownBrowser',
+                    'userAgent' => 'Unknown',
                 ],
             ],
         ];
