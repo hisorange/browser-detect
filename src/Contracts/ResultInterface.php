@@ -11,69 +11,49 @@ use JsonSerializable;
  *
  * @package hisorange\BrowserDetect
  */
-interface ResultInterface extends ArrayAccess, JsonSerializable
+interface ResultInterface extends JsonSerializable
 {
     /**
-     * Initialize the result with the user agent string.
+     * Initialize the result object with a processed payload.
      *
-     * @param string $userAgent
+     * @param array $result
      */
-    public function __construct($userAgent);
+    public function __construct(array $result);
 
     /**
-     * Set the user agent string.
-     *
-     * @param string $userAgent
-     */
-    public function setUserAgent($userAgent);
-
-    /**
-     * @return string
-     */
-    public function getUserAgent();
-
-    /**
-     * Extend the attributes with the given extension, overwrite existing ones.
-     *
-     * @param  array $extension
-     * @return void
-     */
-    public function extend(array $extension);
-
-    /**
-     * Export the result's data into an array.
-     *
-     * @return array
-     */
-    public function toArray();
-
-    /**
-     * Build a human readable browser name: Internet Explorer 7, Firefox 3.6
+     * Get the original user agent string.
      *
      * @return string
      */
-    public function browserName();
+    public function userAgent();
 
     /**
-     * Build human readable browser version. (cuts the trailing .0 parts)
+     * Is this a mobile device.
      *
-     * @return string
+     * @return bool
      */
-    public function browserVersion();
+    public function isMobile();
 
     /**
-     * Build a human readable os name: Windows 7, Windows XP, Android OS 2.3.6
+     * Is this a tablet device.
      *
-     * @return string
+     * @return bool
      */
-    public function osName();
+    public function isTablet();
 
     /**
-     * Build human readable os version. (cuts the trailing .0 parts)
+     * Is this a desktop computer.
      *
-     * @return string
+     * @return bool
      */
-    public function osVersion();
+    public function isDesktop();
+
+    /**
+     * Is this a crawler / bot.
+     *
+     * @return bool
+     */
+    public function isBot();
 
     /**
      * Is this a Chrome or Chromium browser?
@@ -120,5 +100,115 @@ interface ResultInterface extends ArrayAccess, JsonSerializable
      */
     public function isIEVersion($version, $operator = '=');
 
+    /**
+     * Build a human readable browser name: Internet Explorer 7, Firefox 3.6
+     *
+     * @return string
+     */
+    public function browserName();
 
+    /**
+     * Browser's vendor like Chrome, Firefox, Opera.
+     *
+     * @return string
+     */
+    public function browserFamily();
+
+    /**
+     * Build human readable browser version. (cuts the trailing .0 parts)
+     *
+     * @return string
+     */
+    public function browserVersion();
+
+    /**
+     * Browser's semantic major version.
+     *
+     * @return int
+     */
+    public function browserVersionMajor();
+
+    /**
+     * Browser's semantic minor version.
+     *
+     * @return int
+     */
+    public function browserVersionMinor();
+
+    /**
+     * Browser's semantic patch version.
+     *
+     * @return int
+     */
+    public function browserVersionPatch();
+
+    /**
+     * Operating system's human friendly name like Windows XP, MacOS 10.
+     *
+     * @return string
+     */
+    public function osName();
+
+    /**
+     * Operating system's vendor like Linux, Windows, MacOS.
+     *
+     * @return string
+     */
+    public function osFamily();
+
+    /**
+     * Build human readable os version. (cuts the trailing .0 parts)
+     *
+     * @return string
+     */
+    public function osVersion();
+
+    /**
+     * Operating system's semantic major version.
+     *
+     * @return int
+     */
+    public function osVersionMajor();
+
+    /**
+     * Operating system's semantic minor version.
+     *
+     * @return int
+     */
+    public function osVersionMinor();
+
+    /**
+     * Operating system's semantic patch version.
+     *
+     * @return int
+     */
+    public function osVersionPatch();
+
+    /**
+     * Device's vendor like Samsung, Apple, Huawei.
+     *
+     * @return string
+     */
+    public function deviceFamily();
+
+    /**
+     * Device's brand name like iPad, iPhone, Nexus.
+     *
+     * @return string
+     */
+    public function deviceModel();
+
+    /**
+     * Device's mobile grade in scale of A,B,C for performance.
+     *
+     * @return string
+     */
+    public function mobileGrade();
+
+    /**
+     * Export the result's data into an array.
+     *
+     * @return array
+     */
+    public function toArray();
 }
