@@ -2,7 +2,9 @@
 
 namespace hisorange\BrowserDetect;
 
+use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Http\Request;
 use League\Pipeline\Pipeline;
@@ -12,7 +14,7 @@ use League\Pipeline\Pipeline;
  *
  * @package hisorange\BrowserDetect
  */
-class Parser implements Contracts\ParserInterface
+class Parser implements ParserInterface
 {
     /**
      * @var CacheManager
@@ -47,7 +49,7 @@ class Parser implements Contracts\ParserInterface
     /**
      * Reflect calls to the result object.
      *
-     * @throws \InvalidArgumentException
+     * @throws \hisorange\BrowserDetect\Exceptions\BadMethodCallException
      *
      * @param  string $method
      * @param  array  $params
@@ -58,17 +60,12 @@ class Parser implements Contracts\ParserInterface
     {
         $result = $this->detect();
 
-        // Reflect a parsed value.
-        if ($result->offsetExists($method)) {
-            return $result->offsetGet($method);
-        }
-
         // Reflect a method.
         if (method_exists($result, $method)) {
             return call_user_func_array([$result, $method], $params);
         }
 
-        throw new \InvalidArgumentException(sprintf('%s method does not exists on the %s object.', $method, Result::class));
+        throw new BadMethodCallException(sprintf('%s method does not exists on the %s object.', $method, ResultInterface::class));
     }
 
     /**
@@ -88,7 +85,7 @@ class Parser implements Contracts\ParserInterface
 
         if ( ! isset($this->runtime[$key])) {
             $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
-                return $this->process(new Result($agent));
+                return $this->process($agent);
             });
         }
 
@@ -107,19 +104,20 @@ class Parser implements Contracts\ParserInterface
     }
 
     /**
-     * Pipe the result through the stages.
+     * Pipe the payload through the stages.
      *
-     * @param  ResultInterface $result
+     * @param  string $agent
      * @return ResultInterface
      */
-    protected function process($result)
+    protected function process($agent)
     {
         $pipeline = new Pipeline([
             new Stages\UAParser,
             new Stages\MobileDetect,
-            new Stages\Correction,
+            new Stages\CrawlerDetect,
+            new Stages\BrowserDetect,
         ]);
 
-        return $pipeline->process($result);
+        return $pipeline->process(new Payload($agent));
     }
 }

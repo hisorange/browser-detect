@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 use League\Pipeline\StageInterface;
 use UAParser\Parser;
 
@@ -16,36 +16,31 @@ class UAParser implements StageInterface
     /**
      * @throws \UAParser\Exception\FileNotFoundException
      *
-     * @param  ResultInterface $payload
-     * @return ResultInterface
+     * @param  PayloadInterface $payload
+     * @return PayloadInterface
      */
     public function __invoke($payload)
     {
-        $parser    = Parser::create();
-        $result    = $parser->parse($payload->getUserAgent());
-        $extension = [];
+        $parser = Parser::create();
+        $result = $parser->parse($payload->getAgent());
 
         if ($result->ua->family !== 'Other') {
-            $extension['browserFamily']       = (string) $result->ua->family;
-            $extension['browserVersionMajor'] = (int) $result->ua->major ?: 0;
-            $extension['browserVersionMinor'] = (int) $result->ua->minor ?: 0;
-            $extension['browserVersionPatch'] = (int) $result->ua->patch ?: 0;
+            $payload->setValue('browserFamily', (string) $result->ua->family);
+            $payload->setValue('browserVersionMajor', (int) ($result->ua->major ?: 0));
+            $payload->setValue('browserVersionMinor', (int) ($result->ua->minor ?: 0));
+            $payload->setValue('browserVersionPatch', (int) ($result->ua->patch ?: 0));
         }
 
         if ($result->os->family !== 'Other') {
-            $extension['osFamily']       = (string) $result->os->family;
-            $extension['osVersionMajor'] = (int) $result->os->major ?: 0;
-            $extension['osVersionMinor'] = (int) $result->os->minor ?: 0;
-            $extension['osVersionPatch'] = (int) $result->os->patch ?: 0;
+            $payload->setValue('platformFamily', (string) $result->os->family);
+            $payload->setValue('platformVersionMajor', (int) ($result->os->major ?: 0));
+            $payload->setValue('platformVersionMinor', (int) ($result->os->minor ?: 0));
+            $payload->setValue('platformVersionPatch', (int) ($result->os->patch ?: 0));
         }
 
         if ($result->device->family !== 'Other') {
-            $extension['deviceFamily'] = (string) $result->device->family;
-            $extension['deviceModel']  = (string) $result->device->model;
-        }
-
-        if ( ! empty($extension)) {
-            $payload->extend($extension);
+            $payload->setValue('deviceFamily', (string) $result->device->family);
+            $payload->setValue('deviceModel', (string) $result->device->model);
         }
 
         return $payload;

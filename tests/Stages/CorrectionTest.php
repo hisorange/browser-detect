@@ -3,14 +3,14 @@
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Result;
-use hisorange\BrowserDetect\Stages\Correction;
+use hisorange\BrowserDetect\Stages\BrowserDetect;
 use hisorange\BrowserDetect\Test\TestCase;
 
 /**
  * Test the UAParser stage.
  *
  * @package            hisorange\BrowserDetect\Test\Stages
- * @coversDefaultClass hisorange\BrowserDetect\Stages\Correction
+ * @coversDefaultClass hisorange\BrowserDetect\Stages\BrowserDetect
  */
 class CorrectionTest extends TestCase
 {
@@ -24,7 +24,7 @@ class CorrectionTest extends TestCase
      */
     public function testInvoke($scenario, $expectations)
     {
-        $stage  = new Correction;
+        $stage  = new BrowserDetect;
         $result = new Result(null);
         $result->extend($scenario);
 
