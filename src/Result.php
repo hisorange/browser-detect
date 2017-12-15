@@ -6,31 +6,115 @@ use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Class Result
+ *
  * @package hisorange\BrowserDetect
  */
 class Result implements ResultInterface
 {
+    /**
+     * @var string
+     */
     protected $userAgent = 'Unknown';
+
+    /**
+     * @var bool
+     */
     protected $isMobile = false;
+
+    /**
+     * @var bool
+     */
     protected $isTablet = false;
+
+    /**
+     * @var bool
+     */
     protected $isDesktop = false;
+
+    /**
+     * @var bool
+     */
     protected $isBot = false;
+
+    /**
+     * @var bool
+     */
+    protected $isChrome = false;
+
+    /**
+     * @var bool
+     */
+    protected $isFirefox = false;
+
+    /**
+     * @var bool
+     */
+    protected $isOpera = false;
+
+    /**
+     * @var bool
+     */
+    protected $isSafari = false;
+
+    /**
+     * @var bool
+     */
+    protected $isIE = false;
+
+    /**
+     * @var string
+     */
     protected $browserFamily = 'Unknown';
+
+    /**
+     * @var int
+     */
     protected $browserVersionMajor = 0;
+
+    /**
+     * @var int
+     */
     protected $browserVersionMinor = 0;
+
+    /**
+     * @var int
+     */
     protected $browserVersionPatch = 0;
+
+    /**
+     * @var string
+     */
     protected $osFamily = 'Unknown';
+
+    /**
+     * @var int
+     */
     protected $osVersionMajor = 0;
+
+    /**
+     * @var int
+     */
     protected $osVersionMinor = 0;
+
+    /**
+     * @var int
+     */
     protected $osVersionPatch = 0;
+
+    /**
+     * @var string
+     */
     protected $deviceFamily = 'Unknown';
+
+    /**
+     * @var string
+     */
     protected $deviceModel = '';
+
+    /**
+     * @var string
+     */
     protected $mobileGrade = '';
-    protected $isChrome;
-    protected $isFirefox;
-    protected $isOpera;
-    protected $isSafari;
-    protected $isIE;
 
     /**
      * @inheritdoc
@@ -38,76 +122,48 @@ class Result implements ResultInterface
     public function __construct(array $result)
     {
         foreach ($result as $property => $value) {
-            if ($value !== null) {
-                $this->$property = $value;
-            }
+            $this->$property = $value;
         }
     }
 
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function userAgent()
     {
-        return $this->attributes;
+        return $this->userAgent;
     }
 
     /**
      * @inheritdoc
      */
-    public function browserName()
+    public function isMobile()
     {
-        return trim($this->attributes['browserFamily'] . ' ' . $this->browserVersion());
+        return $this->isMobile;
     }
 
     /**
      * @inheritdoc
      */
-    public function browserVersion()
+    public function isTablet()
     {
-        return $this->trimVersion(
-            implode('.', [
-                $this->attributes['browserVersionMajor'],
-                $this->attributes['browserVersionMinor'],
-                $this->attributes['browserVersionPatch'],
-            ])
-        );
-    }
-
-    /**
-     * Trim the trailing .0 versions from a semantic version string.
-     * It makes it more readable for an end user.
-     *
-     * @param  string $version
-     *
-     * @return string
-     */
-    protected function trimVersion($version)
-    {
-        return preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version);
+        return $this->isTablet;
     }
 
     /**
      * @inheritdoc
      */
-    public function osName()
+    public function isDesktop()
     {
-        return trim($this->attributes['osFamily'] . ' ' . $this->osVersion());
+        return $this->isDesktop;
     }
 
     /**
      * @inheritdoc
      */
-    public function osVersion()
+    public function isBot()
     {
-        return $this->trimVersion(
-            sprintf(
-                '%d.%d.%d',
-                $this->attributes['osVersionMajor'],
-                $this->attributes['osVersionMinor'],
-                $this->attributes['osVersionPatch']
-            )
-        );
+        return $this->isBot;
     }
 
     /**
@@ -115,7 +171,7 @@ class Result implements ResultInterface
      */
     public function isChrome()
     {
-        return false !== stripos($this->attributes['browserFamily'], 'chrom');
+        return $this->isChrome;
     }
 
     /**
@@ -123,7 +179,7 @@ class Result implements ResultInterface
      */
     public function isFirefox()
     {
-        return false !== stripos($this->attributes['browserFamily'], 'firefox');
+        return $this->isFirefox;
     }
 
     /**
@@ -131,7 +187,7 @@ class Result implements ResultInterface
      */
     public function isOpera()
     {
-        return false !== stripos($this->attributes['browserFamily'], 'opera');
+        return $this->isOpera;
     }
 
     /**
@@ -139,15 +195,7 @@ class Result implements ResultInterface
      */
     public function isSafari()
     {
-        return false !== stripos($this->attributes['browserFamily'], 'safari');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function isIEVersion($version, $operator = '=')
-    {
-        return $this->isIE() && version_compare($this->attributes['browserVersionMajor'], $version, $operator);
+        return $this->isSafari;
     }
 
     /**
@@ -155,11 +203,143 @@ class Result implements ResultInterface
      */
     public function isIE()
     {
-        return (
-            false !== stripos($this->attributes['browserFamily'], 'explorer') ||
-            false !== stripos($this->attributes['browserFamily'], 'ie') ||
-            false !== stripos($this->attributes['browserFamily'], 'trident')
-        );
+        return $this->isIE;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isIEVersion($version, $operator = '=')
+    {
+        return ($this->isIE && version_compare($version, $this->browserVersion(), $operator));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserName()
+    {
+        return $this->browserName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserFamily()
+    {
+        return $this->browserFamily;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserVersion()
+    {
+        return $this->browserVersion;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserVersionMajor()
+    {
+        return $this->browserVersionMajor;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserVersionMinor()
+    {
+        return $this->browserVersionMinor;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserVersionPatch()
+    {
+        return $this->browserVersionPatch;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osName()
+    {
+        return $this->osName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osFamily()
+    {
+        return $this->osFamily;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osVersion()
+    {
+        return $this->osVersion;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osVersionMajor()
+    {
+        return $this->osVersionMajor;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osVersionMinor()
+    {
+        return $this->osVersionMinor;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function osVersionPatch()
+    {
+        return $this->osVersionPatch;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function deviceFamily()
+    {
+        return $this->deviceFamily;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function deviceModel()
+    {
+        return $this->deviceModel;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function mobileGrade()
+    {
+        return $this->mobileGrade;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toArray()
+    {
+        return (array) $this;
     }
 
     /**
@@ -167,14 +347,6 @@ class Result implements ResultInterface
      */
     public function jsonSerialize()
     {
-        return $this->attributes;
-    }
-
-    /**
-     * Export data as json string.
-     */
-    public function __toString()
-    {
-        return json_encode($this);
+        return $this->toArray();
     }
 }

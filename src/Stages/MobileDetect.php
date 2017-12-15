@@ -2,10 +2,8 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\ResultInterface;
-use hisorange\BrowserDetect\Exceptions\RuntimeException;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 use League\Pipeline\StageInterface;
-use Mobile_Detect;
 
 /**
  * Most reliable mobile and tablet testing stage.
@@ -15,45 +13,35 @@ use Mobile_Detect;
 class MobileDetect implements StageInterface
 {
     /**
-     * @throws RuntimeException
-     *
-     * @param  ResultInterface $payload
-     * @return ResultInterface
+     * @param  PayloadInterface $payload
+     * @return PayloadInterface
      */
     public function __invoke($payload)
     {
         if (class_exists('Mobile_Detect')) {
             $class = 'Mobile_Detect';
-        } elseif (class_exists('MobileDetect')) {
-            $class = 'MobileDetect';
         } else {
-            throw new RuntimeException('Mobile Detect package is not installed.');
+            $class = 'MobileDetect';
         }
 
-        /** @var Mobile_Detect $result */
+        /** @var \Mobile_Detect|\MobileDetect $result */
         $result = new $class;
-        $result->setHttpHeaders(['HTTP_FAKE_HEADER' => 'Mobile\Detect']);
-        $result->setUserAgent($payload->getUserAgent());
+        $result->setHttpHeaders(['HTTP_FAKE_HEADER' => 'Mobile\Detect\Header']);
+        $result->setUserAgent($payload->getAgent());
 
-        $extension = [];
-
-        // Mobile but not tablet, some tablet gets the mobile match too.
-        if ($result->isMobile() and ! $result->isTablet()) {
-            $extension['isMobile']    = true;
-            $extension['mobileGrade'] = (string) $result->mobileGrade();
-            $extension['deviceModel'] = (string) $this->filter($result, $class::getPhoneDevices());
-        } elseif ($result->isTablet()) {
-            $extension['isTablet']    = true;
-            $extension['mobileGrade'] = (string) $result->mobileGrade();
-            $extension['deviceModel'] = (string) $this->filter($result, $class::getTabletDevices());
+        // Need to test for tablet first, because most of the tablet are mobile too.
+        if ($result->isTablet()) {
+            $payload->setValue('isTablet', true);
+            $payload->setValue('mobileGrade', (string) $result->mobileGrade());
+            $payload->setValue('deviceModel', (string) $this->filter($result, $class::getTabletDevices()));
+        } elseif ($result->isMobile()) {
+            $payload->setValue('isMobile', true);
+            $payload->setValue('mobileGrade', (string) $result->mobileGrade());
+            $payload->setValue('deviceModel', (string) $this->filter($result, $class::getPhoneDevices()));
         }
 
-        $extension['osFamily']      = $this->filter($result, $class::getOperatingSystems());
-        $extension['browserFamily'] = $this->filter($result, $class::getBrowsers());
-
-        if ( ! empty($extension)) {
-            $payload->extend($extension);
-        }
+        $payload->setValue('osFamily', $this->filter($result, $class::getOperatingSystems()));
+        $payload->setValue('browserFamily', $this->filter($result, $class::getBrowsers()));
 
         return $payload;
     }
@@ -69,7 +57,7 @@ class MobileDetect implements StageInterface
     protected function filter($result, $choices)
     {
         foreach ($choices as $key => $regex) {
-            if ($result->is($key) and stripos($key, 'generic')) {
+            if ($result->is($key) and stripos($key, 'generic') === false) {
                 return $key;
             }
         }
