@@ -1,8 +1,25 @@
 ### Changes in 3.0.0
 ***
-- Browsecap plugin has been removed. (Project is abandoned and the site is down)
-- UserAgentStringApi plugin has been removed. (Site is down)
-
+- The package has been rewrote from ground zero.
+- Added PHPUnit, and covering the main features.
+- Added the travis ci to the release cycle.
+- Moved to the Develop -> Staging -> Stable branch model.
+- Interfaced everything, seriously!
+- Custom exceptions for easier package managing.
+- Blade directives.
+- Result is now a well annotated object, any IDE can work with it.
+- End of the plugin era, pipelines ha arrived.
+- Added the crawler detect package.
+- Replaced the UAParser to a more supported one.
+- Support for MobileDetect 2.0 to 2.8, 3.0 will never come :D
+- Parser class is much more simple to use.
+- PSR-2 code style.  
+- Browsecap plugin has been removed.
+- UserAgentStringApi plugin has been removed. (Too slow to call)
+- Everything is easier now, but also less flexibility in the package.
+- Better version support for PHP and Laravel.
+- Easy fast setup.
+- Namespaces are redesigned to be more descriptive.
 
 
 ### Changes in 2.0 version
