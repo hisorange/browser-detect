@@ -59,6 +59,8 @@ class Payload implements PayloadInterface
      */
     public function toArray()
     {
-        return $this->store;
+        return array_merge($this->store, [
+            'userAgent' => $this->agent,
+        ]);
     }
 }
