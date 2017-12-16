@@ -52,13 +52,6 @@ class BrowserDetect implements StageInterface
             $payload->setValue('isIE', true);
         }
 
-        // Popular browser engines.
-        if (false !== stripos($payload->getAgent(), 'webkit')) {
-            $payload->setValue('isWebkit', true);
-        } elseif (false !== stripos($payload->getAgent(), 'mozilla')) {
-            $payload->setValue('isMozilla', true);
-        }
-
         // Human readable browser version.
         $payload->setValue('browserVersion', $this->trimVersion(
             implode('.', [
