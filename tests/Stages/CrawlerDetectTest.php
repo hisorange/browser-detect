@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test\Stages;
 
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Payload;
 use hisorange\BrowserDetect\Stages\CrawlerDetect;
 use hisorange\BrowserDetect\Test\TestCase;
 
@@ -25,11 +25,11 @@ class CrawlerDetectTest extends TestCase
     public function testInvoke($agent, $expected)
     {
         $stage  = new CrawlerDetect;
-        $result = new Result($agent);
+        $result = new Payload($agent);
 
         $stage($result);
 
-        $this->assertSame($expected, $result->offsetGet('isBot'), sprintf('User agent "%s" failing the crawler test.', $agent));
+        $this->assertSame($expected, $result->getValue('isBot'), sprintf('User agent "%s" failing the crawler test.', $agent));
     }
 
     /**

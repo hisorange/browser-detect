@@ -22,17 +22,17 @@ class BrowserDetect implements StageInterface
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
         if ( ! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
-            $payload->getValue('isMobile', false);
-            $payload->getValue('isTablet', false);
-            $payload->getValue('isDesktop', true);
+            $payload->setValue('isMobile', false);
+            $payload->setValue('isTablet', false);
+            $payload->setValue('isDesktop', true);
         } elseif ($payload->getValue('isTablet')) {
-            $payload->getValue('isMobile', false);
-            $payload->getValue('isTablet', true);
-            $payload->getValue('isDesktop', false);
+            $payload->setValue('isMobile', false);
+            $payload->setValue('isTablet', true);
+            $payload->setValue('isDesktop', false);
         } else {
-            $payload->getValue('isMobile', true);
-            $payload->getValue('isTablet', false);
-            $payload->getValue('isDesktop', false);
+            $payload->setValue('isMobile', true);
+            $payload->setValue('isTablet', false);
+            $payload->setValue('isDesktop', false);
         }
 
         // Popular browser vendors.

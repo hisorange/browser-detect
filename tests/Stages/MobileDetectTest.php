@@ -2,8 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test\Stages;
 
-use hisorange\BrowserDetect\Exceptions\RuntimeException;
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Payload;
 use hisorange\BrowserDetect\Stages\MobileDetect;
 use hisorange\BrowserDetect\Test\TestCase;
 
@@ -23,18 +22,16 @@ class MobileDetectTest extends TestCase
      *
      * @param string $agent
      * @param array  $changes
-     *
-     * @throws RuntimeException
      */
     public function testInvoke($agent, $changes)
     {
         $stage  = new MobileDetect;
-        $result = new Result($agent);
+        $result = new Payload($agent);
 
         $stage($result);
 
         foreach ($changes as $key => $expected) {
-            $this->assertSame($expected, $result->offsetGet($key));
+            $this->assertSame($expected, $result->getValue($key));
         }
     }
 
@@ -50,22 +47,22 @@ class MobileDetectTest extends TestCase
                 'Mozilla/5.0 (Linux; U; Android 2.2.1; en-ca; LG-P505R Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
                 [
                     'isMobile' => true,
-                    'isTablet' => false,
+                    'isTablet' => null,
                 ],
             ],
             [
                 'Opera/9.80 (S60; SymbOS; Opera Mobi/447; U; en) Presto/2.4.18 Version/10.00',
                 [
                     'isMobile' => true,
-                    'isTablet' => false,
+                    'isTablet' => null,
                 ],
             ],
             [
                 'NotGonaMatchMe',
                 [
-                    'isMobile'  => false,
-                    'isTablet'  => false,
-                    'isDesktop' => false,
+                    'isMobile'  => null,
+                    'isTablet'  => null,
+                    'isDesktop' => null,
                 ],
             ],
         ];

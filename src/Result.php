@@ -3,6 +3,7 @@
 namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use function get_object_vars;
 
 /**
  * Class Result
@@ -64,7 +65,17 @@ class Result implements ResultInterface
     /**
      * @var string
      */
+    protected $browserName = 'Unknown';
+
+    /**
+     * @var string
+     */
     protected $browserFamily = 'Unknown';
+
+    /**
+     * @var string
+     */
+    protected $browserVersion = '';
 
     /**
      * @var int
@@ -84,22 +95,32 @@ class Result implements ResultInterface
     /**
      * @var string
      */
-    protected $osFamily = 'Unknown';
+    protected $platformName = 'Unknown';
+
+    /**
+     * @var string
+     */
+    protected $platformFamily = 'Unknown';
+
+    /**
+     * @var string
+     */
+    protected $platformVersion = '';
 
     /**
      * @var int
      */
-    protected $osVersionMajor = 0;
+    protected $platformVersionMajor = 0;
 
     /**
      * @var int
      */
-    protected $osVersionMinor = 0;
+    protected $platformVersionMinor = 0;
 
     /**
      * @var int
      */
-    protected $osVersionPatch = 0;
+    protected $platformVersionPatch = 0;
 
     /**
      * @var string
@@ -217,6 +238,14 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
+    public function browserVersion()
+    {
+        return $this->browserVersion;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function browserName()
     {
         return $this->browserName;
@@ -228,14 +257,6 @@ class Result implements ResultInterface
     public function browserFamily()
     {
         return $this->browserFamily;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function browserVersion()
-    {
-        return $this->browserVersion;
     }
 
     /**
@@ -265,7 +286,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osName()
+    public function platformName()
     {
         return $this->osName;
     }
@@ -273,7 +294,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osFamily()
+    public function platformFamily()
     {
         return $this->osFamily;
     }
@@ -281,7 +302,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osVersion()
+    public function platformVersion()
     {
         return $this->osVersion;
     }
@@ -289,7 +310,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osVersionMajor()
+    public function platformVersionMajor()
     {
         return $this->osVersionMajor;
     }
@@ -297,7 +318,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osVersionMinor()
+    public function platformVersionMinor()
     {
         return $this->osVersionMinor;
     }
@@ -305,7 +326,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function osVersionPatch()
+    public function platformVersionPatch()
     {
         return $this->osVersionPatch;
     }
@@ -337,16 +358,16 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function jsonSerialize()
     {
-        return (array) $this;
+        return $this->toArray();
     }
 
     /**
      * @inheritdoc
      */
-    public function jsonSerialize()
+    public function toArray()
     {
-        return $this->toArray();
+        return get_object_vars($this);
     }
 }
