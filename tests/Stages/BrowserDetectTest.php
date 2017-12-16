@@ -2,9 +2,11 @@
 
 namespace hisorange\BrowserDetect\Test\Stages;
 
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Payload;
 use hisorange\BrowserDetect\Stages\BrowserDetect;
 use hisorange\BrowserDetect\Test\TestCase;
+use function json_encode;
 
 /**
  * Test the UAParser stage.
@@ -12,7 +14,7 @@ use hisorange\BrowserDetect\Test\TestCase;
  * @package            hisorange\BrowserDetect\Test\Stages
  * @coversDefaultClass hisorange\BrowserDetect\Stages\BrowserDetect
  */
-class CorrectionTest extends TestCase
+class BrowserDetectTest extends TestCase
 {
     /**
      * @dataProvider provideScenarios
@@ -21,17 +23,25 @@ class CorrectionTest extends TestCase
      *
      * @param array $scenario
      * @param array $expectations
+     *
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit_Framework_Exception
      */
     public function testInvoke($scenario, $expectations)
     {
         $stage  = new BrowserDetect;
-        $result = new Result(null);
-        $result->extend($scenario);
+        $payload = new Payload('Unknown');
 
-        $stage($result);
+        foreach ($scenario as $k => $v) {
+            $payload->setValue($k, $v);
+        }
+
+        $result = $stage($payload);
+
+        $this->assertInstanceOf(ResultInterface::class, $result);
 
         foreach ($expectations as $key => $expected) {
-            $this->assertSame($expected, $result->offsetGet($key));
+            $this->assertSame($expected, $result->$key(), sprintf('Key %s not matching when %s', $key, print_r($scenario, true)));
         }
     }
 

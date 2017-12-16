@@ -3,7 +3,6 @@
 namespace hisorange\BrowserDetect\Contracts;
 
 // PHP SPL.
-use ArrayAccess;
 use JsonSerializable;
 
 /**
@@ -147,42 +146,42 @@ interface ResultInterface extends JsonSerializable
      *
      * @return string
      */
-    public function osName();
+    public function platformName();
 
     /**
      * Operating system's vendor like Linux, Windows, MacOS.
      *
      * @return string
      */
-    public function osFamily();
+    public function platformFamily();
 
     /**
      * Build human readable os version. (cuts the trailing .0 parts)
      *
      * @return string
      */
-    public function osVersion();
+    public function platformVersion();
 
     /**
      * Operating system's semantic major version.
      *
      * @return int
      */
-    public function osVersionMajor();
+    public function platformVersionMajor();
 
     /**
      * Operating system's semantic minor version.
      *
      * @return int
      */
-    public function osVersionMinor();
+    public function platformVersionMinor();
 
     /**
      * Operating system's semantic patch version.
      *
      * @return int
      */
-    public function osVersionPatch();
+    public function platformVersionPatch();
 
     /**
      * Device's vendor like Samsung, Apple, Huawei.

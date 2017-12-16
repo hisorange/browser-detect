@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Test\Stages;
 
-use hisorange\BrowserDetect\Result;
+use hisorange\BrowserDetect\Payload;
 use hisorange\BrowserDetect\Stages\UAParser;
 use hisorange\BrowserDetect\Test\TestCase;
 
@@ -27,12 +27,12 @@ class UAParserTest extends TestCase
     public function testInvoke($agent, $changes)
     {
         $stage  = new UAParser;
-        $result = new Result($agent);
+        $result = new Payload($agent);
 
         $stage($result);
 
         foreach ($changes as $key => $expected) {
-            $this->assertSame($expected, $result->offsetGet($key));
+            $this->assertSame($expected, $result->getValue($key));
         }
     }
 
