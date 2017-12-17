@@ -1,3 +1,8 @@
+### Changes in 3.0.1
+***
+- Fixed the result objects bad property calls.
+- Added more unit test for the fixed case. 
+
 ### Changes in 3.0.0
 ***
 - The package has been rewrote from ground zero.
