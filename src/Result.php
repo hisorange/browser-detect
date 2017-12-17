@@ -288,7 +288,7 @@ class Result implements ResultInterface
      */
     public function platformName()
     {
-        return $this->osName;
+        return $this->platformName;
     }
 
     /**
@@ -296,7 +296,7 @@ class Result implements ResultInterface
      */
     public function platformFamily()
     {
-        return $this->osFamily;
+        return $this->platformFamily;
     }
 
     /**
@@ -304,7 +304,7 @@ class Result implements ResultInterface
      */
     public function platformVersion()
     {
-        return $this->osVersion;
+        return $this->platformVersion;
     }
 
     /**
@@ -312,7 +312,7 @@ class Result implements ResultInterface
      */
     public function platformVersionMajor()
     {
-        return $this->osVersionMajor;
+        return $this->platformVersionMajor;
     }
 
     /**
@@ -320,7 +320,7 @@ class Result implements ResultInterface
      */
     public function platformVersionMinor()
     {
-        return $this->osVersionMinor;
+        return $this->platformVersionMinor;
     }
 
     /**
@@ -328,7 +328,7 @@ class Result implements ResultInterface
      */
     public function platformVersionPatch()
     {
-        return $this->osVersionPatch;
+        return $this->platformVersionPatch;
     }
 
     /**
