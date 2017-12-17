@@ -77,12 +77,67 @@ class ResultTest extends TestCase
     }
 
     /**
-     * Provide an empty schema for testing.
-     *
-     * @return array
+     * @covers ::__construct()
+     * @covers ::userAgent()
+     * @covers ::isMobile()
+     * @covers ::isTablet()
+     * @covers ::isDesktop()
+     * @covers ::isBot()
+     * @covers ::isChrome()
+     * @covers ::isFirefox()
+     * @covers ::isOpera()
+     * @covers ::isSafari()
+     * @covers ::isIE()
+     * @covers ::browserName()
+     * @covers ::browserFamily()
+     * @covers ::browserVersion()
+     * @covers ::browserVersionMajor()
+     * @covers ::browserVersionMinor()
+     * @covers ::browserVersionPatch()
+     * @covers ::platformName()
+     * @covers ::platformFamily()
+     * @covers ::platformVersion()
+     * @covers ::platformVersionMajor()
+     * @covers ::platformVersionMinor()
+     * @covers ::platformVersionPatch()
+     * @covers ::deviceFamily()
+     * @covers ::deviceModel()
+     * @covers ::mobileGrade()
      */
-    protected function getSchema()
+    public function testUserAgent()
     {
-        return ;
+        $keys   = [
+            'userAgent',
+            'isMobile',
+            'isTablet',
+            'isDesktop',
+            'isBot',
+            'isChrome',
+            'isFirefox',
+            'isOpera',
+            'isSafari',
+            'isIE',
+            'browserName',
+            'browserFamily',
+            'browserVersion',
+            'browserVersionMajor',
+            'browserVersionMinor',
+            'browserVersionPatch',
+            'platformName',
+            'platformFamily',
+            'platformVersion',
+            'platformVersionMajor',
+            'platformVersionMinor',
+            'platformVersionPatch',
+            'deviceFamily',
+            'deviceModel',
+            'mobileGrade',
+        ];
+        $value  = 'testable';
+        $result = new Result(array_fill_keys($keys, $value));
+
+        foreach ($keys as $key) {
+            $this->assertSame($value, $result->$key());
+        }
     }
 }
