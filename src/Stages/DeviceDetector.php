@@ -106,7 +106,7 @@ class DeviceDetector implements StageInterface
 
             foreach ($match as $key => $value) {
                 if ($key === 'major' || $key === 'minor' || $key === 'patch') {
-                    $pieces[] = $response[$prefix . 'Version' . ucfirst($key)] = $value;
+                    $pieces[] = $response[$prefix . 'Version' . ucfirst($key)] = (int) $value;
                 }
             }
 

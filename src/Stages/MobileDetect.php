@@ -40,7 +40,7 @@ class MobileDetect implements StageInterface
             $payload->setValue('deviceModel', (string) $this->filter($result, $class::getPhoneDevices()));
         }
 
-        $payload->setValue('osFamily', $this->filter($result, $class::getOperatingSystems()));
+        $payload->setValue('platformFamily', $this->filter($result, $class::getOperatingSystems()));
         $payload->setValue('browserFamily', $this->filter($result, $class::getBrowsers()));
 
         return $payload;

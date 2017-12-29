@@ -32,7 +32,7 @@ class UAParserTest extends TestCase
         $stage($result);
 
         foreach ($changes as $key => $expected) {
-            $this->assertSame($expected, $result->getValue($key));
+            $this->assertSame($expected, $result->getValue($key), 'Changes are not matched ' . print_r($changes, true) . ' with ' . $key . ' being ' . var_export($result->getValue($key), true));
         }
     }
 
@@ -45,6 +45,12 @@ class UAParserTest extends TestCase
     {
         return [
             [
+                'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.',
+                [
+                    'deviceFamily' => 'iPad',
+                ],
+            ],
+            [
                 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2224.3 Safari/537.36',
                 [
                     'browserFamily'       => 'Chrome',
@@ -52,6 +58,8 @@ class UAParserTest extends TestCase
                     'browserVersionMinor' => 0,
                     'browserVersionPatch' => 2224,
                 ],
+            ],
+            [
                 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1',
                 [
                     'browserFamily'       => 'Firefox',
@@ -59,12 +67,14 @@ class UAParserTest extends TestCase
                     'browserVersionMinor' => 1,
                     'browserVersionPatch' => 0,
                 ],
+            ],
+            [
                 'TestUserAgentString',
                 [
-                    'browserFamily'       => '',
-                    'browserVersionMajor' => 0,
-                    'browserVersionMinor' => 0,
-                    'browserVersionPatch' => 0,
+                    'browserFamily'       => null,
+                    'browserVersionMajor' => null,
+                    'browserVersionMinor' => null,
+                    'browserVersionPatch' => null,
                 ],
             ],
         ];

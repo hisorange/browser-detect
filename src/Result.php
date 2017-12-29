@@ -237,7 +237,7 @@ class Result implements ResultInterface
      */
     public function isIEVersion($version, $operator = '=')
     {
-        return ($this->isIE && version_compare($version, $this->browserVersion(), $operator));
+        return ($this->isIE && version_compare($this->browserVersion, $version, $operator));
     }
 
     /**
