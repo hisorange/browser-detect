@@ -54,6 +54,7 @@ class ResultTest extends TestCase
             'browserVersionMajor'  => 0,
             'browserVersionMinor'  => 0,
             'browserVersionPatch'  => 0,
+            'browserEngine'        => 'Unknown',
             'platformName'         => 'Unknown',
             'platformFamily'       => 'Unknown',
             'platformVersion'      => '',
@@ -94,6 +95,7 @@ class ResultTest extends TestCase
      * @covers ::browserVersionMajor()
      * @covers ::browserVersionMinor()
      * @covers ::browserVersionPatch()
+     * @covers ::browserEngine()
      * @covers ::platformName()
      * @covers ::platformFamily()
      * @covers ::platformVersion()
@@ -123,6 +125,7 @@ class ResultTest extends TestCase
             'browserVersionMajor',
             'browserVersionMinor',
             'browserVersionPatch',
+            'browserEngine',
             'platformName',
             'platformFamily',
             'platformVersion',

@@ -4,7 +4,7 @@
     "keywords": ["laravel", "user-agent", "browser", "mobile", "detect", "tablet", "user agent", "mobile", "tablet", "analyize", "hisorange"],
     "homepage": "https://github.com/hisorange/browser-detect",
     "license": "MIT",
-    "version": "3.0.1",
+    "version": "3.1.0",
     "authors": [
         {
             "name": "Varga Zsolt (hisorange)",
@@ -17,7 +17,8 @@
         "ua-parser/uap-php": "~3.4",
         "league/pipeline": "~0.1",
         "mobiledetect/mobiledetectlib": "~2.0",
-        "jaybizzle/crawler-detect": "~1.0"
+        "jaybizzle/crawler-detect": "~1.0",
+        "piwik/device-detector": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~5.0 || ~6.0",

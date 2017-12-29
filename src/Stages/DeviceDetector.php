@@ -1,0 +1,113 @@
+<?php
+
+namespace hisorange\BrowserDetect\Stages;
+
+use DeviceDetector\Parser\Device\DeviceParserAbstract;
+use function dump;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
+use League\Pipeline\StageInterface;
+use function preg_match;
+use function strpos;
+use function ucfirst;
+
+/**
+ * Strong browser and platform detector.
+ *
+ * @package hisorange\BrowserDetect\Stages
+ */
+class DeviceDetector implements StageInterface
+{
+    /**
+     * @param  PayloadInterface $payload
+     * @return PayloadInterface
+     */
+    public function __invoke($payload)
+    {
+        // Skipping on bots, the detector is set to ignore bot details.
+        if ( ! $payload->getValue('isBot')) {
+            $detector = new \DeviceDetector\DeviceDetector();
+            $detector->setUserAgent($payload->getAgent());
+            $detector->skipBotDetection(true);
+            $detector->parse();
+
+            $platform = $detector->getOs();
+            $browser  = $detector->getClient();
+            $device   = [
+                'type'  => $detector->getDeviceName(),
+                'brand' => $detector->getBrand(),
+                'model' => $detector->getModel(),
+            ];
+
+            // Convert the platform and browser data to the payload's format.
+            foreach (['platform', 'browser'] as $var) {
+                if ($$var !== null) {
+                    if ( ! empty($$var['name'])) {
+                        $payload->setValue($var . 'Family', $$var['name']);
+                    }
+
+                    if ( ! empty($$var['engine'])) {
+                        $payload->setValue($var . 'Engine', $$var['engine']);
+                    }
+
+                    if ( ! empty($$var['version'])) {
+                        foreach ($this->parseVersion($$var['version'], $var) as $key => $value) {
+                            $payload->setValue($key, $value);
+                        }
+                    }
+                }
+            }
+
+            // Determine device type from the type string.
+            if ( ! empty($device['type'])) {
+                if ($device['type'] === 'desktop') {
+                    $payload->setValue('isDesktop', true);
+                }
+                elseif ($device['type'] === 'tablet' || $device['type'] === 'phablet') {
+                    $payload->setValue('isTablet', true);
+                }
+                elseif ($device['type'] === 'smartphone' || $device['type'] === 'feature phone') {
+                    $payload->setValue('isMobile', true);
+                }
+            }
+
+            // Brand is just a short name, but if present need to get the full name for it.
+            if ( ! empty($device['brand'])) {
+                $payload->setValue('deviceFamily', DeviceParserAbstract::getFullName($device['brand']));
+            }
+
+            if ( ! empty($device['model'])) {
+                $payload->setValue('deviceModel', $device['model']);
+            }
+        }
+
+        return $payload;
+    }
+
+    /**
+     * Parse semantic version strings into major.minor.patch pieces.
+     *
+     * @param string $version
+     * @param string $prefix
+     * @return array
+     */
+    protected function parseVersion($version, $prefix)
+    {
+        $response = [];
+
+        if (preg_match('%(?<major>\d+)((\.(?<minor>\d+)((\.(?<patch>\d+))|$))|$)%', $version, $match)) {
+            $pieces = [];
+
+            foreach ($match as $key => $value) {
+                if ($key === 'major' || $key === 'minor' || $key === 'patch') {
+                    $pieces[] = $response[$prefix . 'Version' . ucfirst($key)] = $value;
+                }
+            }
+
+            if ( ! empty($pieces)) {
+                $response[$prefix . 'Version'] = implode('.', $pieces);
+            }
+        }
+
+        return $response;
+    }
+}
