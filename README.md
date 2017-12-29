@@ -130,17 +130,17 @@ Laravel 4.x releases are not actively developed but you can still use the browse
 If you are using laravel 5.4 and below you have to add the service provider in your **config/app.php** like this:
 
 ```php
-	'providers' => [
-    	// Package Service Providers...
-    	\hisorange\BrowserDetect\ServiceProvider::class,
+    'providers' => [
+        // Package Service Providers...
+        \hisorange\BrowserDetect\ServiceProvider::class,
     ]
 ```
 
 and don't forget to add the **facade** in the same file like this:
 
 ```php
-	'aliases' => [
-    	'Browser' => \hisorange\BrowserDetect\Facade::class,
+    'aliases' => [
+        'Browser' => \hisorange\BrowserDetect\Facade::class,
     ]
 ```
 
