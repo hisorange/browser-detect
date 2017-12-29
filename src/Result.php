@@ -95,6 +95,11 @@ class Result implements ResultInterface
     /**
      * @var string
      */
+    protected $browserEngine = 'Unknown';
+
+    /**
+     * @var string
+     */
     protected $platformName = 'Unknown';
 
     /**
@@ -281,6 +286,14 @@ class Result implements ResultInterface
     public function browserVersionPatch()
     {
         return $this->browserVersionPatch;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function browserEngine()
+    {
+        return $this->browserEngine;
     }
 
     /**

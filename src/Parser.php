@@ -115,6 +115,7 @@ class Parser implements ParserInterface
             new Stages\UAParser,
             new Stages\MobileDetect,
             new Stages\CrawlerDetect,
+            new Stages\DeviceDetector,
             new Stages\BrowserDetect,
         ]);
 

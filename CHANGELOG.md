@@ -1,3 +1,11 @@
+### Changes in 3.1.0
+***
+- Added the DeviceDetector stage to the pipeline.
+- Fixed a minor issue with versions and trailing dots.
+- Added the Browser::browserEngine() function.
+- Much better detection rates with the new stage.
+
+
 ### Changes in 3.0.1
 ***
 - Fixed the result objects bad property calls.
