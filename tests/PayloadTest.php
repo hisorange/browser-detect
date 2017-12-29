@@ -36,5 +36,7 @@ class PayloadTest extends TestCase
             'a'         => 'b',
             'userAgent' => 'test',
         ], $payload->toArray());
+
+        $this->assertNull($payload->getValue('non'));
     }
 }

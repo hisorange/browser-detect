@@ -4,6 +4,7 @@ namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
+use function json_decode;
 
 /**
  * Class ResultTest
@@ -108,7 +109,21 @@ class ResultTest extends TestCase
      */
     public function testUserAgent()
     {
-        $keys   = [
+        $keys   = $this->getKeys();
+        $value  = 'testable';
+        $result = new Result(array_fill_keys($keys, $value));
+
+        foreach ($keys as $key) {
+            $this->assertSame($value, $result->$key());
+        }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getKeys()
+    {
+        return [
             'userAgent',
             'isMobile',
             'isTablet',
@@ -136,11 +151,34 @@ class ResultTest extends TestCase
             'deviceModel',
             'mobileGrade',
         ];
-        $value  = 'testable';
-        $result = new Result(array_fill_keys($keys, $value));
+    }
 
-        foreach ($keys as $key) {
-            $this->assertSame($value, $result->$key());
-        }
+    /**
+     * @covers ::isIEVersion()
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testIEVersion()
+    {
+        $result = new Result([
+            'isIE'           => true,
+            'browserVersion' => 6,
+        ]);
+
+        $this->assertTrue($result->isIEVersion(6, '='));
+        $this->assertTrue($result->isIEVersion(6, '<='));
+        $this->assertFalse($result->isIEVersion(6, '>'));
+        $this->assertFalse($result->isIEVersion(7, '>'));
+    }
+
+    public function testJsonOutput()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.';
+        $result = $parser->parse($agent);
+        // Encode and decode to get the keys.
+        $keys   = array_keys(json_decode(json_encode($result), true));
+
+        $this->assertSame($keys, $this->getKeys());
     }
 }
