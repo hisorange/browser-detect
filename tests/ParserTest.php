@@ -28,6 +28,7 @@ class ParserTest extends TestCase
     }
 
     /**
+     * @covers ::__construct()
      * @return \hisorange\BrowserDetect\Contracts\ParserInterface
      */
     protected function getParser()
@@ -65,5 +66,24 @@ class ParserTest extends TestCase
             ['Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'],
             ['Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko'],
         ];
+    }
+
+    /**
+     * @covers ::__call()
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit_Framework_AssertionFailedError
+     */
+    public function testCall()
+    {
+        $this->assertNotEmpty($this->getParser()->userAgent());
+    }
+
+    /**
+     * @covers ::__call()
+     * @expectedException \hisorange\BrowserDetect\Exceptions\BadMethodCallException
+     */
+    public function testCallException()
+    {
+        $this->getParser()->BadMethod();
     }
 }

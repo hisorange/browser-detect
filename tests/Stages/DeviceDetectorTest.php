@@ -19,6 +19,7 @@ class DeviceDetectorTest extends TestCase
      * @dataProvider provideAgents
      *
      * @covers ::__invoke()
+     * @covers ::<protected>parseVersion()
      *
      * @param string $agent
      * @param array  $changes
@@ -43,17 +44,22 @@ class DeviceDetectorTest extends TestCase
     public function provideAgents()
     {
         return [
-            [
-                'Mozilla/5.0 (Linux; U; Android 2.2.1; en-ca; LG-P505R Build/FRG83) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1',
-                [
-                    'browserEngine' => 'WebKit',
-                ],
-            ],
+
             [
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.360',
                 [
-                    'browserEngine' => 'Blink',
+                    'browserEngine'       => 'Blink',
+                    'browserVersion'      => '63.0',
+                    'browserVersionMajor' => 63,
+                    'browserVersionMinor' => 0,
+                    'browserVersionPatch' => null,
                 ],
+            ],
+            [
+                'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.',
+                [
+                    'isTablet' => true,
+                ]
             ],
             [
                 'NotGonaMatchMe',
@@ -64,6 +70,6 @@ class DeviceDetectorTest extends TestCase
                     'browserEngine' => null,
                 ],
             ],
-        ];;
+        ];
     }
 }
