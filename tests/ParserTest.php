@@ -69,7 +69,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @covers ::call()
+     * @covers ::__call()
      * @throws \PHPUnit\Framework\AssertionFailedError
      * @throws \PHPUnit_Framework_AssertionFailedError
      */
@@ -79,7 +79,7 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @covers ::call()
+     * @covers ::__call()
      * @expectedException \hisorange\BrowserDetect\Exceptions\BadMethodCallException
      */
     public function testCallException()
