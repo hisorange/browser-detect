@@ -83,6 +83,7 @@ Every call on the **Browser** facade is mirrored to the result object, so the fo
 | Browser::browserVersionMajor() | Browser's [semantic](https://semver.org/) major version. | _(integer)_ |
 | Browser::browserVersionMinor() | Browser's [semantic](https://semver.org/) minor version. | _(integer)_ |
 | Browser::browserVersionPatch() | Browser's [semantic](https://semver.org/) patch version. | _(integer)_ |
+| Browser::browserEngine() | Browser's engine like: Blink, WebKit, Gecko. | _(string)_ |
 | **Operating system related functions**  |||
 | Browser::platformName() | Operating system's human friendly name like Windows XP, MacOS 10. | _(string)_ |
 | Browser::platformFamily() | Operating system's vendor like Linux, Windows, MacOS. | _(string)_ |

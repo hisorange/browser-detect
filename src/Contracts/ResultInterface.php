@@ -142,6 +142,13 @@ interface ResultInterface extends JsonSerializable
     public function browserVersionPatch();
 
     /**
+     * Browser's rendering engine.
+     *
+     * @return string
+     */
+    public function browserEngine();
+
+    /**
      * Operating system's human friendly name like Windows XP, MacOS 10.
      *
      * @return string
