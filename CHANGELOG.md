@@ -1,3 +1,11 @@
+### Changes in 3.1.1
+***
+- Fix: MobileDetect still used the osName instead of platformName.
+- Fix: isIEVersion comparison called the parameters in wrong order.
+- Addition: Version parser now forces the semantic version pieces to be integer.
+- Fixed: MobileDetect test only ran on one sample.
+- Addition: More test coverage, getting closer to the maximum. 
+
 ### Changes in 3.1.0
 ***
 - Added the DeviceDetector stage to the pipeline.
