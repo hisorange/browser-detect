@@ -38,26 +38,34 @@ class DeviceDetector implements StageInterface
                 'model' => $detector->getModel(),
             ];
 
-            // Convert the platform and browser data to the payload's format.
-            foreach (['platform', 'browser'] as $var) {
-                if ($$var !== null) {
-                    if ( ! empty($$var['name'])) {
-                        $payload->setValue($var . 'Family', $$var['name']);
-                    }
+            if ($platform !== null) {
+                if ( ! empty($platform['name'])) {
+                    $payload->setValue('platformFamily', $platform['name']);
+                }
 
-                    if ( ! empty($$var['engine'])) {
-                        $payload->setValue($var . 'Engine', $$var['engine']);
-                    }
-
-                    if ( ! empty($$var['version'])) {
-                        foreach ($this->parseVersion($$var['version'], $var) as $key => $value) {
-                            $payload->setValue($key, $value);
-                        }
+                if ( ! empty($platform['version'])) {
+                    foreach ($this->parseVersion($platform['version'], 'platform') as $key => $value) {
+                        $payload->setValue($key, $value);
                     }
                 }
             }
 
-            // Determine device type from the type string.
+            if ($browser !== null) {
+                if ( ! empty($browser['name'])) {
+                    $payload->setValue('browserFamily', $browser['name']);
+                }
+
+                if ( ! empty($browser['engine'])) {
+                    $payload->setValue('browserEngine', $browser['engine']);
+                }
+
+                if ( ! empty($browser['version'])) {
+                    foreach ($this->parseVersion($browser['version'], 'browser') as $key => $value) {
+                        $payload->setValue($key, $value);
+                    }
+                }
+            }
+
             if ( ! empty($device['type'])) {
                 if ($device['type'] === 'desktop') {
                     $payload->setValue('isDesktop', true);
@@ -70,7 +78,6 @@ class DeviceDetector implements StageInterface
                 }
             }
 
-            // Brand is just a short name, but if present need to get the full name for it.
             if ( ! empty($device['brand'])) {
                 $payload->setValue('deviceFamily', DeviceParserAbstract::getFullName($device['brand']));
             }
