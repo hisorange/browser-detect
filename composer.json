@@ -4,7 +4,7 @@
     "keywords": ["laravel", "user-agent", "browser", "mobile", "detect", "tablet", "user agent", "mobile", "tablet", "analyize", "hisorange"],
     "homepage": "https://github.com/hisorange/browser-detect",
     "license": "MIT",
-    "version": "3.1.1",
+    "version": "3.1.2",
     "authors": [
         {
             "name": "Varga Zsolt (hisorange)",

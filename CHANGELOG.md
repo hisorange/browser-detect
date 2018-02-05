@@ -1,3 +1,7 @@
+### Changes in 3.1.2
+***
+- Bump version testing to laravel 5.6.
+
 ### Changes in 3.1.1
 ***
 - Fix: MobileDetect still used the osName instead of platformName.
