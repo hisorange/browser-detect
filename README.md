@@ -117,7 +117,7 @@ The following matrix is being continuously tested by the great and awesome [Trav
 | Laravel 5.3 | &#10003; | - | - | - |
 | Laravel 5.4 | &#10003; | &#10003; | &#10003; | &#10003; |
 | Laravel 5.5 | - | &#10003; | &#10003; | &#10003; |
-| Laravel 5.6 | - | &#10003; | &#10003; | &#10003; |
+| Laravel 5.6 | - | - | &#10003; | &#10003; |
 
 \* _Cannot auto test the laravel 5.4 on PHP 7.1 because of version incompatibility between the PHPUnit, Laravel and the package testing library, but the versions are tested manually._
 
