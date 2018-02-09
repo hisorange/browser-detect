@@ -1,3 +1,8 @@
+### Changes in 3.1.3
+***
+- Allow PHPUnit 7.0 as dependency.
+
+
 ### Changes in 3.1.2
 ***
 - Bump version testing to laravel 5.6.
