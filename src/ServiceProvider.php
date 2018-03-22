@@ -40,12 +40,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
             foreach (['desktop', 'tablet', 'mobile'] as $key) {
                 $blade->$if($key, function () use ($key) {
-                    return app()->make('browser-detect')->detect()->offsetGet('is' . ucfirst($key));
+                    $fn = 'is' . $key;
+                    return app()->make('browser-detect')->detect()->$fn();
                 });
             }
 
-            $blade->$if('browser', function ($key) {
-                return app()->make('browser-detect')->detect()->offsetGet($key);
+            $blade->$if('browser', function ($fn) {
+                return app()->make('browser-detect')->detect()->$fn();
             });
         }
     }

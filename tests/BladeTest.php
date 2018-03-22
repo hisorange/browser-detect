@@ -47,6 +47,32 @@ class BladeTest extends TestCase
     }
 
     /**
+     * @return array
+     */
+    public function directiveValuedProvider()
+    {
+        return [['mobile', false], ['desktop', true], ['tablet', false]];
+    }
+
+    /**
+     * @dataProvider directiveValuedProvider
+     * @param string $directive
+     * @covers       ::<protected>registerDirectives()
+     */
+    public function testCheckingDirectives($directive, $expected) {
+        $this->assertSame($expected, Blade::check($directive));
+    }
+
+    /**
+     * @param string $directive
+     * @covers       ::<protected>registerDirectives()
+     */
+    public function testBrowserDirective() {
+        $this->assertSame(true, Blade::check('browser', 'isDesktop'));
+        $this->assertSame(false, Blade::check('browser', 'ISMOBILE'));
+    }
+
+    /**
      * @covers ::<protected>registerDirectives()
      */
     public function testBrowserDirective()
