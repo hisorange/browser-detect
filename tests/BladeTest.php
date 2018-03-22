@@ -67,7 +67,7 @@ class BladeTest extends TestCase
      * @param string $directive
      * @covers       ::<protected>registerDirectives()
      */
-    public function testBrowserDirective() {
+    public function testBrowserDirectiveResult() {
         $this->assertSame(true, Blade::check('browser', 'isDesktop'));
         $this->assertSame(false, Blade::check('browser', 'ISMOBILE'));
     }
