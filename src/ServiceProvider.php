@@ -35,7 +35,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             // Workaround to support the PHP5.6 syntax.
             // Even tho the laravel version will lock to 7.0 >=
             // but the code is still complied and throws syntax error on 5.6.
-            require __DIR__ + '/Legacy/Blade.php';
+            require 'Legacy/Blade.php';
         }
     }
 
