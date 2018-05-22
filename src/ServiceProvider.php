@@ -35,19 +35,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             // Workaround to support the PHP5.6 syntax.
             // Even tho the laravel version will lock to 7.0 >=
             // but the code is still complied and throws syntax error on 5.6.
-            $blade = Blade::getFacadeRoot();
-            $if    = 'if';
-
-            foreach (['desktop', 'tablet', 'mobile'] as $key) {
-                $blade->$if($key, function () use ($key) {
-                    $fn = 'is' . $key;
-                    return app()->make('browser-detect')->detect()->$fn();
-                });
-            }
-
-            $blade->$if('browser', function ($fn) {
-                return app()->make('browser-detect')->detect()->$fn();
-            });
+            require __DIR__ + '/Legacy/Blade.php';
         }
     }
 
