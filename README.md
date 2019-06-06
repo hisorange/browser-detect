@@ -102,6 +102,7 @@ Every call on the **Browser** facade is mirrored to the result object, so the fo
 | Browser::isSafari() | Is this a safari browser. | _(boolean)_ |
 | Browser::isIE() | Checks if the browser is an some kind of Internet Explorer (or Trident) | _(boolean)_ |
 | Browser::isIEVersion() | Compares to a given IE version | _(boolean)_ |
+| Browser::isEdge() | Is this a microsoft edge browser. | _(boolean)_ |
 
 
 ### Version support ###

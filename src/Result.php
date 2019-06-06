@@ -60,6 +60,11 @@ class Result implements ResultInterface
     /**
      * @var bool
      */
+    protected $isEdge = false;
+
+    /**
+     * @var bool
+     */
     protected $isIE = false;
 
     /**
@@ -222,6 +227,14 @@ class Result implements ResultInterface
     public function isSafari()
     {
         return $this->isSafari;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEdge()
+    {
+        return $this->isEdge;
     }
 
     /**
