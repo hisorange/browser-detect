@@ -50,6 +50,8 @@ class BrowserDetect implements StageInterface
             false !== stripos($payload->getValue('browserFamily'), 'trident')
         ) {
             $payload->setValue('isIE', true);
+        } elseif (false !== stripos($payload->getValue('browserFamily'), 'edge')) {
+            $payload->setValue('isEdge', true);
         }
 
         // Human readable browser version.
