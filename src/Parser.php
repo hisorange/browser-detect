@@ -111,13 +111,12 @@ class Parser implements ParserInterface
      */
     protected function process($agent)
     {
-        $pipeline = new Pipeline([
-            new Stages\UAParser,
-            new Stages\MobileDetect,
-            new Stages\CrawlerDetect,
-            new Stages\DeviceDetector,
-            new Stages\BrowserDetect,
-        ]);
+        $pipeline = (new Pipeline())
+            ->pipe(new Stages\UAParser)
+            ->pipe(new Stages\MobileDetect)
+            ->pipe(new Stages\CrawlerDetect)
+            ->pipe(new Stages\DeviceDetector)
+            ->pipe(new Stages\BrowserDetect);
 
         return $pipeline->process(new Payload($agent));
     }

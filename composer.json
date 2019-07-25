@@ -12,10 +12,10 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.1",
         "laravel/framework": "~5.0",
         "ua-parser/uap-php": "~3.8",
-        "league/pipeline": "~0.1",
+        "league/pipeline": "~1.0",
         "mobiledetect/mobiledetectlib": "~2.0",
         "jaybizzle/crawler-detect": "~1.0",
         "piwik/device-detector": "~3.0"
