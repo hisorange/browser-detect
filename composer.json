@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
-        "laravel/framework": "^6.0",
+        "php": ">=5.6.0",
+        "laravel/framework": "^5.0|^6.0",
         "ua-parser/uap-php": "~3.8",
         "league/pipeline": "~0.1",
         "mobiledetect/mobiledetectlib": "~2.0",
