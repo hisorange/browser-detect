@@ -14,6 +14,9 @@ env:
   - LARAVEL_VERSION=5.4
   - LARAVEL_VERSION=5.5
   - LARAVEL_VERSION=5.6
+  - LARAVEL_VERSION=5.7
+  - LARAVEL_VERSION=5.8
+  - LARAVEL_VERSION=6.0
 
 matrix:
   exclude:
@@ -21,6 +24,12 @@ matrix:
       env: LARAVEL_VERSION=5.5
     - php: 5.6
       env: LARAVEL_VERSION=5.6
+    - php: 5.6
+      env: LARAVEL_VERSION=5.7
+    - php: 5.6
+      env: LARAVEL_VERSION=5.8
+    - php: 5.6
+      env: LARAVEL_VERSION=6.0
     - php: 7.0
       env: LARAVEL_VERSION=5.0
     - php: 7.0
@@ -31,6 +40,12 @@ matrix:
       env: LARAVEL_VERSION=5.3
     - php: 7.0
       env: LARAVEL_VERSION=5.6
+    - php: 7.0
+      env: LARAVEL_VERSION=5.7
+    - php: 7.0
+      env: LARAVEL_VERSION=5.8
+    - php: 7.0
+      env: LARAVEL_VERSION=6.0
     - php: 7.1
       env: LARAVEL_VERSION=5.0
     - php: 7.1
@@ -54,14 +69,16 @@ matrix:
 
 before_install:
   - composer self-update >/dev/null 2>&1
-  - composer require laravel/framework:${LARAVEL_VERSION} --no-update
+  - composer require illuminate/cache:${LARAVEL_VERSION} --no-update
+  - composer require illuminate/http:${LARAVEL_VERSION} --no-update
+  - composer require illuminate/support:${LARAVEL_VERSION} --no-update
 
 install: composer update --prefer-source --no-interaction
 
 script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
 after_script:
-- php vendor/bin/coveralls -v
+- travis_retry php vendor/bin/php-coveralls -v
 
 branches:
   only:
