@@ -14,6 +14,10 @@ use hisorange\BrowserDetect\ServiceProvider;
  */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+    }
     /**
      * Register the service.
      *
