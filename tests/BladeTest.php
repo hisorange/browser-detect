@@ -16,7 +16,7 @@ class BladeTest extends TestCase
      * @throws \PHPUnit\Framework\SkippedTestError
      * @throws \PHPUnit_Framework_SkippedTestError
      */
-    public function setUp()
+    public function setUp():void
     {
         parent::setUp();
 
