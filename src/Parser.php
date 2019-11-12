@@ -83,7 +83,7 @@ class Parser implements ParserInterface
     {
         $key = $this->key($agent);
 
-        if ( ! isset($this->runtime[$key])) {
+        if (! isset($this->runtime[$key])) {
             $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
                 return $this->process($agent);
             });
@@ -100,7 +100,7 @@ class Parser implements ParserInterface
      */
     protected function key($agent)
     {
-        return 'bd3_' . md5($agent);
+        return 'bd4_' . md5($agent);
     }
 
     /**

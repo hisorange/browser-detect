@@ -24,7 +24,7 @@ class DeviceDetector implements StageInterface
     public function __invoke($payload)
     {
         // Skipping on bots, the detector is set to ignore bot details.
-        if ( ! $payload->getValue('isBot')) {
+        if (! $payload->getValue('isBot')) {
             $detector = new \DeviceDetector\DeviceDetector();
             $detector->setUserAgent($payload->getAgent());
             $detector->skipBotDetection(true);
@@ -39,11 +39,11 @@ class DeviceDetector implements StageInterface
             ];
 
             if ($platform !== null) {
-                if ( ! empty($platform['name'])) {
+                if (! empty($platform['name'])) {
                     $payload->setValue('platformFamily', $platform['name']);
                 }
 
-                if ( ! empty($platform['version'])) {
+                if (! empty($platform['version'])) {
                     foreach ($this->parseVersion($platform['version'], 'platform') as $key => $value) {
                         $payload->setValue($key, $value);
                     }
@@ -51,38 +51,36 @@ class DeviceDetector implements StageInterface
             }
 
             if ($browser !== null) {
-                if ( ! empty($browser['name'])) {
+                if (! empty($browser['name'])) {
                     $payload->setValue('browserFamily', $browser['name']);
                 }
 
-                if ( ! empty($browser['engine'])) {
+                if (! empty($browser['engine'])) {
                     $payload->setValue('browserEngine', $browser['engine']);
                 }
 
-                if ( ! empty($browser['version'])) {
+                if (! empty($browser['version'])) {
                     foreach ($this->parseVersion($browser['version'], 'browser') as $key => $value) {
                         $payload->setValue($key, $value);
                     }
                 }
             }
 
-            if ( ! empty($device['type'])) {
+            if (! empty($device['type'])) {
                 if ($device['type'] === 'desktop') {
                     $payload->setValue('isDesktop', true);
-                }
-                elseif ($device['type'] === 'tablet' || $device['type'] === 'phablet') {
+                } elseif ($device['type'] === 'tablet' || $device['type'] === 'phablet') {
                     $payload->setValue('isTablet', true);
-                }
-                elseif ($device['type'] === 'smartphone' || $device['type'] === 'feature phone') {
+                } elseif ($device['type'] === 'smartphone' || $device['type'] === 'feature phone') {
                     $payload->setValue('isMobile', true);
                 }
             }
 
-            if ( ! empty($device['brand'])) {
+            if (! empty($device['brand'])) {
                 $payload->setValue('deviceFamily', DeviceParserAbstract::getFullName($device['brand']));
             }
 
-            if ( ! empty($device['model'])) {
+            if (! empty($device['model'])) {
                 $payload->setValue('deviceModel', $device['model']);
             }
         }
@@ -110,7 +108,7 @@ class DeviceDetector implements StageInterface
                 }
             }
 
-            if ( ! empty($pieces)) {
+            if (! empty($pieces)) {
                 $response[$prefix . 'Version'] = implode('.', $pieces);
             }
         }

@@ -21,7 +21,7 @@ class BrowserDetect implements StageInterface
     public function __invoke($payload)
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
-        if ( ! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
+        if (! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
             $payload->setValue('isMobile', false);
             $payload->setValue('isTablet', false);
             $payload->setValue('isDesktop', true);

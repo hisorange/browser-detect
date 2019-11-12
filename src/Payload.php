@@ -29,7 +29,7 @@ class Payload implements PayloadInterface
      */
     public function getAgent()
     {
-       return $this->agent;
+        return $this->agent;
     }
 
     /**
