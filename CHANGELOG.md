@@ -1,25 +1,35 @@
 ### Change in 4.0.0
+
 ---
 
 - PHP 5.6 is no longer supported.
-- Raised the minimum Laravel version to 5.4
+- Raised the minimum Laravel version to 5.5
+- Support for Laravel 5.7
+- Support for Laravel 5.8
+- Support for Laravel 6.0
+- Support for Laravel 6.2
+- Unify the coding standards
 
 ### Changes in 3.1.4
+
 ---
 
 - Fix blade directives, add test coverage.
 
 ### Changes in 3.1.3
+
 ---
 
 - Allow PHPUnit 7.0 as dependency.
 
 ### Changes in 3.1.2
+
 ---
 
 - Bump version testing to laravel 5.6.
 
 ### Changes in 3.1.1
+
 ---
 
 - Fix: MobileDetect still used the osName instead of platformName.
@@ -29,6 +39,7 @@
 - Addition: More test coverage, getting closer to the maximum.
 
 ### Changes in 3.1.0
+
 ---
 
 - Added the DeviceDetector stage to the pipeline.
@@ -37,12 +48,14 @@
 - Much better detection rates with the new stage.
 
 ### Changes in 3.0.1
+
 ---
 
 - Fixed the result objects bad property calls.
 - Added more unit test for the fixed case.
 
 ### Changes in 3.0.0
+
 ---
 
 - The package has been rewrote from ground zero.
@@ -67,11 +80,13 @@
 - Namespaces are redesigned to be more descriptive.
 
 ### Changes in 2.0 version
+
 ---
 
 - Laravel 5 is now supported, first draft.
 
 ### Changes in 1.0.0pre
+
 ---
 
 The code has been almost totaly rewrited except like 30 line of code from v0.9.\*, this breaks the compability with older versions so the major version has been increased to v1.0.0pre.
@@ -97,12 +112,14 @@ The version 1.0.0 is promised when the Mobile Detect 3 comes out but since they 
 - UserAgentStringApi plugin is default turned off, because it requires greater amount of time to process.
 
 ### v0.9.2
+
 ---
 
 - Fix the case where importing datas and query the current agent in the same request.
 - Perform self analization before importing data.
 
 ### v0.9.1
+
 ---
 
 - New import and export function on the info object.
