@@ -4,48 +4,50 @@ php:
   - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
 env:
-  - LARAVEL_VERSION=5.0
-  - LARAVEL_VERSION=5.1
-  - LARAVEL_VERSION=5.2
-  - LARAVEL_VERSION=5.3
-  - LARAVEL_VERSION=5.4
   - LARAVEL_VERSION=5.5
   - LARAVEL_VERSION=5.6
+  - LARAVEL_VERSION=5.7
+  - LARAVEL_VERSION=5.8
+  - LARAVEL_VERSION=6.0
+  - LARAVEL_VERSION=6.2
 
 matrix:
-  exclude:
+  include:
     - php: 7.0
-      env: LARAVEL_VERSION=5.0
-    - php: 7.0
-      env: LARAVEL_VERSION=5.1
-    - php: 7.0
-      env: LARAVEL_VERSION=5.2
-    - php: 7.0
-      env: LARAVEL_VERSION=5.3
-    - php: 7.0
+      env: LARAVEL_VERSION=5.5
+    - php: 7.1
       env: LARAVEL_VERSION=5.6
     - php: 7.1
-      env: LARAVEL_VERSION=5.0
+      env: LARAVEL_VERSION=5.7
     - php: 7.1
-      env: LARAVEL_VERSION=5.1
-    - php: 7.1
-      env: LARAVEL_VERSION=5.2
-    - php: 7.1
-      env: LARAVEL_VERSION=5.3
-    - php: 7.1
-      env: LARAVEL_VERSION=5.4
+      env: LARAVEL_VERSION=5.8
     - php: 7.2
-      env: LARAVEL_VERSION=5.0
+      env: LARAVEL_VERSION=5.5
     - php: 7.2
-      env: LARAVEL_VERSION=5.1
+      env: LARAVEL_VERSION=5.6
     - php: 7.2
-      env: LARAVEL_VERSION=5.2
+      env: LARAVEL_VERSION=5.7
     - php: 7.2
-      env: LARAVEL_VERSION=5.3
+      env: LARAVEL_VERSION=5.8
     - php: 7.2
-      env: LARAVEL_VERSION=5.4
+      env: LARAVEL_VERSION=6.0
+    - php: 7.2
+      env: LARAVEL_VERSION=6.2
+    - php: 7.3
+      env: LARAVEL_VERSION=5.5
+    - php: 7.3
+      env: LARAVEL_VERSION=5.6
+    - php: 7.3
+      env: LARAVEL_VERSION=5.7
+    - php: 7.3
+      env: LARAVEL_VERSION=5.8
+    - php: 7.3
+      env: LARAVEL_VERSION=6.0
+    - php: 7.3
+      env: LARAVEL_VERSION=6.2
 
 before_install:
   - composer self-update >/dev/null 2>&1
@@ -56,10 +58,9 @@ install: composer update --prefer-source --no-interaction
 script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
 after_script:
-- php vendor/bin/coveralls -v
+  - php vendor/bin/coveralls -v
 
 notifications:
   email:
-  - hello@hisorange.me
-
+    - hello@hisorange.me
 # Thanks for this awesome service @TravisCI!
