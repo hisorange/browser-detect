@@ -82,10 +82,10 @@ class ParserTest extends TestCase
 
     /**
      * @covers ::__call()
-     * @expectedException \hisorange\BrowserDetect\Exceptions\BadMethodCallException
      */
     public function testCallException()
     {
+        $this->expectException(\hisorange\BrowserDetect\Exceptions\BadMethodCallException::class);
         $this->getParser()->BadMethod();
     }
 }
