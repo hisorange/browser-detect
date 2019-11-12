@@ -15,38 +15,16 @@ env:
   - LARAVEL_VERSION=6.2
 
 matrix:
-  include:
+  exclude:
     - php: 7.0
-      env: LARAVEL_VERSION=5.5
-    - php: 7.1
       env: LARAVEL_VERSION=5.6
-    - php: 7.1
+    - php: 7.0
       env: LARAVEL_VERSION=5.7
-    - php: 7.1
+    - php: 7.0
       env: LARAVEL_VERSION=5.8
-    - php: 7.2
-      env: LARAVEL_VERSION=5.5
-    - php: 7.2
-      env: LARAVEL_VERSION=5.6
-    - php: 7.2
-      env: LARAVEL_VERSION=5.7
-    - php: 7.2
-      env: LARAVEL_VERSION=5.8
-    - php: 7.2
+    - php: 7.0
       env: LARAVEL_VERSION=6.0
-    - php: 7.2
-      env: LARAVEL_VERSION=6.2
-    - php: 7.3
-      env: LARAVEL_VERSION=5.5
-    - php: 7.3
-      env: LARAVEL_VERSION=5.6
-    - php: 7.3
-      env: LARAVEL_VERSION=5.7
-    - php: 7.3
-      env: LARAVEL_VERSION=5.8
-    - php: 7.3
-      env: LARAVEL_VERSION=6.0
-    - php: 7.3
+    - php: 7.0
       env: LARAVEL_VERSION=6.2
 
 before_install:
