@@ -31,12 +31,21 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     protected function registerDirectives()
     {
-        if (version_compare($this->app->version(), '5.5', '>=')) {
-            // Workaround to support the PHP5.6 syntax.
-            // Even tho the laravel version will lock to 7.0 >=
-            // but the code is still complied and throws syntax error on 5.6.
-            require 'Legacy/Blade.php';
-        }
+        Blade::if('desktop', function () {
+            return app()->make('browser-detect')->detect()->isDesktop();
+        });
+
+        Blade::if('tablet', function () {
+            return app()->make('browser-detect')->detect()->isTablet();
+        });
+
+        Blade::if('mobile', function () {
+            return app()->make('browser-detect')->detect()->isMobile();
+        });
+
+        Blade::if('browser', function ($fn) {
+            return app()->make('browser-detect')->detect()->$fn();
+        });
     }
 
     /**
