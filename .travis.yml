@@ -58,11 +58,6 @@ script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 after_script:
 - php vendor/bin/coveralls -v
 
-branches:
-  only:
-  - staging
-  - stable
-
 notifications:
   email:
   - hello@hisorange.me
