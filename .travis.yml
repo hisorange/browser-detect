@@ -26,6 +26,10 @@ matrix:
       env: LARAVEL_VERSION=6.0
     - php: 7.0
       env: LARAVEL_VERSION=6.2
+    - php: 7.1
+      env: LARAVEL_VERSION=6.0
+    - php: 7.1
+      env: LARAVEL_VERSION=6.2
 
 before_install:
   - composer self-update >/dev/null 2>&1
