@@ -119,8 +119,8 @@ The following matrix is has been continuously tested by the great and awesome [T
 |    -----    | Browser Detect 1.x | Browser Detect 2.x | Browser Detect 3.x | Browser Detect 4.x |
 | :---------: | :----------------: | :----------------: | :----------------: | :----------------: |
 | Laravel 4.x |      &#10003;      |      &#10003;      |         -          |         -          |
-| Laravel 5.x |         -          |      &#10003;      |      &#10003;      |         -          |
-| Laravel 6.x |         -          |         -          |       > 5.5        |      &#10003;      |
+| Laravel 5.x |         -          |      &#10003;      |      &#10003;      |       > 5.5        |
+| Laravel 6.x |         -          |         -          |         -          |      &#10003;      |
 
 The package runs tests on every possible PHP / Laravel version combination.
 
