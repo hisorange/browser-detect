@@ -3,12 +3,13 @@
 ---
 
 - PHP 5.6 is no longer supported.
-- Raised the minimum Laravel version to 5.5
-- Support for Laravel 5.7
-- Support for Laravel 5.8
-- Support for Laravel 6.0
-- Support for Laravel 6.2
-- Unify the coding standards
+- Raised the minimum Laravel version to 6.0.
+- Support for Laravel 6.0, 6.1, 6.2, 6.3, 6.4, 6.5.
+- Unify the coding standards.
+- Remove legacy PHP workarounds.
+- Release the isEdge result variable.
+- Invalidate cache with 3.x versions.
+- Update the tests to test for every laravel framework version.
 
 ### Changes in 3.1.4
 
