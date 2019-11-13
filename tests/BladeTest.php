@@ -13,19 +13,6 @@ use Illuminate\Support\Facades\Blade;
 class BladeTest extends TestCase
 {
     /**
-     * @throws \PHPUnit\Framework\SkippedTestError
-     * @throws \PHPUnit_Framework_SkippedTestError
-     */
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        if (version_compare($this->app->version(), '5.5', '<')) {
-            $this->markTestSkipped('Cannot test if directives below laravel 5.5.');
-        }
-    }
-
-    /**
      * @return array
      */
     public function directiveProvider()
