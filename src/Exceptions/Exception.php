@@ -1,4 +1,6 @@
 <?php
 namespace hisorange\BrowserDetect\Exceptions;
 
-class Exception extends \Exception {}
+class Exception extends \Exception
+{
+}

@@ -2,7 +2,6 @@
 
 namespace hisorange\BrowserDetect\Contracts;
 
-// PHP SPL.
 use JsonSerializable;
 
 /**
@@ -81,6 +80,13 @@ interface ResultInterface extends JsonSerializable
      * @return bool
      */
     public function isSafari();
+
+    /**
+     * Is this browser an Microsoft Edge?
+     *
+     * @return bool
+     */
+    public function isEdge();
 
     /**
      * Is this browser an Internet Explorer?
