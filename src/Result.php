@@ -1,12 +1,13 @@
 <?php
-
 namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;
-use function get_object_vars;
 
 /**
- * Class Result
+ * The object is used for safely accessing the
+ * result of the parsing, this is necessary
+ * to allow us to change the implementaion
+ * behind the values.
  *
  * @package hisorange\BrowserDetect
  */

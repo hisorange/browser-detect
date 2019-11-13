@@ -1,25 +1,21 @@
 <?php
-
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Support\Facades\Blade;
+use \Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
- * Class ServiceProvider
+ * Registers the package as a service provider,
+ * also injects the blade directives.
+ *
  * @package hisorange\BrowserDetect
  */
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
-     * @inheritdoc
-     */
-    public function isDeferred()
-    {
-        return true;
-    }
-
-    /**
      * Register the custom blade directives.
+     *
+     * @inheritDoc
      */
     public function boot()
     {
@@ -49,18 +45,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     }
 
     /**
+     * Only binding can occure here!
+     *
      * @inheritdoc
      */
     public function register()
     {
         $this->app->singleton('browser-detect', Parser::class);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function provides()
-    {
-        return ['browser-detect'];
     }
 }

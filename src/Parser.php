@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Contracts\ParserInterface;
@@ -10,7 +9,7 @@ use Illuminate\Http\Request;
 use League\Pipeline\Pipeline;
 
 /**
- * Class Parser
+ * Manages the parsing mechanism.
  *
  * @package hisorange\BrowserDetect
  */
@@ -65,7 +64,9 @@ class Parser implements ParserInterface
             return call_user_func_array([$result, $method], $params);
         }
 
-        throw new BadMethodCallException(sprintf('%s method does not exists on the %s object.', $method, ResultInterface::class));
+        throw new BadMethodCallException(
+            sprintf('%s method does not exists on the %s object.', $method, ResultInterface::class)
+        );
     }
 
     /**
@@ -81,7 +82,7 @@ class Parser implements ParserInterface
      */
     public function parse($agent)
     {
-        $key = $this->key($agent);
+        $key = $this->makeHashKey($agent);
 
         if (! isset($this->runtime[$key])) {
             $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
@@ -93,12 +94,12 @@ class Parser implements ParserInterface
     }
 
     /**
-     * Get a unique cache key for the user agent.
+     * Create a unique cache key for the user agent.
      *
      * @param  string $agent
      * @return string
      */
-    protected function key($agent)
+    protected function makeHashKey($agent)
     {
         return 'bd4_' . md5($agent);
     }
