@@ -1,13 +1,15 @@
 <?php
-
 namespace hisorange\BrowserDetect;
 
+use Illuminate\Support\Facades\Facade as BaseFacade;
+
 /**
- * Class Facade
+ * Facading class to mask the service behind the "Browser" class.
+ *
  * @example Browser::isMobile();
  * @package hisorange\BrowserDetect
  */
-class Facade extends \Illuminate\Support\Facades\Facade
+class Facade extends BaseFacade
 {
     /**
      * @inheritdoc

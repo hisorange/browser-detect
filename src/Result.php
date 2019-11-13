@@ -1,12 +1,13 @@
 <?php
-
 namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;
-use function get_object_vars;
 
 /**
- * Class Result
+ * The object is used for safely accessing the
+ * result of the parsing, this is necessary
+ * to allow us to change the implementaion
+ * behind the values.
  *
  * @package hisorange\BrowserDetect
  */
@@ -56,6 +57,11 @@ class Result implements ResultInterface
      * @var bool
      */
     protected $isSafari = false;
+
+    /**
+     * @var bool
+     */
+    protected $isEdge = false;
 
     /**
      * @var bool
@@ -222,6 +228,14 @@ class Result implements ResultInterface
     public function isSafari()
     {
         return $this->isSafari;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isEdge()
+    {
+        return $this->isEdge;
     }
 
     /**
