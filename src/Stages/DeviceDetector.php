@@ -3,12 +3,8 @@
 namespace hisorange\BrowserDetect\Stages;
 
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
-use function dump;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
-use function preg_match;
-use function strpos;
-use function ucfirst;
+use hisorange\BrowserDetect\Contracts\StageInterface;
 
 /**
  * Strong browser and platform detector.

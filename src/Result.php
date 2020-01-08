@@ -249,7 +249,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function isIEVersion(string $version, string $operator = '='): bool
+    public function isIEVersion(int $version, string $operator = '='): bool
     {
         return ($this->isIE && version_compare($this->browserVersion, $version, $operator));
     }
@@ -283,7 +283,7 @@ class Result implements ResultInterface
      */
     public function browserVersionMajor(): int
     {
-        return $this->browserVersionMajor;
+        return (int) $this->browserVersionMajor;
     }
 
     /**
@@ -291,7 +291,7 @@ class Result implements ResultInterface
      */
     public function browserVersionMinor(): int
     {
-        return $this->browserVersionMinor;
+        return (int) $this->browserVersionMinor;
     }
 
     /**
@@ -299,7 +299,7 @@ class Result implements ResultInterface
      */
     public function browserVersionPatch(): int
     {
-        return $this->browserVersionPatch;
+        return (int) $this->browserVersionPatch;
     }
 
     /**
@@ -339,7 +339,7 @@ class Result implements ResultInterface
      */
     public function platformVersionMajor(): int
     {
-        return $this->platformVersionMajor;
+        return (int) $this->platformVersionMajor;
     }
 
     /**
@@ -347,7 +347,7 @@ class Result implements ResultInterface
      */
     public function platformVersionMinor(): int
     {
-        return $this->platformVersionMinor;
+        return (int) $this->platformVersionMinor;
     }
 
     /**
@@ -355,7 +355,7 @@ class Result implements ResultInterface
      */
     public function platformVersionPatch(): int
     {
-        return $this->platformVersionPatch;
+        return (int) $this->platformVersionPatch;
     }
 
     /**

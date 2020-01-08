@@ -3,7 +3,7 @@
 namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
+use hisorange\BrowserDetect\Contracts\StageInterface;
 
 /**
  * Most reliable mobile and tablet testing stage.
