@@ -19,7 +19,7 @@ class UAParser implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         $parser = Parser::create();
         $result = $parser->parse($payload->getAgent());

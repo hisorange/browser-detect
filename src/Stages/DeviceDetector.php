@@ -21,7 +21,7 @@ class DeviceDetector implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         // Skipping on bots, the detector is set to ignore bot details.
         if (! $payload->getValue('isBot')) {
@@ -95,7 +95,7 @@ class DeviceDetector implements StageInterface
      * @param string $prefix
      * @return array
      */
-    protected function parseVersion($version, $prefix)
+    protected function parseVersion(string $version, string $prefix)
     {
         $response = [];
 

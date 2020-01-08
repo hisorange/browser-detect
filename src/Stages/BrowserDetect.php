@@ -18,7 +18,7 @@ class BrowserDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return ResultInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): ResultInterface
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
         if (! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
@@ -86,7 +86,7 @@ class BrowserDetect implements StageInterface
      * @param  string $version
      * @return string
      */
-    protected function trimVersion($version)
+    protected function trimVersion(string $version): string
     {
         return trim(preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
     }

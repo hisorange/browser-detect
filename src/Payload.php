@@ -25,7 +25,7 @@ class Payload implements PayloadInterface
     /**
      * @inheritdoc
      */
-    public function __construct($agent)
+    public function __construct(string $agent)
     {
         $this->agent = $agent;
     }
@@ -33,7 +33,7 @@ class Payload implements PayloadInterface
     /**
      * @inheritdoc
      */
-    public function getAgent()
+    public function getAgent(): string
     {
         return $this->agent;
     }
@@ -41,7 +41,7 @@ class Payload implements PayloadInterface
     /**
      * @inheritdoc
      */
-    public function getValue($key)
+    public function getValue(string $key)
     {
         if (array_key_exists($key, $this->store)) {
             return $this->store[$key];
@@ -53,7 +53,7 @@ class Payload implements PayloadInterface
     /**
      * @inheritdoc
      */
-    public function setValue($key, $value)
+    public function setValue(string $key, $value): void
     {
         if ($value !== null) {
             $this->store[$key] = $value;

@@ -16,7 +16,7 @@ class CrawlerDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         $crawler          = new \Jaybizzle\CrawlerDetect\CrawlerDetect(['HTTP_FAKE_HEADER' => 'Crawler\Detect'], $payload->getAgent());
         $payload->setValue('isBot', $crawler->isCrawler());
