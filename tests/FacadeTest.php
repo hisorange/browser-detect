@@ -1,9 +1,8 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Facade;
+use hisorange\BrowserDetect\Contracts\ParserInterface;
 
 /**
  * Class FacadeTest

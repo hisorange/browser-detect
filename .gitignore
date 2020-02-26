@@ -3,3 +3,4 @@ composer.lock
 .idea
 .vscode
 demo/cache
+.phpunit.result.cache

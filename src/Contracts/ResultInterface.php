@@ -23,199 +23,227 @@ interface ResultInterface extends JsonSerializable
      *
      * @return string
      */
-    public function userAgent();
+    public function userAgent(): string;
 
     /**
      * Is this a mobile device.
      *
      * @return bool
      */
-    public function isMobile();
+    public function isMobile(): bool;
 
     /**
      * Is this a tablet device.
      *
      * @return bool
      */
-    public function isTablet();
+    public function isTablet(): bool;
 
     /**
      * Is this a desktop computer.
      *
      * @return bool
      */
-    public function isDesktop();
+    public function isDesktop(): bool;
 
     /**
      * Is this a crawler / bot.
      *
      * @return bool
      */
-    public function isBot();
+    public function isBot(): bool;
 
     /**
      * Is this a Chrome or Chromium browser?
      *
      * @return bool
      */
-    public function isChrome();
+    public function isChrome(): bool;
 
     /**
      * Is this a Chrome or Chromium browser?
      *
      * @return bool
      */
-    public function isFirefox();
+    public function isFirefox(): bool;
 
     /**
      * Is this a Chrome or Chromium browser?
      *
      * @return bool
      */
-    public function isOpera();
+    public function isOpera(): bool;
 
     /**
      * Is this a Chrome or Chromium browser?
      *
      * @return bool
      */
-    public function isSafari();
+    public function isSafari(): bool;
 
     /**
      * Is this browser an Microsoft Edge?
      *
      * @return bool
      */
-    public function isEdge();
+    public function isEdge(): bool;
 
     /**
      * Is this browser an Internet Explorer?
      *
      * @return bool
      */
-    public function isIE();
+    public function isIE(): bool;
 
     /**
      * Is this an Internet Explorer X (or lower version).
      *
-     * @param  integer $version
-     * @param  string  $operator
+     * @param integer $version
+     * @param string  $operator
      *
-     * @return mixed
+     * @return bool
      */
-    public function isIEVersion($version, $operator = '=');
+    public function isIEVersion(int $version, string $operator = '='): bool;
 
     /**
      * Build a human readable browser name: Internet Explorer 7, Firefox 3.6
      *
      * @return string
      */
-    public function browserName();
+    public function browserName(): string;
 
     /**
      * Browser's vendor like Chrome, Firefox, Opera.
      *
      * @return string
      */
-    public function browserFamily();
+    public function browserFamily(): string;
 
     /**
      * Build human readable browser version. (cuts the trailing .0 parts)
      *
      * @return string
      */
-    public function browserVersion();
+    public function browserVersion(): string;
 
     /**
      * Browser's semantic major version.
      *
      * @return int
      */
-    public function browserVersionMajor();
+    public function browserVersionMajor(): int;
 
     /**
      * Browser's semantic minor version.
      *
      * @return int
      */
-    public function browserVersionMinor();
+    public function browserVersionMinor(): int;
 
     /**
      * Browser's semantic patch version.
      *
      * @return int
      */
-    public function browserVersionPatch();
+    public function browserVersionPatch(): int;
 
     /**
      * Browser's rendering engine.
      *
      * @return string
      */
-    public function browserEngine();
+    public function browserEngine(): string;
 
     /**
      * Operating system's human friendly name like Windows XP, MacOS 10.
      *
      * @return string
      */
-    public function platformName();
+    public function platformName(): string;
 
     /**
      * Operating system's vendor like Linux, Windows, MacOS.
      *
      * @return string
      */
-    public function platformFamily();
+    public function platformFamily(): string;
 
     /**
      * Build human readable os version. (cuts the trailing .0 parts)
      *
      * @return string
      */
-    public function platformVersion();
+    public function platformVersion(): string;
 
     /**
      * Operating system's semantic major version.
      *
      * @return int
      */
-    public function platformVersionMajor();
+    public function platformVersionMajor(): int;
 
     /**
      * Operating system's semantic minor version.
      *
      * @return int
      */
-    public function platformVersionMinor();
+    public function platformVersionMinor(): int;
 
     /**
      * Operating system's semantic patch version.
      *
      * @return int
      */
-    public function platformVersionPatch();
+    public function platformVersionPatch(): int;
+
+    /**
+     * Is this a windows operating system?
+     *
+     * @return bool
+     */
+    public function isWindows(): bool;
+
+    /**
+     * Is this a linux operating system?
+     *
+     * @return bool
+     */
+    public function isLinux(): bool;
+
+    /**
+     * Is this a mac operating system?
+     *
+     * @return bool
+     */
+    public function isMac(): bool;
+
+    /**
+     * Is this an android operating system?
+     *
+     * @return bool
+     */
+    public function isAndroid(): bool;
 
     /**
      * Device's vendor like Samsung, Apple, Huawei.
      *
      * @return string
      */
-    public function deviceFamily();
+    public function deviceFamily(): string;
 
     /**
      * Device's brand name like iPad, iPhone, Nexus.
      *
      * @return string
      */
-    public function deviceModel();
+    public function deviceModel(): string;
 
     /**
      * Device's mobile grade in scale of A,B,C for performance.
      *
      * @return string
      */
-    public function mobileGrade();
+    public function mobileGrade(): string;
 
     /**
      * Export the result's data into an array.

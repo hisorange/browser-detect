@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
@@ -14,7 +15,7 @@ class Facade extends BaseFacade
     /**
      * @inheritdoc
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return 'browser-detect';
     }

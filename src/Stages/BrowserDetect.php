@@ -2,10 +2,10 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
-use League\Pipeline\StageInterface;
+use hisorange\BrowserDetect\Contracts\StageInterface;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
  * BrowserDetect stage to fix mix ups caused by different results.
@@ -18,7 +18,7 @@ class BrowserDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return ResultInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): ResultInterface
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
         if (! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
@@ -45,9 +45,9 @@ class BrowserDetect implements StageInterface
         } elseif (false !== stripos($payload->getValue('browserFamily'), 'safari')) {
             $payload->setValue('isSafari', true);
         } elseif (
-            false !== stripos($payload->getValue('browserFamily'), 'explorer') ||
-            false !== stripos($payload->getValue('browserFamily'), 'ie') ||
-            false !== stripos($payload->getValue('browserFamily'), 'trident')
+            false !== stripos($payload->getValue('browserFamily'), 'explorer')
+            || false !== stripos($payload->getValue('browserFamily'), 'ie')
+            || false !== stripos($payload->getValue('browserFamily'), 'trident')
         ) {
             $payload->setValue('isIE', true);
         } elseif (false !== stripos($payload->getValue('browserFamily'), 'edge')) {
@@ -55,26 +55,60 @@ class BrowserDetect implements StageInterface
         }
 
         // Human readable browser version.
-        $payload->setValue('browserVersion', $this->trimVersion(
-            implode('.', [
-                $payload->getValue('browserVersionMajor'),
-                $payload->getValue('browserVersionMinor'),
-                $payload->getValue('browserVersionPatch'),
-            ])
-        ));
+        $payload->setValue(
+            'browserVersion',
+            $this->trimVersion(
+                implode(
+                    '.',
+                    [
+                    $payload->getValue('browserVersionMajor'),
+                    $payload->getValue('browserVersionMinor'),
+                    $payload->getValue('browserVersionPatch'),
+                    ]
+                )
+            )
+        );
 
-        $payload->setValue('browserName', trim($payload->getValue('browserFamily') . ' ' . $payload->getValue('browserVersion')));
+        $payload->setValue('browserName', trim(
+            $payload->getValue('browserFamily') .
+            ' ' .
+            $payload->getValue('browserVersion')
+        ));
 
         // Human readable platform version.
-        $payload->setValue('platformVersion', $this->trimVersion(
-            implode('.', [
-                $payload->getValue('platformVersionMajor'),
-                $payload->getValue('platformVersionMinor'),
-                $payload->getValue('platformVersionPatch'),
-            ])
+        $payload->setValue(
+            'platformVersion',
+            $this->trimVersion(
+                implode(
+                    '.',
+                    [
+                    $payload->getValue('platformVersionMajor'),
+                    $payload->getValue('platformVersionMinor'),
+                    $payload->getValue('platformVersionPatch'),
+                    ]
+                )
+            )
+        );
+
+        $payload->setValue('platformName', trim(
+            $payload->getValue('platformFamily') .
+            ' ' .
+            $payload->getValue('platformVersion')
         ));
 
-        $payload->setValue('platformName', trim($payload->getValue('platformFamily') . ' ' . $payload->getValue('platformVersion')));
+        // Popular os vendors.
+        if (false !== stripos($payload->getValue('platformFamily'), 'windows')) {
+            $payload->setValue('isWindows', true);
+        } elseif (false !== stripos($payload->getValue('platformFamily'), 'android')) {
+            $payload->setValue('isAndroid', true);
+        } elseif (
+            false !== stripos($payload->getValue('platformFamily'), 'mac')
+            || false !== stripos($payload->getValue('platformFamily'), 'ios')
+        ) {
+            $payload->setValue('isMac', true);
+        } elseif (false !== stripos($payload->getValue('platformFamily'), 'linux')) {
+            $payload->setValue('isLinux', true);
+        }
 
         return new Result($payload->toArray());
     }
@@ -86,8 +120,8 @@ class BrowserDetect implements StageInterface
      * @param  string $version
      * @return string
      */
-    protected function trimVersion($version)
+    protected function trimVersion(string $version): string
     {
-        return trim(preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
+        return trim((string) preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
     }
 }

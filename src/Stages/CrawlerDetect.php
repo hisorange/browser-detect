@@ -2,8 +2,8 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
 
 /**
  * Checks if the user agent belongs to bot or crawler.
@@ -16,9 +16,12 @@ class CrawlerDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
-        $crawler          = new \Jaybizzle\CrawlerDetect\CrawlerDetect(['HTTP_FAKE_HEADER' => 'Crawler\Detect'], $payload->getAgent());
+        $crawler          = new \Jaybizzle\CrawlerDetect\CrawlerDetect(
+            ['HTTP_FAKE_HEADER' => 'Crawler\Detect'],
+            $payload->getAgent()
+        );
         $payload->setValue('isBot', $crawler->isCrawler());
 
         return $payload;

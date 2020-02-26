@@ -2,13 +2,9 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use hisorange\BrowserDetect\Contracts\StageInterface;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
-use function dump;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
-use function preg_match;
-use function strpos;
-use function ucfirst;
 
 /**
  * Strong browser and platform detector.
@@ -21,7 +17,7 @@ class DeviceDetector implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         // Skipping on bots, the detector is set to ignore bot details.
         if (! $payload->getValue('isBot')) {
@@ -38,7 +34,7 @@ class DeviceDetector implements StageInterface
                 'model' => $detector->getModel(),
             ];
 
-            if ($platform !== null) {
+            if ($platform !== null && is_array($platform)) {
                 if (! empty($platform['name'])) {
                     $payload->setValue('platformFamily', $platform['name']);
                 }
@@ -50,7 +46,7 @@ class DeviceDetector implements StageInterface
                 }
             }
 
-            if ($browser !== null) {
+            if ($browser !== null && is_array($browser)) {
                 if (! empty($browser['name'])) {
                     $payload->setValue('browserFamily', $browser['name']);
                 }
@@ -91,11 +87,11 @@ class DeviceDetector implements StageInterface
     /**
      * Parse semantic version strings into major.minor.patch pieces.
      *
-     * @param string $version
-     * @param string $prefix
+     * @param  string $version
+     * @param  string $prefix
      * @return array
      */
-    protected function parseVersion($version, $prefix)
+    protected function parseVersion(string $version, string $prefix)
     {
         $response = [];
 

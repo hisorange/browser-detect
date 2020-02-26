@@ -1,3 +1,17 @@
+### Changes in 4.1.0
+
+---
+
+- OS detectors for Windows, Linux, Andorid, and Mac/iOS.
+- 100% test coverage.
+- Type hinted every class and function.
+- Introduced the static code analysis to the test flow.
+- Introduced the code quality analysis to the test flow.
+- Moved to PSR12 standards with the code base.
+- Fixed potential type errors.
+- Improve the resistance for HTTP header based attacks.
+- First iteraton for a demo site.
+
 ### Change in 4.0.0
 
 ---

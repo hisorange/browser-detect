@@ -1,8 +1,9 @@
 <?php
+
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Support\Facades\Blade;
-use \Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
  * Registers the package as a service provider,
@@ -16,8 +17,10 @@ class ServiceProvider extends BaseServiceProvider
      * Register the custom blade directives.
      *
      * @inheritDoc
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerDirectives();
     }
@@ -25,23 +28,35 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * Register the blade directives.
      */
-    protected function registerDirectives()
+    protected function registerDirectives(): void
     {
-        Blade::if('desktop', function () {
-            return app()->make('browser-detect')->detect()->isDesktop();
-        });
+        Blade::if(
+            'desktop',
+            function () {
+                return app()->make('browser-detect')->detect()->isDesktop();
+            }
+        );
 
-        Blade::if('tablet', function () {
-            return app()->make('browser-detect')->detect()->isTablet();
-        });
+        Blade::if(
+            'tablet',
+            function () {
+                return app()->make('browser-detect')->detect()->isTablet();
+            }
+        );
 
-        Blade::if('mobile', function () {
-            return app()->make('browser-detect')->detect()->isMobile();
-        });
+        Blade::if(
+            'mobile',
+            function () {
+                return app()->make('browser-detect')->detect()->isMobile();
+            }
+        );
 
-        Blade::if('browser', function ($fn) {
-            return app()->make('browser-detect')->detect()->$fn();
-        });
+        Blade::if(
+            'browser',
+            function ($fn) {
+                return app()->make('browser-detect')->detect()->$fn();
+            }
+        );
     }
 
     /**
@@ -49,7 +64,7 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @inheritdoc
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton('browser-detect', Parser::class);
     }

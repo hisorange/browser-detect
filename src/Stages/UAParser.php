@@ -2,9 +2,9 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
 use UAParser\Parser;
+use hisorange\BrowserDetect\Contracts\StageInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
  * Main parser to get the most of the info about the browser and it's operating system.
@@ -19,7 +19,7 @@ class UAParser implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         $parser = Parser::create();
         $result = $parser->parse($payload->getAgent());
