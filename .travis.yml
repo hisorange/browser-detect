@@ -19,8 +19,8 @@ install: composer update --prefer-source --no-interaction
 
 script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
-after_script:
-  - php vendor/bin/coveralls -v
+after_success:
+  - "if [ $LARAVEL_VERSION = '6.5' ]; then php vendor/bin/coveralls -v; fi"
 
 notifications:
   email:
