@@ -132,7 +132,7 @@ class ParserTest extends TestCase
      */
     public function testCall()
     {
-        $this->assertEmpty($this->getParser()->userAgent());
+        $this->assertNotEmpty($this->getParser()->userAgent());
     }
 
     /**
