@@ -30,6 +30,7 @@ class ParserTest extends TestCase
 
     /**
      * @covers ::__construct()
+     * @covers ::parse()
      */
     public function testStandaloneConstruct()
     {

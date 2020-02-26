@@ -142,7 +142,7 @@ class Parser implements ParserInterface
     {
         $key = $this->makeHashKey($agent);
 
-        if (! isset($this->runtime[$key])) {
+        if (!isset($this->runtime[$key])) {
             // In standalone mode You can run the parser without cache.
             if ($this->cache !== null) {
                 $result = $this->cache->remember(
