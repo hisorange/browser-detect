@@ -1,6 +1,7 @@
 <?php
 namespace hisorange\BrowserDetect\Test;
 
+use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
@@ -24,6 +25,31 @@ class ParserTest extends TestCase
         $expected = ResultInterface::class;
 
         $this->assertInstanceOf($expected, $actual);
+    }
+
+    /**
+     * @covers ::__construct()
+     */
+    public function testStandaloneConstruct()
+    {
+        $this->assertInstanceOf(ResultInterface::class, (new Parser())->parse('test'));
+    }
+
+    /**
+     * @covers ::__callStatic()
+     * @covers ::getUserAgentString()
+     */
+    public function testStandaloneFacade()
+    {
+        $this->assertSame(Parser::isMobile(), false);
+    }
+
+    /**
+     * Check if the results are the same.
+     */
+    public function testStandaloneResult()
+    {
+        $this->assertSame(Parser::toArray(), $this->getParser()->parse('')->toArray());
     }
 
     /**

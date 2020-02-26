@@ -17,12 +17,12 @@ use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
 class Parser implements ParserInterface
 {
     /**
-     * @var CacheManager
+     * @var CacheManager|null
      */
     protected $cache;
 
     /**
-     * @var Request
+     * @var Request|null
      */
     protected $request;
 
@@ -39,7 +39,7 @@ class Parser implements ParserInterface
      * @param CacheManager $cache
      * @param Request      $request
      */
-    public function __construct(CacheManager $cache, Request $request)
+    public function __construct(CacheManager $cache = null, Request $request = null)
     {
         $this->cache   = $cache;
         $this->request = $request;
@@ -71,14 +71,48 @@ class Parser implements ParserInterface
     }
 
     /**
+     * Acts as a facade, but proxies all the call to a singleton.
+     *
+     * @param string $method
+     * @param array $params
+     *
+     * @return mixed
+     */
+    public static function __callStatic(string $method, array $params)
+    {
+        static $instance;
+
+        if (!$instance) {
+            $instance = new static();
+        }
+
+        return call_user_func_array([$instance, $method], $params);
+    }
+
+    /**
      * @inheritdoc
      */
     public function detect(): ResultInterface
     {
         // Cuts the agent string at 2048 byte, anything longer will be a DoS attack.
-        $userAgentString = substr($this->request->userAgent(), 0, 2048);
+        $userAgentString = substr($this->getUserAgentString(), 0, 2048);
 
         return $this->parse($userAgentString);
+    }
+
+    /**
+     * Wrapper around the request accessor, in standalone mode
+     * the fn will use the $_SERVER global.
+     *
+     * @return string
+     */
+    protected function getUserAgentString(): string
+    {
+        if ($this->request !== null) {
+            return $this->request->userAgent();
+        } else {
+            return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+        }
     }
 
     /**
@@ -89,13 +123,20 @@ class Parser implements ParserInterface
         $key = $this->makeHashKey($agent);
 
         if (! isset($this->runtime[$key])) {
-            $this->runtime[$key] = $this->cache->remember(
-                $key,
-                10080,
-                function () use ($agent) {
-                    return $this->process($agent);
-                }
-            );
+            // In standalone mode You can run the parser without cache.
+            if ($this->cache !== null) {
+                $result = $this->cache->remember(
+                    $key,
+                    10080,
+                    function () use ($agent) {
+                        return $this->process($agent);
+                    }
+                );
+            } else {
+                $result = $this->process($agent);
+            }
+
+            $this->runtime[$key] = $result;
         }
 
         return $this->runtime[$key];
