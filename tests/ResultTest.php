@@ -1,9 +1,8 @@
 <?php
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
-use function json_decode;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Class ResultTest

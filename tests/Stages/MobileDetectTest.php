@@ -2,8 +2,8 @@
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
-use hisorange\BrowserDetect\Stages\MobileDetect;
 use hisorange\BrowserDetect\Test\TestCase;
+use hisorange\BrowserDetect\Stages\MobileDetect;
 
 /**
  * Test the CrawlerDetect stage.

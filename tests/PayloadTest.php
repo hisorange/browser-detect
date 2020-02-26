@@ -1,47 +1,41 @@
 <?php
-namespace hisorange\BrowserDetect\Test\Stages;
+namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Payload;
-use hisorange\BrowserDetect\Stages\CrawlerDetect;
-use hisorange\BrowserDetect\Test\TestCase;
 
 /**
- * Test the CrawlerDetect stage.
- *
- * @package            hisorange\BrowserDetect\Test\Stages
- * @coversDefaultClass hisorange\BrowserDetect\Stages\CrawlerDetect
+ * Class PayloadTest
+ * @package            hisorange\BrowserDetect\Test
+ * @coversDefaultClass hisorange\BrowserDetect\Payload
  */
-class CrawlerDetectTest extends TestCase
+class PayloadTest extends TestCase
 {
     /**
-     * @dataProvider provideAgents
-     *
-     * @covers ::__invoke()
-     *
-     * @param string $agent
-     * @param bool   $expected
+     * @covers ::__construct()
+     * @covers ::getAgent()
      */
-    public function testInvoke($agent, $expected)
+    public function testGetAgent()
     {
-        $stage  = new CrawlerDetect;
-        $result = new Payload($agent);
-
-        $stage($result);
-
-        $this->assertSame($expected, $result->getValue('isBot'), sprintf('User agent "%s" failing the crawler test.', $agent));
+        $payload = new Payload('test');
+        $this->assertSame('test', $payload->getAgent());
     }
 
     /**
-     * Simple agents to test the crawler stage.
-     *
-     * @return array
+     * @covers ::getValue()
+     * @covers ::setValue()
+     * @covers ::toArray()
      */
-    public function provideAgents()
+    public function testApi()
     {
-        return [
-            ['NotGoingToMatch', false],
-            ['GoogleBot', true],
-            ['Yahoo Crawler', true],
-        ];
+        $payload = new Payload('test');
+        $payload->setValue('a', 'b');
+
+        $this->assertSame('b', $payload->getValue('a'));
+        $this->assertSame([
+            'a'         => 'b',
+            'userAgent' => 'test',
+        ], $payload->toArray());
+
+        $this->assertNull($payload->getValue('non'));
     }
 }
