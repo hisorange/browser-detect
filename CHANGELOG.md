@@ -1,3 +1,10 @@
+### Changes in 3.1.5
+
+---
+
+* Remove the deferer option to fix an old bug in production.
+
+
 ### Changes in 3.1.4
 
 ---

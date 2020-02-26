@@ -15,7 +15,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function isDeferred()
     {
-        return true;
+        return false;
     }
 
     /**
