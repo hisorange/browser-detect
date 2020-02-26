@@ -91,6 +91,21 @@ The following matrix is has been continuously tested by the great and awesome [T
 
 Since 2013 the package runs tests on every possible PHP / Laravel version matrix.
 
+### Standalone mode, without Laravel!
+
+---
+
+Based on community requests; Now You can use the library without Laravel.
+Just simply use the Parser class as a static object.
+
+```php
+use hisorange\BrowserDetect\Parser as Browser;
+
+if (Browser::isLinux()) {
+    // Works as well!
+}
+```
+
 ### Available API calls
 
 ---

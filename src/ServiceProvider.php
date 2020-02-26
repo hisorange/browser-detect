@@ -66,6 +66,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('browser-detect', Parser::class);
+        $this->app->singleton('browser-detect', function ($app) {
+            return new Parser($app->make('cache'), $app->make('request'));
+        });
     }
 }
