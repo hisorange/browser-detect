@@ -1,9 +1,8 @@
 <?php
-
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\PayloadInterface;
 use hisorange\BrowserDetect\Contracts\StageInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
  * Most reliable mobile and tablet testing stage.

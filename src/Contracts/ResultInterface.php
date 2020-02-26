@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect\Contracts;
 
 use JsonSerializable;

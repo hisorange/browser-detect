@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect\Contracts;
 
 interface PayloadInterface
@@ -39,5 +38,5 @@ interface PayloadInterface
      *
      * @return array
      */
-    public function toArray();
+    public function toArray(): array;
 }

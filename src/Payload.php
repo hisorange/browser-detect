@@ -63,7 +63,7 @@ class Payload implements PayloadInterface
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return array_merge($this->store, [
             'userAgent' => $this->agent,

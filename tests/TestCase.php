@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Facade;

@@ -1,12 +1,12 @@
 <?php
 namespace hisorange\BrowserDetect;
 
+use Illuminate\Http\Request;
+use League\Pipeline\Pipeline;
+use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
-use Illuminate\Cache\CacheManager;
-use Illuminate\Http\Request;
-use League\Pipeline\Pipeline;
 
 /**
  * Manages the parsing mechanism.

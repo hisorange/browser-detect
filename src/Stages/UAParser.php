@@ -1,10 +1,9 @@
 <?php
-
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use hisorange\BrowserDetect\Contracts\StageInterface;
 use UAParser\Parser;
+use hisorange\BrowserDetect\Contracts\StageInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
  * Main parser to get the most of the info about the browser and it's operating system.

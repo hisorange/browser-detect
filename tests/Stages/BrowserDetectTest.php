@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;

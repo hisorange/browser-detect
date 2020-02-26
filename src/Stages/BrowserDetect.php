@@ -1,11 +1,10 @@
 <?php
-
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
 use hisorange\BrowserDetect\Contracts\StageInterface;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
  * BrowserDetect stage to fix mix ups caused by different results.
