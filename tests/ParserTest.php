@@ -3,6 +3,7 @@ namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Class ParserTest
@@ -36,6 +37,26 @@ class ParserTest extends TestCase
     }
 
     /**
+     * @covers ::__construct()
+     */
+    public function testBadCacheProvider()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new Parser("invalid");
+    }
+
+    /**
+     * @covers ::__construct()
+     */
+    public function testBadRequestProvider()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new Parser(null, "invalid");
+    }
+
+    /**
      * @covers ::__callStatic()
      * @covers ::getUserAgentString()
      */
@@ -53,7 +74,16 @@ class ParserTest extends TestCase
     }
 
     /**
+     * @covers ::parse()
+     */
+    public function testStandaloneRuntimeCache()
+    {
+        $this->assertSame(Parser::toArray(), Parser::toArray());
+    }
+
+    /**
      * @covers ::__construct()
+     *
      * @return \hisorange\BrowserDetect\Contracts\ParserInterface
      */
     protected function getParser()
@@ -102,7 +132,7 @@ class ParserTest extends TestCase
      */
     public function testCall()
     {
-        $this->assertNotEmpty($this->getParser()->userAgent());
+        $this->assertEmpty($this->getParser()->userAgent());
     }
 
     /**

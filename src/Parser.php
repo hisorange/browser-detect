@@ -8,6 +8,7 @@ use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
+use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Manages the parsing mechanism.
@@ -39,10 +40,24 @@ class Parser implements ParserInterface
      * @param CacheManager $cache
      * @param Request      $request
      */
-    public function __construct(CacheManager $cache = null, Request $request = null)
+    public function __construct($cache = null, $request = null)
     {
-        $this->cache   = $cache;
-        $this->request = $request;
+        if ($cache !== null) {
+            if ($cache instanceof CacheManager) {
+                $this->cache   = $cache;
+            } else {
+                throw new InvalidArgumentException('Invalid cache manager instance!');
+            }
+        }
+
+        if ($request !== null) {
+            if ($request instanceof Request) {
+                $this->request = $request;
+            } else {
+                throw new InvalidArgumentException('Invalid request instance!');
+            }
+        }
+
         $this->runtime = [];
     }
 
@@ -111,7 +126,7 @@ class Parser implements ParserInterface
         if ($this->request !== null) {
             return $this->request->userAgent();
         } else {
-            return isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+            return isset($_SERVER['HTTP_USER_AGENT']) ? ((string) $_SERVER['HTTP_USER_AGENT']) : '';
         }
     }
 
