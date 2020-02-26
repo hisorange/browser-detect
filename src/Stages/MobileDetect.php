@@ -17,11 +17,7 @@ class MobileDetect implements StageInterface
      */
     public function __invoke(PayloadInterface $payload): PayloadInterface
     {
-        if (class_exists('Mobile_Detect')) {
-            $class = 'Mobile_Detect';
-        } else {
-            $class = 'MobileDetect';
-        }
+        $class = class_exists('Mobile_Detect') ? 'Mobile_Detect' : 'MobileDetect';
 
         /** @var \Mobile_Detect|\MobileDetect $result */
         $result = new $class;
