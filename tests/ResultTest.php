@@ -89,6 +89,7 @@ class ResultTest extends TestCase
      * @covers ::isOpera()
      * @covers ::isSafari()
      * @covers ::isIE()
+     * @covers ::isEdge()
      * @covers ::browserName()
      * @covers ::browserFamily()
      * @covers ::browserVersion()
@@ -203,5 +204,97 @@ class ResultTest extends TestCase
         $keys   = array_keys(json_decode(json_encode($result), true));
 
         $this->assertSame($keys, $this->getKeys());
+    }
+
+    public function testChromeFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), true);
+        $this->assertSame($result->isFirefox(), false);
+        $this->assertSame($result->isOpera(), false);
+        $this->assertSame($result->isSafari(), false);
+        $this->assertSame($result->isIE(), false);
+        $this->assertSame($result->isEdge(), false);
+    }
+
+    public function testFirefoxFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), false);
+        $this->assertSame($result->isFirefox(), true);
+        $this->assertSame($result->isOpera(), false);
+        $this->assertSame($result->isSafari(), false);
+        $this->assertSame($result->isIE(), false);
+        $this->assertSame($result->isEdge(), false);
+    }
+
+    public function testOperaFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Opera/9.80 (Macintosh; Intel Mac OS X 10.14.1) Presto/2.12.388 Version/12.16';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), false);
+        $this->assertSame($result->isFirefox(), false);
+        $this->assertSame($result->isOpera(), true);
+        $this->assertSame($result->isSafari(), false);
+        $this->assertSame($result->isIE(), false);
+        $this->assertSame($result->isEdge(), false);
+    }
+
+    public function testSafariFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), false);
+        $this->assertSame($result->isFirefox(), false);
+        $this->assertSame($result->isOpera(), false);
+        $this->assertSame($result->isSafari(), true);
+        $this->assertSame($result->isIE(), false);
+        $this->assertSame($result->isEdge(), false);
+    }
+
+    public function testIEFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), false);
+        $this->assertSame($result->isFirefox(), false);
+        $this->assertSame($result->isOpera(), false);
+        $this->assertSame($result->isSafari(), false);
+        $this->assertSame($result->isIE(), true);
+        $this->assertSame($result->isEdge(), false);
+    }
+
+    public function testEdgeFamily()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14931';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isChrome(), false);
+        $this->assertSame($result->isFirefox(), false);
+        $this->assertSame($result->isOpera(), false);
+        $this->assertSame($result->isSafari(), false);
+        $this->assertSame($result->isEdge(), true);
+    }
+
+    public function testSamsungBrowser()
+    {
+        $parser = $this->app->make('browser-detect');
+        $agent  = 'Mozilla/5.0 (Linux; Android 9; SAMSUNG SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/10.2 Chrome/71.0.3578.99 Mobile Safari/537.36';
+        $result = $parser->parse($agent);
+
+        $this->assertSame($result->isMobile(), true);
     }
 }
