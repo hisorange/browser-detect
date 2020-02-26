@@ -35,6 +35,13 @@ class Parser implements ParserInterface
     protected $runtime;
 
     /**
+     * Singleton used in standalone mode.
+     *
+     * @var self
+     */
+    protected static $instance;
+
+    /**
      * Parser constructor.
      *
      * @param CacheManager $cache
@@ -95,13 +102,11 @@ class Parser implements ParserInterface
      */
     public static function __callStatic(string $method, array $params)
     {
-        static $instance;
-
-        if (!$instance) {
-            $instance = new static();
+        if (!static::$instance) {
+            static::$instance = new static();
         }
 
-        return call_user_func_array([$instance, $method], $params);
+        return call_user_func_array([static::$instance, $method], $params);
     }
 
     /**
