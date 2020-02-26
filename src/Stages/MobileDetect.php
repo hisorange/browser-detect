@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\Contracts\StageInterface;
@@ -19,8 +20,7 @@ class MobileDetect implements StageInterface
     {
         $class = class_exists('Mobile_Detect') ? 'Mobile_Detect' : 'MobileDetect';
 
-        /** @var \Mobile_Detect|\MobileDetect $result */
-        $result = new $class;
+        $result = new $class();
         $result->setHttpHeaders(['HTTP_FAKE_HEADER' => 'Mobile\Detect\Header']);
         $result->setUserAgent($payload->getAgent());
 

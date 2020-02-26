@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Stages;
 
 use UAParser\Parser;

@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Http\Request;
@@ -50,8 +51,8 @@ class Parser implements ParserInterface
      *
      * @throws \hisorange\BrowserDetect\Exceptions\BadMethodCallException
      *
-     * @param  string $method
-     * @param  array  $params
+     * @param string $method
+     * @param array  $params
      *
      * @return mixed
      */
@@ -85,9 +86,13 @@ class Parser implements ParserInterface
         $key = $this->makeHashKey($agent);
 
         if (! isset($this->runtime[$key])) {
-            $this->runtime[$key] = $this->cache->remember($key, 10080, function () use ($agent) {
-                return $this->process($agent);
-            });
+            $this->runtime[$key] = $this->cache->remember(
+                $key,
+                10080,
+                function () use ($agent) {
+                    return $this->process($agent);
+                }
+            );
         }
 
         return $this->runtime[$key];
@@ -112,13 +117,15 @@ class Parser implements ParserInterface
      */
     protected function process(string $agent): ResultInterface
     {
-        $pipeline = new Pipeline([
-            new Stages\UAParser,
-            new Stages\MobileDetect,
-            new Stages\CrawlerDetect,
-            new Stages\DeviceDetector,
-            new Stages\BrowserDetect,
-        ]);
+        $pipeline = new Pipeline(
+            [
+            new Stages\UAParser(),
+            new Stages\MobileDetect(),
+            new Stages\CrawlerDetect(),
+            new Stages\DeviceDetector(),
+            new Stages\BrowserDetect(),
+            ]
+        );
 
         return $pipeline->process(new Payload($agent));
     }

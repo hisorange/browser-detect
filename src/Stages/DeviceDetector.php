@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\Contracts\StageInterface;
@@ -86,8 +87,8 @@ class DeviceDetector implements StageInterface
     /**
      * Parse semantic version strings into major.minor.patch pieces.
      *
-     * @param string $version
-     * @param string $prefix
+     * @param  string $version
+     * @param  string $prefix
      * @return array
      */
     protected function parseVersion(string $version, string $prefix)

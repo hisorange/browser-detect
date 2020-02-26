@@ -21,6 +21,7 @@ script: vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
 after_success:
   - "if [ $LARAVEL_VERSION = '6.5' ]; then php vendor/bin/coveralls -v; fi"
+  - "if [ $LARAVEL_VERSION = '6.5' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
 
 notifications:
   email:
