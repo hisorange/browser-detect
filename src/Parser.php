@@ -76,13 +76,7 @@ class Parser implements ParserInterface
     public function detect(): ResultInterface
     {
         // Cuts the agent string at 2048 byte, anything longer will be a DoS attack.
-        $userAgentStringRaw = $this->request->server('HTTP_USER_AGENT');
-
-        if (is_string($userAgentStringRaw)) {
-            $userAgentString = substr($userAgentStringRaw, 0, 2048);
-        } else {
-            $userAgentString = 'Unknown';
-        }
+        $userAgentString = substr($this->request->userAgent(), 0, 2048);
 
         return $this->parse($userAgentString);
     }
