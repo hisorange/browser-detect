@@ -30,7 +30,7 @@ interface PayloadInterface
      * Get a value if exists in the data schema,
      * returns null if the key does not exists.
      *
-     * @param sting $key Temporary data key.
+     * @param string $key Temporary data key.
      *
      * @return mixed
      */

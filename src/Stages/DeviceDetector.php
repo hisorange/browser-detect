@@ -34,7 +34,7 @@ class DeviceDetector implements StageInterface
                 'model' => $detector->getModel(),
             ];
 
-            if ($platform !== null) {
+            if ($platform !== null && is_array($platform)) {
                 if (! empty($platform['name'])) {
                     $payload->setValue('platformFamily', $platform['name']);
                 }
@@ -46,7 +46,7 @@ class DeviceDetector implements StageInterface
                 }
             }
 
-            if ($browser !== null) {
+            if ($browser !== null && is_array($browser)) {
                 if (! empty($browser['name'])) {
                     $payload->setValue('browserFamily', $browser['name']);
                 }

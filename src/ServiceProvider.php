@@ -17,8 +17,10 @@ class ServiceProvider extends BaseServiceProvider
      * Register the custom blade directives.
      *
      * @inheritDoc
+     *
+     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerDirectives();
     }
@@ -26,7 +28,7 @@ class ServiceProvider extends BaseServiceProvider
     /**
      * Register the blade directives.
      */
-    protected function registerDirectives()
+    protected function registerDirectives(): void
     {
         Blade::if(
             'desktop',
@@ -62,7 +64,7 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @inheritdoc
      */
-    public function register()
+    public function register(): void
     {
         $this->app->singleton('browser-detect', Parser::class);
     }

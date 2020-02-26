@@ -108,6 +108,6 @@ class BrowserDetect implements StageInterface
      */
     protected function trimVersion(string $version): string
     {
-        return trim(preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
+        return trim((string) preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
     }
 }
