@@ -1,14 +1,9 @@
 <?php
-
 namespace hisorange\BrowserDetect\Stages;
 
+use hisorange\BrowserDetect\Contracts\StageInterface;
 use DeviceDetector\Parser\Device\DeviceParserAbstract;
-use function dump;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
-use function preg_match;
-use function strpos;
-use function ucfirst;
 
 /**
  * Strong browser and platform detector.
@@ -21,7 +16,7 @@ class DeviceDetector implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         // Skipping on bots, the detector is set to ignore bot details.
         if (! $payload->getValue('isBot')) {
@@ -95,7 +90,7 @@ class DeviceDetector implements StageInterface
      * @param string $prefix
      * @return array
      */
-    protected function parseVersion($version, $prefix)
+    protected function parseVersion(string $version, string $prefix)
     {
         $response = [];
 

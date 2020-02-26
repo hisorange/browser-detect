@@ -1,9 +1,7 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Contracts\ParserInterface;
-use hisorange\BrowserDetect\ServiceProvider;
 
 /**
  * Class ServiceProviderTest

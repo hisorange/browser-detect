@@ -1,12 +1,10 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test\Stages;
 
-use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Payload;
-use hisorange\BrowserDetect\Stages\BrowserDetect;
 use hisorange\BrowserDetect\Test\TestCase;
-use function json_encode;
+use hisorange\BrowserDetect\Stages\BrowserDetect;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Test the UAParser stage.

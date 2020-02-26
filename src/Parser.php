@@ -1,12 +1,12 @@
 <?php
 namespace hisorange\BrowserDetect;
 
+use Illuminate\Http\Request;
+use League\Pipeline\Pipeline;
+use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
-use Illuminate\Cache\CacheManager;
-use Illuminate\Http\Request;
-use League\Pipeline\Pipeline;
 
 /**
  * Manages the parsing mechanism.
@@ -55,7 +55,7 @@ class Parser implements ParserInterface
      *
      * @return mixed
      */
-    public function __call($method, $params)
+    public function __call(string $method, array $params)
     {
         $result = $this->detect();
 
@@ -72,7 +72,7 @@ class Parser implements ParserInterface
     /**
      * @inheritdoc
      */
-    public function detect()
+    public function detect(): ResultInterface
     {
         return $this->parse($this->request->server('HTTP_USER_AGENT'));
     }
@@ -80,7 +80,7 @@ class Parser implements ParserInterface
     /**
      * @inheritdoc
      */
-    public function parse($agent)
+    public function parse(string $agent): ResultInterface
     {
         $key = $this->makeHashKey($agent);
 
@@ -99,7 +99,7 @@ class Parser implements ParserInterface
      * @param  string $agent
      * @return string
      */
-    protected function makeHashKey($agent)
+    protected function makeHashKey(string $agent): string
     {
         return 'bd4_' . md5($agent);
     }
@@ -110,7 +110,7 @@ class Parser implements ParserInterface
      * @param  string $agent
      * @return ResultInterface
      */
-    protected function process($agent)
+    protected function process(string $agent): ResultInterface
     {
         $pipeline = new Pipeline([
             new Stages\UAParser,

@@ -1,10 +1,9 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
-use hisorange\BrowserDetect\Stages\UAParser;
 use hisorange\BrowserDetect\Test\TestCase;
+use hisorange\BrowserDetect\Stages\UAParser;
 
 /**
  * Test the UAParser stage.

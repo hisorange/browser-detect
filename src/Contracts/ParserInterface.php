@@ -1,5 +1,4 @@
 <?php
-
 namespace hisorange\BrowserDetect\Contracts;
 
 /**
@@ -14,7 +13,7 @@ interface ParserInterface
      *
      * @return ResultInterface
      */
-    public function detect();
+    public function detect(): ResultInterface;
 
     /**
      * Parse the user agent and provide a result object.
@@ -24,5 +23,5 @@ interface ParserInterface
      * @param   string $agent User agent string.
      * @return  ResultInterface
      */
-    public function parse($agent);
+    public function parse(string $agent): ResultInterface;
 }

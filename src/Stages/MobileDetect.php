@@ -1,9 +1,8 @@
 <?php
-
 namespace hisorange\BrowserDetect\Stages;
 
+use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
-use League\Pipeline\StageInterface;
 
 /**
  * Most reliable mobile and tablet testing stage.
@@ -16,7 +15,7 @@ class MobileDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return PayloadInterface
      */
-    public function __invoke($payload)
+    public function __invoke(PayloadInterface $payload): PayloadInterface
     {
         if (class_exists('Mobile_Detect')) {
             $class = 'Mobile_Detect';
@@ -54,7 +53,7 @@ class MobileDetect implements StageInterface
      *
      * @return string|null
      */
-    protected function filter($result, $choices)
+    protected function filter($result, array $choices): ?string
     {
         foreach ($choices as $key => $regex) {
             if ($result->is($key) and stripos($key, 'generic') === false) {

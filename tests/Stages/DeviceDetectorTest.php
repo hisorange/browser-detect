@@ -1,11 +1,9 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
-use hisorange\BrowserDetect\Stages\DeviceDetector;
 use hisorange\BrowserDetect\Test\TestCase;
-use function var_export;
+use hisorange\BrowserDetect\Stages\DeviceDetector;
 
 /**
  * Test the DeviceDetector stage.

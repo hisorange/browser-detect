@@ -1,10 +1,8 @@
 <?php
-
 namespace hisorange\BrowserDetect\Test;
 
-use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Result;
-use function json_decode;
+use hisorange\BrowserDetect\Contracts\ResultInterface;
 
 /**
  * Class ResultTest
@@ -111,12 +109,35 @@ class ResultTest extends TestCase
     public function testUserAgent()
     {
         $keys   = $this->getKeys();
-        $value  = 'testable';
+        $value  = 'valueType';
         $result = new Result(array_fill_keys($keys, $value));
 
-        foreach ($keys as $key) {
-            $this->assertSame($value, $result->$key());
-        }
+        $this->assertSame($value, $result->userAgent());
+        $this->assertSame(!!$value, $result->isMobile());
+        $this->assertSame(!!$value, $result->isTablet());
+        $this->assertSame(!!$value, $result->isDesktop());
+        $this->assertSame(!!$value, $result->isBot());
+        $this->assertSame(!!$value, $result->isChrome());
+        $this->assertSame(!!$value, $result->isFirefox());
+        $this->assertSame(!!$value, $result->isOpera());
+        $this->assertSame(!!$value, $result->isSafari());
+        $this->assertSame(!!$value, $result->isIE());
+        $this->assertSame($value, $result->browserName());
+        $this->assertSame($value, $result->browserFamily());
+        $this->assertSame($value, $result->browserVersion());
+        $this->assertSame((int) $value, $result->browserVersionMajor());
+        $this->assertSame((int) $value, $result->browserVersionMinor());
+        $this->assertSame((int) $value, $result->browserVersionPatch());
+        $this->assertSame($value, $result->browserEngine());
+        $this->assertSame($value, $result->platformName());
+        $this->assertSame($value, $result->platformFamily());
+        $this->assertSame($value, $result->platformVersion());
+        $this->assertSame((int) $value, $result->platformVersionMajor());
+        $this->assertSame((int) $value, $result->platformVersionMinor());
+        $this->assertSame((int) $value, $result->platformVersionPatch());
+        $this->assertSame($value, $result->deviceFamily());
+        $this->assertSame($value, $result->deviceModel());
+        $this->assertSame($value, $result->mobileGrade());
     }
 
     /**
