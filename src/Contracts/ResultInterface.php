@@ -197,6 +197,34 @@ interface ResultInterface extends JsonSerializable
     public function platformVersionPatch(): int;
 
     /**
+     * Is this a windows operating system?
+     *
+     * @return bool
+     */
+    public function isWindows(): bool;
+
+    /**
+     * Is this a linux operating system?
+     *
+     * @return bool
+     */
+    public function isLinux(): bool;
+
+    /**
+     * Is this a mac operating system?
+     *
+     * @return bool
+     */
+    public function isMac(): bool;
+
+    /**
+     * Is this an android operating system?
+     *
+     * @return bool
+     */
+    public function isAndroid(): bool;
+
+    /**
      * Device's vendor like Samsung, Apple, Huawei.
      *
      * @return string

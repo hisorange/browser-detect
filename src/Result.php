@@ -135,6 +135,26 @@ class Result implements ResultInterface
     protected $platformVersionPatch = 0;
 
     /**
+     * @var bool
+     */
+    protected $isWindows = false;
+
+    /**
+     * @var bool
+     */
+    protected $isLinux = false;
+
+    /**
+     * @var bool
+     */
+    protected $isMac = false;
+
+    /**
+     * @var bool
+     */
+    protected $isAndroid = false;
+
+    /**
      * @var string
      */
     protected $deviceFamily = 'Unknown';
@@ -349,6 +369,38 @@ class Result implements ResultInterface
     public function platformVersionMinor(): int
     {
         return (int) $this->platformVersionMinor;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isWindows(): bool
+    {
+        return $this->isWindows;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isLinux(): bool
+    {
+        return $this->isLinux;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isMac(): bool
+    {
+        return $this->isMac;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isAndroid(): bool
+    {
+        return $this->isAndroid;
     }
 
     /**

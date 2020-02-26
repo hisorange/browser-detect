@@ -96,6 +96,20 @@ class BrowserDetect implements StageInterface
             $payload->getValue('platformVersion')
         ));
 
+        // Popular os vendors.
+        if (false !== stripos($payload->getValue('platformFamily'), 'windows')) {
+            $payload->setValue('isWindows', true);
+        } elseif (false !== stripos($payload->getValue('platformFamily'), 'android')) {
+            $payload->setValue('isAndroid', true);
+        } elseif (
+            false !== stripos($payload->getValue('platformFamily'), 'mac')
+            || false !== stripos($payload->getValue('platformFamily'), 'ios')
+        ) {
+            $payload->setValue('isMac', true);
+        } elseif (false !== stripos($payload->getValue('platformFamily'), 'linux')) {
+            $payload->setValue('isLinux', true);
+        }
+
         return new Result($payload->toArray());
     }
 
