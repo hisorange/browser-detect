@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Contracts;
 
 use JsonSerializable;
@@ -97,8 +98,8 @@ interface ResultInterface extends JsonSerializable
     /**
      * Is this an Internet Explorer X (or lower version).
      *
-     * @param  integer $version
-     * @param  string  $operator
+     * @param integer $version
+     * @param string  $operator
      *
      * @return bool
      */

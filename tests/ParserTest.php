@@ -37,7 +37,7 @@ class ParserTest extends TestCase
 
     /**
      * @dataProvider provideAgents
-     * @param  string $agent
+     * @param string $agent
      * @covers ::parse()
      * @covers ::<protected>key()
      * @covers ::<protected>process()

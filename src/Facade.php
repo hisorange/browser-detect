@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;

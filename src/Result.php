@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect;
 
 use hisorange\BrowserDetect\Contracts\ResultInterface;
@@ -251,7 +252,7 @@ class Result implements ResultInterface
      */
     public function isIEVersion(int $version, string $operator = '='): bool
     {
-        return ($this->isIE && version_compare($this->browserVersion, $version, $operator));
+        return ($this->isIE && version_compare($this->browserVersion, (string) $version, $operator));
     }
 
     /**
@@ -385,7 +386,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

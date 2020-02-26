@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\Result;
@@ -44,9 +45,9 @@ class BrowserDetect implements StageInterface
         } elseif (false !== stripos($payload->getValue('browserFamily'), 'safari')) {
             $payload->setValue('isSafari', true);
         } elseif (
-            false !== stripos($payload->getValue('browserFamily'), 'explorer') ||
-            false !== stripos($payload->getValue('browserFamily'), 'ie') ||
-            false !== stripos($payload->getValue('browserFamily'), 'trident')
+            false !== stripos($payload->getValue('browserFamily'), 'explorer')
+            || false !== stripos($payload->getValue('browserFamily'), 'ie')
+            || false !== stripos($payload->getValue('browserFamily'), 'trident')
         ) {
             $payload->setValue('isIE', true);
         } elseif (false !== stripos($payload->getValue('browserFamily'), 'edge')) {
@@ -54,26 +55,46 @@ class BrowserDetect implements StageInterface
         }
 
         // Human readable browser version.
-        $payload->setValue('browserVersion', $this->trimVersion(
-            implode('.', [
-                $payload->getValue('browserVersionMajor'),
-                $payload->getValue('browserVersionMinor'),
-                $payload->getValue('browserVersionPatch'),
-            ])
-        ));
+        $payload->setValue(
+            'browserVersion',
+            $this->trimVersion(
+                implode(
+                    '.',
+                    [
+                    $payload->getValue('browserVersionMajor'),
+                    $payload->getValue('browserVersionMinor'),
+                    $payload->getValue('browserVersionPatch'),
+                    ]
+                )
+            )
+        );
 
-        $payload->setValue('browserName', trim($payload->getValue('browserFamily') . ' ' . $payload->getValue('browserVersion')));
+        $payload->setValue('browserName', trim(
+            $payload->getValue('browserFamily') .
+            ' ' .
+            $payload->getValue('browserVersion')
+        ));
 
         // Human readable platform version.
-        $payload->setValue('platformVersion', $this->trimVersion(
-            implode('.', [
-                $payload->getValue('platformVersionMajor'),
-                $payload->getValue('platformVersionMinor'),
-                $payload->getValue('platformVersionPatch'),
-            ])
-        ));
+        $payload->setValue(
+            'platformVersion',
+            $this->trimVersion(
+                implode(
+                    '.',
+                    [
+                    $payload->getValue('platformVersionMajor'),
+                    $payload->getValue('platformVersionMinor'),
+                    $payload->getValue('platformVersionPatch'),
+                    ]
+                )
+            )
+        );
 
-        $payload->setValue('platformName', trim($payload->getValue('platformFamily') . ' ' . $payload->getValue('platformVersion')));
+        $payload->setValue('platformName', trim(
+            $payload->getValue('platformFamily') .
+            ' ' .
+            $payload->getValue('platformVersion')
+        ));
 
         return new Result($payload->toArray());
     }
@@ -87,6 +108,6 @@ class BrowserDetect implements StageInterface
      */
     protected function trimVersion(string $version): string
     {
-        return trim(preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
+        return trim((string) preg_replace('%(^0.0.0$|\.0\.0$|\.0$)%', '', $version), '.');
     }
 }

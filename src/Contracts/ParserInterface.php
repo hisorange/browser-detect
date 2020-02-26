@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Contracts;
 
 /**
@@ -20,8 +21,8 @@ interface ParserInterface
      *
      * @example Browser::parse('Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14');
      *
-     * @param   string $agent User agent string.
-     * @return  ResultInterface
+     * @param  string $agent User agent string.
+     * @return ResultInterface
      */
     public function parse(string $agent): ResultInterface;
 }
