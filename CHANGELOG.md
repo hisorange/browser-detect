@@ -1,3 +1,10 @@
+### Changes in 4.2.0
+
+---
+
+- Standalone mode, removed the requirement for Laravel.
+- Support for user configs, also supports the Laravel config manager.
+
 ### Changes in 4.1.0
 
 ---

@@ -1,4 +1,4 @@
-## Browser Detection v4.1 by _[hisorange](https://hisorange.me)_
+## Browser Detection v4.2 by _[hisorange](https://hisorange.me)_
 
 [![Latest Stable Version](https://poser.pugx.org/hisorange/browser-detect/v/stable)](https://packagist.org/packages/hisorange/browser-detect)
 [![Build Status](https://travis-ci.org/hisorange/browser-detect.svg?branch=stable)](https://travis-ci.org/hisorange/browser-detect)
@@ -202,6 +202,17 @@ it uses an inmemory runtime cache for multiple calls in a single page load;
 And it will use the application's cache to persist the result for a week or so,
 this should provide You with a sufficient caching mechanism so the detection will
 cost less than **0.02 millisecond**, this was tested with a 80,000 fake visit.
+
+### Community
+
+---
+
+At the time of this writing, the library is getting closer to be 7 year old. I have implemented
+every user request which was feasable, and running out of ideas for the future. By this statement
+I am declaring this as the last feature release at version 4.2, from now on I will maintain compatibility
+with new Laravel and PHP versions, but not planning to do any new features.
+
+Thank You for your support over the years, and worry not, the library is stable, and has all the features You ever need.
 
 ### Changelog
 
