@@ -8,6 +8,7 @@ use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
+use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Manages the parsing mechanism.
@@ -17,12 +18,12 @@ use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
 class Parser implements ParserInterface
 {
     /**
-     * @var CacheManager
+     * @var CacheManager|null
      */
     protected $cache;
 
     /**
-     * @var Request
+     * @var Request|null
      */
     protected $request;
 
@@ -34,15 +35,49 @@ class Parser implements ParserInterface
     protected $runtime;
 
     /**
+     * Parsing configurations.
+     *
+     * @var array
+     */
+    protected $config;
+
+    /**
+     * Singleton used in standalone mode.
+     *
+     * @var self
+     */
+    protected static $instance;
+
+    /**
      * Parser constructor.
      *
      * @param CacheManager $cache
      * @param Request      $request
+     * @param array        $config
      */
-    public function __construct(CacheManager $cache, Request $request)
+    public function __construct($cache = null, $request = null, array $config = [])
     {
-        $this->cache   = $cache;
-        $this->request = $request;
+        if ($cache !== null) {
+            if ($cache instanceof CacheManager) {
+                $this->cache   = $cache;
+            } else {
+                throw new InvalidArgumentException('Invalid cache manager instance!');
+            }
+        }
+
+        if ($request !== null) {
+            if ($request instanceof Request) {
+                $this->request = $request;
+            } else {
+                throw new InvalidArgumentException('Invalid request instance!');
+            }
+        }
+
+        $this->config = array_merge_recursive(
+            require(__DIR__ . '/../config/browser-detect.php'),
+            $config
+        );
+
         $this->runtime = [];
     }
 
@@ -71,14 +106,50 @@ class Parser implements ParserInterface
     }
 
     /**
+     * Acts as a facade, but proxies all the call to a singleton.
+     *
+     * @param string $method
+     * @param array $params
+     *
+     * @return mixed
+     */
+    public static function __callStatic(string $method, array $params)
+    {
+        if (!static::$instance) {
+            static::$instance = new static();
+        }
+
+        return call_user_func_array([static::$instance, $method], $params);
+    }
+
+    /**
      * @inheritdoc
      */
     public function detect(): ResultInterface
     {
         // Cuts the agent string at 2048 byte, anything longer will be a DoS attack.
-        $userAgentString = substr($this->request->userAgent(), 0, 2048);
+        $userAgentString = substr(
+            $this->getUserAgentString(),
+            0,
+            $this->config['security']['max-header-length']
+        );
 
         return $this->parse($userAgentString);
+    }
+
+    /**
+     * Wrapper around the request accessor, in standalone mode
+     * the fn will use the $_SERVER global.
+     *
+     * @return string
+     */
+    protected function getUserAgentString(): string
+    {
+        if ($this->request !== null) {
+            return $this->request->userAgent();
+        } else {
+            return isset($_SERVER['HTTP_USER_AGENT']) ? ((string) $_SERVER['HTTP_USER_AGENT']) : '';
+        }
     }
 
     /**
@@ -88,14 +159,21 @@ class Parser implements ParserInterface
     {
         $key = $this->makeHashKey($agent);
 
-        if (! isset($this->runtime[$key])) {
-            $this->runtime[$key] = $this->cache->remember(
-                $key,
-                10080,
-                function () use ($agent) {
-                    return $this->process($agent);
-                }
-            );
+        if (!isset($this->runtime[$key])) {
+            // In standalone mode You can run the parser without cache.
+            if ($this->cache !== null) {
+                $result = $this->cache->remember(
+                    $key,
+                    $this->config['cache']['interval'],
+                    function () use ($agent) {
+                        return $this->process($agent);
+                    }
+                );
+            } else {
+                $result = $this->process($agent);
+            }
+
+            $this->runtime[$key] = $result;
         }
 
         return $this->runtime[$key];
@@ -109,7 +187,7 @@ class Parser implements ParserInterface
      */
     protected function makeHashKey(string $agent): string
     {
-        return 'bd4_' . md5($agent);
+        return $this->config['cache']['prefix'] . md5($agent);
     }
 
     /**

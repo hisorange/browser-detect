@@ -23,6 +23,10 @@ class ServiceProvider extends BaseServiceProvider
     public function boot(): void
     {
         $this->registerDirectives();
+
+        $this->publishes([
+            __DIR__ . '/../config/browser-detect.php' => config_path('browser-detect.php'),
+        ]);
     }
 
     /**
@@ -66,6 +70,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('browser-detect', Parser::class);
+        $this->app->singleton('browser-detect', function ($app) {
+            return new Parser($app->make('cache'), $app->make('request'), $app->make('config')['browser-detect'] ?? []);
+        });
     }
 }

@@ -1,7 +1,9 @@
 <?php
 namespace hisorange\BrowserDetect\Test;
 
+use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Class ParserTest
@@ -28,6 +30,61 @@ class ParserTest extends TestCase
 
     /**
      * @covers ::__construct()
+     * @covers ::parse()
+     */
+    public function testStandaloneConstruct()
+    {
+        $this->assertInstanceOf(ResultInterface::class, (new Parser())->parse('test'));
+    }
+
+    /**
+     * @covers ::__construct()
+     */
+    public function testBadCacheProvider()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new Parser("invalid");
+    }
+
+    /**
+     * @covers ::__construct()
+     */
+    public function testBadRequestProvider()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new Parser(null, "invalid");
+    }
+
+    /**
+     * @covers ::__callStatic()
+     * @covers ::getUserAgentString()
+     */
+    public function testStandaloneFacade()
+    {
+        $this->assertSame(Parser::isMobile(), false);
+    }
+
+    /**
+     * Check if the results are the same.
+     */
+    public function testStandaloneResult()
+    {
+        $this->assertSame(Parser::toArray(), $this->getParser()->parse('')->toArray());
+    }
+
+    /**
+     * @covers ::parse()
+     */
+    public function testStandaloneRuntimeCache()
+    {
+        $this->assertSame(Parser::toArray(), Parser::toArray());
+    }
+
+    /**
+     * @covers ::__construct()
+     *
      * @return \hisorange\BrowserDetect\Contracts\ParserInterface
      */
     protected function getParser()
