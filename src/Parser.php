@@ -35,6 +35,13 @@ class Parser implements ParserInterface
     protected $runtime;
 
     /**
+     * Parsing configurations.
+     *
+     * @var array
+     */
+    protected $config;
+
+    /**
      * Singleton used in standalone mode.
      *
      * @var self
@@ -46,8 +53,9 @@ class Parser implements ParserInterface
      *
      * @param CacheManager $cache
      * @param Request      $request
+     * @param array        $config
      */
-    public function __construct($cache = null, $request = null)
+    public function __construct($cache = null, $request = null, array $config = [])
     {
         if ($cache !== null) {
             if ($cache instanceof CacheManager) {
@@ -64,6 +72,11 @@ class Parser implements ParserInterface
                 throw new InvalidArgumentException('Invalid request instance!');
             }
         }
+
+        $this->config = array_merge_recursive(
+            require(__DIR__ . '/../config/browser-detect.php'),
+            $config
+        );
 
         $this->runtime = [];
     }
@@ -115,7 +128,11 @@ class Parser implements ParserInterface
     public function detect(): ResultInterface
     {
         // Cuts the agent string at 2048 byte, anything longer will be a DoS attack.
-        $userAgentString = substr($this->getUserAgentString(), 0, 2048);
+        $userAgentString = substr(
+            $this->getUserAgentString(),
+            0,
+            $this->config['security']['max-header-length']
+        );
 
         return $this->parse($userAgentString);
     }
@@ -147,7 +164,7 @@ class Parser implements ParserInterface
             if ($this->cache !== null) {
                 $result = $this->cache->remember(
                     $key,
-                    10080,
+                    $this->config['cache']['interval'],
                     function () use ($agent) {
                         return $this->process($agent);
                     }
@@ -170,7 +187,7 @@ class Parser implements ParserInterface
      */
     protected function makeHashKey(string $agent): string
     {
-        return 'bd4_' . md5($agent);
+        return $this->config['cache']['prefix'] . md5($agent);
     }
 
     /**

@@ -153,6 +153,34 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 | Browser::isIEVersion()                  | Compares to a given IE version                                          |  _(boolean)_  |
 | Browser::isEdge()                       | Is this a microsoft edge browser.                                       |  _(boolean)_  |
 
+### Configuration, personalization
+
+---
+
+If You are using Laravel then after installation run the following command:
+
+```sh
+// Will copy a config file to ~/app/config/browser-detect.php
+php artisan vendor:publish
+```
+
+For standalone mode to apply Your custom configuration:
+
+```php
+use hisorange\BrowserDetect\Parser;
+
+$browser = new Parser(null, null, [
+    'cache' => [
+        'interval' => 86400 // This will overide the default configuration.
+    ]
+]);
+
+$result = $browser->detect();
+```
+
+Since the package aims to be easy to use, there is not much to configure.
+But You can customize the cache and security values.
+
 ### Advanced Usage Information
 
 ---
