@@ -146,7 +146,7 @@ class Parser implements ParserInterface
     protected function getUserAgentString(): string
     {
         if ($this->request !== null) {
-            return $this->request->userAgent();
+            return $this->request->userAgent() ?? '';
         } else {
             return isset($_SERVER['HTTP_USER_AGENT']) ? ((string) $_SERVER['HTTP_USER_AGENT']) : '';
         }
