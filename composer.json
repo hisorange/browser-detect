@@ -23,9 +23,9 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0",
+    "php": "^7.1",
     "ua-parser/uap-php": "~3.9",
-    "league/pipeline": "~0.1",
+    "league/pipeline": "^1.0",
     "mobiledetect/mobiledetectlib": "~2.8",
     "jaybizzle/crawler-detect": "~1.2",
     "piwik/device-detector": "~3.0"
