@@ -24,9 +24,15 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->registerDirectives();
 
-        $this->publishes([
-            __DIR__ . '/../config/browser-detect.php' => config_path('browser-detect.php'),
-        ]);
+        $source = realpath($raw = __DIR__ . '/../config/browser-detect.php') ?: $raw;
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                $source => config_path('browser-detect.php'),
+            ]);
+        }
+
+        $this->mergeConfigFrom($source, 'browser-detect');
     }
 
     /**
