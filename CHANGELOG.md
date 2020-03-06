@@ -2,12 +2,18 @@
 
 ---
 
-- Fix bug with config merging
+- Fix bug with config merging.
 - Support for Laravel 7.0
-- Update many dependency to have compatibility on all Laravel version
-- New config accessor to read and test the config injection
-- Tests for the config merging
-- Use composer scripts for easier local testing
+- Update many dependency to have compatibility on all Laravel version.
+- New config accessor to read and test the config injection.
+- Tests for the config merging.
+- Use composer scripts for easier local testing.
+
+### Changes in 4.2.1
+
+---
+
+- Fix unhandled null type in user agent string accessor.
 
 ### Changes in 4.2.0
 
