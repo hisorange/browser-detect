@@ -73,9 +73,22 @@ class Parser implements ParserInterface
             }
         }
 
-        $this->config = $config;
+        $this->config = array_replace_recursive(
+            require(__DIR__ . '/../config/browser-detect.php'),
+            $config
+        );
 
         $this->runtime = [];
+    }
+
+    /**
+     * Read the applied final config.
+     *
+     * @return array
+     */
+    public function config(): array
+    {
+        return $this->config;
     }
 
     /**

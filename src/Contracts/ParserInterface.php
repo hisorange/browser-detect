@@ -25,4 +25,11 @@ interface ParserInterface
      * @return ResultInterface
      */
     public function parse(string $agent): ResultInterface;
+
+    /**
+     * Read the final config for the instance.
+     *
+     * @return array
+     */
+    public function config(): array;
 }

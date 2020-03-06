@@ -29,6 +29,21 @@ class ParserTest extends TestCase
     }
 
     /**
+     * @covers ::config()
+     */
+    public function testConfigMerge()
+    {
+        $i = new Parser(null, null, [
+            'cache' => [
+                'interval' => 42
+            ]
+        ]);
+
+        $this->assertSame($i->config()['cache']['interval'], 42);
+        $this->assertSame($i->config()['cache']['prefix'], 'bd4_');
+    }
+
+    /**
      * @covers ::__construct()
      * @covers ::parse()
      */

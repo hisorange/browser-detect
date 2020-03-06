@@ -88,6 +88,7 @@ The following matrix is has been continuously tested by the great and awesome [T
 | Laravel 4.x |      &#10003;      |      &#10003;      |         -          |         -          |
 | Laravel 5.x |         -          |      &#10003;      |      &#10003;      |         -          |
 | Laravel 6.x |         -          |         -          |         -          |      &#10003;      |
+| Laravel 7.x |         -          |         -          |         -          |      &#10003;      |
 | Standalone  |         -          |         -          |         -          |        4.2+        |
 
 Since 2013 the package runs tests on every possible PHP / Laravel version matrix.

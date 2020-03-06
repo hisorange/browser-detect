@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="false"
-         bootstrap="./vendor/autoload.php"
-         strict="true"
-         verbose="true"
-         colors="true"
->
+<phpunit backupGlobals="false" bootstrap="./vendor/autoload.php" verbose="true" colors="true">
     <testsuite name="Browser Detect PHPUnit Tests">
         <directory suffix="Test.php">./tests</directory>
         <exclude>./tests/_fixture</exclude>
