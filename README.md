@@ -140,7 +140,7 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 | Browser::isWindows()                    | Is this a windows operating system.                                     |  _(boolean)_  |
 | Browser::isLinux()                      | Is this a linux based operating system.                                 |  _(boolean)_  |
 | Browser::isMac()                        | Is this an iOS or Mac based operating system.                           |  _(boolean)_  |
-| Browser::isAndorid()                    | Is this an Andorid operating system.                                    |  _(boolean)_  |
+| Browser::isAndroid()                    | Is this an Android operating system.                                    |  _(boolean)_  |
 | **Device related functions**            |                                                                         |               |
 | Browser::deviceFamily()                 | Device's vendor like Samsung, Apple, Huawei.                            |  _(string)_   |
 | Browser::deviceModel()                  | Device's brand name like iPad, iPhone, Nexus.                           |  _(string)_   |
