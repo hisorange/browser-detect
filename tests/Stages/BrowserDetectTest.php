@@ -1,10 +1,13 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
 use hisorange\BrowserDetect\Test\TestCase;
 use hisorange\BrowserDetect\Stages\BrowserDetect;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
+use PHPUnit\Framework\ExpectationFailedException;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Test the UAParser stage.
@@ -41,6 +44,27 @@ class BrowserDetectTest extends TestCase
         foreach ($expectations as $key => $expected) {
             $this->assertSame($expected, $result->$key(), sprintf('Key %s not matching when %s', $key, print_r($scenario, true)));
         }
+    }
+
+    /**
+     * Check for inApp browsers.
+     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
+    public function testInApp()
+    {
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36');
+        $result = $stage($payload);
+        $this->assertTrue($result->isInApp());
+
+
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Mozilla/5.0 AppleWebKit/537.36');
+        $result = $stage($payload);
+        $this->assertFalse($result->isInApp());
     }
 
     /**

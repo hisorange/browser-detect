@@ -96,6 +96,13 @@ interface ResultInterface extends JsonSerializable
     public function isIE(): bool;
 
     /**
+     * Is this browser an android in app browser?
+     *
+     * @return bool
+     */
+    public function isInApp(): bool;
+
+    /**
      * Is this an Internet Explorer X (or lower version).
      *
      * @param integer $version

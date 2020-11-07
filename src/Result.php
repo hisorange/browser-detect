@@ -65,6 +65,11 @@ class Result implements ResultInterface
     protected $isEdge = false;
 
     /**
+     * @var boolean
+     */
+    protected $isInApp = false;
+
+    /**
      * @var bool
      */
     protected $isIE = false;
@@ -257,6 +262,14 @@ class Result implements ResultInterface
     public function isEdge(): bool
     {
         return $this->isEdge;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isInApp(): bool
+    {
+        return $this->isInApp;
     }
 
     /**

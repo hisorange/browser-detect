@@ -47,6 +47,7 @@ class ResultTest extends TestCase
             'isOpera'              => false,
             'isSafari'             => false,
             'isEdge'               => false,
+            'isInApp'              => false,
             'isIE'                 => false,
             'browserName'          => 'Unknown',
             'browserFamily'        => 'Unknown',
@@ -93,6 +94,7 @@ class ResultTest extends TestCase
      * @covers ::isOpera()
      * @covers ::isSafari()
      * @covers ::isIE()
+     * @covers ::isInApp()
      * @covers ::isEdge()
      * @covers ::browserName()
      * @covers ::browserFamily()
@@ -131,6 +133,7 @@ class ResultTest extends TestCase
         $this->assertSame(!!$value, $result->isOpera());
         $this->assertSame(!!$value, $result->isSafari());
         $this->assertSame(!!$value, $result->isIE());
+        $this->assertSame(!!$value, $result->isInApp());
         $this->assertSame($value, $result->browserName());
         $this->assertSame($value, $result->browserFamily());
         $this->assertSame($value, $result->browserVersion());
@@ -169,6 +172,7 @@ class ResultTest extends TestCase
             'isOpera',
             'isSafari',
             'isEdge',
+            'isInApp',
             'isIE',
             'browserName',
             'browserFamily',
