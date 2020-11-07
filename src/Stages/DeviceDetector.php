@@ -3,7 +3,7 @@
 namespace hisorange\BrowserDetect\Stages;
 
 use hisorange\BrowserDetect\Contracts\StageInterface;
-use DeviceDetector\Parser\Device\DeviceParserAbstract;
+use DeviceDetector\Parser\Device\AbstractDeviceParser;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
@@ -73,7 +73,7 @@ class DeviceDetector implements StageInterface
             }
 
             if (! empty($device['brand'])) {
-                $payload->setValue('deviceFamily', DeviceParserAbstract::getFullName($device['brand']));
+                $payload->setValue('deviceFamily', AbstractDeviceParser::getFullName($device['brand']));
             }
 
             if (! empty($device['model'])) {
