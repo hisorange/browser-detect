@@ -1,4 +1,4 @@
-## Browser Detection v4.2 by _[hisorange](https://hisorange.me)_
+## Browser Detection v4.3 by _[hisorange](https://hisorange.me)_
 
 [![Latest Stable Version](https://poser.pugx.org/hisorange/browser-detect/v/stable)](https://packagist.org/packages/hisorange/browser-detect)
 [![Build Status](https://travis-ci.org/hisorange/browser-detect.svg?branch=stable)](https://travis-ci.org/hisorange/browser-detect)
@@ -130,8 +130,8 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 | Browser::browserVersionPatch()          | Browser's [semantic](https://semver.org/) patch version.                |  _(integer)_  |
 | Browser::browserEngine()                | Browser's engine like: Blink, WebKit, Gecko.                            |  _(string)_   |
 | **Operating system related functions**  |                                                                         |               |
-| Browser::platformName()                 | Operating system's human friendly name like Windows XP, Mac 10.       |  _(string)_   |
-| Browser::platformFamily()               | Operating system's vendor like Linux, Windows, Mac.                   |  _(string)_   |
+| Browser::platformName()                 | Operating system's human friendly name like Windows XP, Mac 10.         |  _(string)_   |
+| Browser::platformFamily()               | Operating system's vendor like Linux, Windows, Mac.                     |  _(string)_   |
 | Browser::platformVersion()              | Operating system's human friendly version like XP, Vista, 10.           |  _(integer)_  |
 | Browser::platformVersionMajor()         | Operating system's [semantic](https://semver.org/) major version.       |  _(integer)_  |
 | Browser::platformVersionMinor()         | Operating system's [semantic](https://semver.org/) minor version.       |  _(integer)_  |
@@ -153,6 +153,8 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 | Browser::isIE()                         | Checks if the browser is an some kind of Internet Explorer (or Trident) |  _(boolean)_  |
 | Browser::isIEVersion()                  | Compares to a given IE version                                          |  _(boolean)_  |
 | Browser::isEdge()                       | Is this a microsoft edge browser.                                       |  _(boolean)_  |
+| **Miscellaneous**                       |                                                                         |               |
+| Browser::isInApp()                      | Check for browsers rendered inside applications like android webview.   |  _(boolean)_  |
 
 ### Configuration, personalization
 

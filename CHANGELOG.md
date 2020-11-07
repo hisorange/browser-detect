@@ -1,3 +1,11 @@
+### Changes in 4.3.0
+
+---
+
+- Replaced the archived piwik/device-detector with the matomo/device-detector (by @matthewnessworthy)
+- Merged some readme changes
+- New micro feature **isInApp** check on the browser #156
+
 ### Changes in 4.2.2
 
 ---

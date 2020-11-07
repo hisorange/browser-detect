@@ -110,7 +110,20 @@ class BrowserDetect implements StageInterface
             $payload->setValue('isLinux', true);
         }
 
+        # Request: https://github.com/hisorange/browser-detect/issues/156
+        $payload->setValue('isInApp', $this->detectIsInApp($payload));
+
         return new Result($payload->toArray());
+    }
+
+    /**
+     * Code snippet based on https://github.com/f2etw/detect-inapp/blob/master/src/inapp.js#L38-L47
+     *
+     * @param PayloadInterface $payload
+     * @return bool
+     */
+    protected function detectIsInApp(PayloadInterface $payload): bool {
+        return preg_match('%(WebView|(iPhone|iPod|iPad)(?!.*Safari\/)|Android.*(wv|\.0\.0\.0))%', $payload->getAgent());
     }
 
     /**
