@@ -12,6 +12,19 @@ env:
   - LARAVEL_VERSION=7.0
   - LARAVEL_VERSION=8.0
 
+matrix:
+  exclude:
+    - php: 8.0
+      env: LARAVEL_VERSION=6.2
+    - php: 8.0
+      env: LARAVEL_VERSION=6.3
+    - php: 8.0
+      env: LARAVEL_VERSION=6.4
+    - php: 8.0
+      env: LARAVEL_VERSION=6.5
+    - php: 8.0
+      env: LARAVEL_VERSION=7.0
+
 before_install:
   - composer self-update >/dev/null 2>&1
   - composer require laravel/framework:${LARAVEL_VERSION} --no-update
