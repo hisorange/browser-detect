@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     strategy:
+      fail-fast: true
       matrix:
         php-version: [7.3]
         laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0, 8.0]
