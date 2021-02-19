@@ -1,4 +1,4 @@
-name: Test
+name: Test php7
 
 on: push
 
@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: [7.3, 8.0]
+        php-version: [7.3]
         laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0, 8.0]
 
     steps:
@@ -36,6 +36,6 @@ jobs:
 
       - name: Analyze/phpcs/Coveralls
         run: |
-          "if [ $LARAVEL_VERSION = '7.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
-          "if [ $LARAVEL_VERSION = '7.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
-          "if [ $LARAVEL_VERSION = '7.0' ]; then php vendor/bin/coveralls -v; fi"
+          "if [ $LARAVEL_VERSION = '8.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
+          "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
+          "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/coveralls -v; fi"
