@@ -1,0 +1,41 @@
+name: Test
+
+on: push
+
+jobs:
+  matrix-build:
+    # Ubuntu latest will be ubuntu-20.04 which doesn't support php 7.3
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        php-version: [7.3, 8.0]
+        laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Composer update
+        run: composer self-update >/dev/null 2>&1
+
+      - name: Laravel install
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: compose require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Vendor update
+        run: composer update --prefer-source --no-interaction
+
+      - name: Run test suite
+        run: composer run-script test
+
+      - name: Analyze/phpcs/Coveralls
+        run: |
+          "if [ $LARAVEL_VERSION = '7.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
+          "if [ $LARAVEL_VERSION = '7.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
+          "if [ $LARAVEL_VERSION = '7.0' ]; then php vendor/bin/coveralls -v; fi"
