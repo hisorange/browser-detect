@@ -9,7 +9,8 @@ jobs:
     strategy:
       matrix:
         php-version: [8.0]
-        laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0, 8.0]
+        # these versions supports php8 in their composer.json
+        laravel-version: [6.19, 7.29, 8.3, 8.4, 8.5]
 
     steps:
       - uses: actions/checkout@v2
