@@ -26,7 +26,7 @@ jobs:
       - name: Laravel install
         env:
           LARAVEL_VERSION: ${{ matrix.laravel-version }}
-        run: compose require laravel/framework:${{ matrix.laravel-version }} --no-update
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
 
       - name: Vendor update
         run: composer update --prefer-source --no-interaction
