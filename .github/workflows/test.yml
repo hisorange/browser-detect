@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         php-version: [7.3, 8.0]
-        laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0]
+        laravel-version: [6.2, 6.3, 6.4, 6.5, 7.0, 8.0]
 
     steps:
       - uses: actions/checkout@v2
