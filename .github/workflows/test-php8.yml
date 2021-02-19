@@ -11,7 +11,7 @@ jobs:
       matrix:
         php-version: [8.0]
         # these versions supports php8 in their composer.json
-        laravel-version: [6.19, 7.29, 8.3, 8.4, 8.5]
+        laravel-version: [6.19, 6.20, 7.29, 7.30, 8.4, 8.5]
 
     steps:
       - uses: actions/checkout@v2
@@ -34,9 +34,8 @@ jobs:
 
       - name: Run test suite
         run: composer run-script test
-
-      - name: Analyze/phpcs/Coveralls
-        run: |
-          "if [ $LARAVEL_VERSION = '8.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
-          "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
-          "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/coveralls -v; fi"
+      # - name: Analyze/phpcs/Coveralls
+      #   run: |
+      #     "if [ $LARAVEL_VERSION = '8.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
+      #     "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
+      #     "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/coveralls -v; fi"
