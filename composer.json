@@ -22,6 +22,12 @@
       "email": "hello@hisorange.me"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/mustangostang/spyc"
+    }
+  ],
   "require": {
     "php": "^7.2 || ^8.0",
     "ua-parser/uap-php": "~3.9",
