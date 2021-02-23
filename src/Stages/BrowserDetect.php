@@ -122,8 +122,12 @@ class BrowserDetect implements StageInterface
      * @param PayloadInterface $payload
      * @return bool
      */
-    protected function detectIsInApp(PayloadInterface $payload): bool {
-        return preg_match('%(WebView|(iPhone|iPod|iPad)(?!.*Safari\/)|Android.*(wv|\.0\.0\.0))%', $payload->getAgent());
+    protected function detectIsInApp(PayloadInterface $payload): bool
+    {
+        return (bool) preg_match(
+            '%(WebView|(iPhone|iPod|iPad)(?!.*Safari\/)|Android.*(wv|\.0\.0\.0))%',
+            $payload->getAgent()
+        );
     }
 
     /**
