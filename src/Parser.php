@@ -58,19 +58,11 @@ class Parser implements ParserInterface
     public function __construct($cache = null, $request = null, array $config = [])
     {
         if ($cache !== null) {
-            if ($cache instanceof CacheManager) {
-                $this->cache   = $cache;
-            } else {
-                throw new InvalidArgumentException('Invalid cache manager instance!');
-            }
+            $this->cache   = $cache;
         }
 
         if ($request !== null) {
-            if ($request instanceof Request) {
-                $this->request = $request;
-            } else {
-                throw new InvalidArgumentException('Invalid request instance!');
-            }
+            $this->request = $request;
         }
 
         $this->config = array_replace_recursive(
