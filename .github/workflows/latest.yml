@@ -23,21 +23,18 @@ jobs:
       - name: Composer update
         run: composer self-update >/dev/null 2>&1
 
-      - name: Get Composer Cache Directory
+      - name: Get composer cache directory
         id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
       
-      - name: Cache composer dependencies
+      - name: Cache dependencies
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Lock laravel/framework version
-        if: steps.composer-cache.outputs.cache-hit != 'true'
         env:
           LARAVEL_VERSION: ${{ matrix.laravel-version }}
         run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
@@ -56,4 +53,4 @@ jobs:
         run: php vendor/bin/phpcs --standard=PSR12 ./src/
 
       - name: Coveralls
-        run: php vendor/bin/coveralls -v
+        run: php vendor/bin/php-coveralls -v
