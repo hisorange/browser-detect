@@ -15,7 +15,7 @@ use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
  *
  * @package hisorange\BrowserDetect
  */
-class Parser implements ParserInterface
+final class Parser implements ParserInterface
 {
     /**
      * @var CacheManager|null
