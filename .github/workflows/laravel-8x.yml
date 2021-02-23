@@ -1,0 +1,150 @@
+name: Laravel8
+
+on: workflow_dispatch
+
+jobs:
+  php7:
+    runs-on: ubuntu-18.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [7.3, 7.4]
+        laravel-version:
+          [
+            8.0,
+            8.1,
+            8.2,
+            8.3,
+            8.4,
+            8.5,
+            8.6,
+            8.7,
+            8.8,
+            8.9,
+            8.10.0,
+            8.11,
+            8.12,
+            8.13,
+            8.14,
+            8.15,
+            8.16,
+            8.17,
+            8.18,
+            8.19,
+            8.20.1,
+            8.21,
+            8.22,
+            8.23,
+            8.24,
+            8.25,
+            8.26,
+            8.27,
+            8.28,
+          ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Composer update
+        run: composer self-update >/dev/null 2>&1
+
+      - name: Lock laravel/framework version
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Vendor update
+        run: composer update --prefer-source --no-interaction
+
+      - name: Run test suites
+        run: composer run-script test
+
+      - name: Analyze
+        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
+
+      - name: phpcs
+        run: php vendor/bin/phpcs --standard=PSR12 ./src/
+
+  php8:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [8.0]
+        laravel-version:
+          [
+            8.12,
+            8.13,
+            8.14,
+            8.15,
+            8.16,
+            8.17,
+            8.18,
+            8.19,
+            8.20.1,
+            8.21,
+            8.22,
+            8.23,
+            8.24,
+            8.25,
+            8.26,
+            8.27,
+            8.28,
+          ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Composer update
+        run: composer self-update >/dev/null 2>&1
+
+      - name: Lock laravel/framework version
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Vendor update
+        run: composer update --prefer-source --no-interaction
+
+      - name: Run test suites
+        run: composer run-script test
+
+      - name: Analyze
+        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
+
+      - name: phpcs
+        run: php vendor/bin/phpcs --standard=PSR12 ./src/
