@@ -208,7 +208,7 @@ class Parser implements ParserInterface
      */
     protected function process(string $agent): ResultInterface
     {
-        return (new Pipeline)
+        return (new Pipeline())
             ->pipe(new Stages\UAParser())
             ->pipe(new Stages\MobileDetect())
             ->pipe(new Stages\CrawlerDetect())
