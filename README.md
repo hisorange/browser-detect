@@ -1,7 +1,7 @@
-## Browser Detection v4.3 by _[hisorange](https://hisorange.me)_
+## Browser Detection v4.4 by _[hisorange](https://hisorange.me)_
 
 [![Latest Stable Version](https://poser.pugx.org/hisorange/browser-detect/v/stable)](https://packagist.org/packages/hisorange/browser-detect)
-[![Build Status](https://travis-ci.org/hisorange/browser-detect.svg?branch=stable)](https://travis-ci.org/hisorange/browser-detect)
+[![Build](https://github.com/hisorange/browser-detect/actions/workflows/latest.yml/badge.svg?branch=stable)](https://github.com/hisorange/browser-detect/actions/workflows/latest.yml)
 [![Coverage Status](https://coveralls.io/repos/github/hisorange/browser-detect/badge.svg)](https://coveralls.io/github/hisorange/browser-detect)
 [![Total Downloads](https://poser.pugx.org/hisorange/browser-detect/downloads)](https://packagist.org/packages/hisorange/browser-detect)
 [![License](https://poser.pugx.org/hisorange/browser-detect/license)](https://packagist.org/packages/hisorange/browser-detect)
@@ -81,7 +81,7 @@ Easy peasy, ain't it?
 
 ---
 
-The following matrix is has been continuously tested by the great and awesome [Travis CI](https://travis-ci.org/hisorange)!
+The following matrix is has been continuously tested by the great and awesome **Github Actions**!
 
 |    -----    | Browser Detect 1.x | Browser Detect 2.x | Browser Detect 3.x | Browser Detect 4.x |
 | :---------: | :----------------: | :----------------: | :----------------: | :----------------: |
@@ -89,7 +89,7 @@ The following matrix is has been continuously tested by the great and awesome [T
 | Laravel 5.x |         -          |      &#10003;      |      &#10003;      |         -          |
 | Laravel 6.x |         -          |         -          |         -          |      &#10003;      |
 | Laravel 7.x |         -          |         -          |         -          |      &#10003;      |
-| Laravel 8.x |         -          |         -          |         -          |      &#10003;      |
+| Laravel 8.x |         -          |         -          |         -          |        4.4+        |
 | Standalone  |         -          |         -          |         -          |        4.2+        |
 
 Since 2013 the package runs tests on every possible PHP / Laravel version matrix.
@@ -217,6 +217,10 @@ I am declaring this as the last feature release at version 4.2, from now on I wi
 with new Laravel and PHP versions, but not planning to do any new features.
 
 Thank You for your support over the years, and worry not, the library is stable, and has all the features You ever need.
+
+~ Update on this :D
+
+No major features are added in the past months, but with the help of [Raymund Ács](https://github.com/PoOwAa) we are patching and continuing the support for micro features and version ports.
 
 ### Changelog
 

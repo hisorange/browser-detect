@@ -1,3 +1,12 @@
+### Changes in 4.4.0
+
+---
+
+- Support for Laravel 8.x
+- Support for PHP 8.x
+- New github actions tests to cover an even bigger test matrix
+- Fixes some PHPStan testing issue
+
 ### Changes in 4.3.0
 
 ---
