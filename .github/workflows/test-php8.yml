@@ -1,6 +1,7 @@
-name: Test php8
+name: PHP8
 
-on: push
+# Manual run
+on: workflow_dispatch
 
 jobs:
   matrix-build:

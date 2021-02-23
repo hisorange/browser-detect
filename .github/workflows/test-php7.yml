@@ -1,6 +1,7 @@
-name: Test php7
+name: PHP7
 
-on: push
+# Manual run
+on: workflow_dispatch
 
 jobs:
   matrix-build:
