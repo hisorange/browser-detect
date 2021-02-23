@@ -1,6 +1,7 @@
 name: Latest
 
-on: push
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
 
 jobs:
   matrix-build:
@@ -54,5 +55,5 @@ jobs:
 
       - name: Coveralls
         env:
-            COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: php vendor/bin/php-coveralls -v
