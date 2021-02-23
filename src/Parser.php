@@ -99,6 +99,7 @@ final class Parser implements ParserInterface
 
         // Reflect a method.
         if (method_exists($result, $method)) {
+            /* @phpstan-ignore-next-line */
             return call_user_func_array([$result, $method], $params);
         }
 
@@ -121,6 +122,7 @@ final class Parser implements ParserInterface
             static::$instance = new static();
         }
 
+        /* @phpstan-ignore-next-line */
         return call_user_func_array([static::$instance, $method], $params);
     }
 
