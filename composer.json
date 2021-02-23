@@ -22,8 +22,14 @@
       "email": "hello@hisorange.me"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/mustangostang/spyc"
+    }
+  ],
   "require": {
-    "php": ">=7.2 || >=8.0",
+    "php": "^7.2 || ^8.0",
     "ua-parser/uap-php": "~3.9",
     "league/pipeline": "^1.0",
     "mobiledetect/mobiledetectlib": "~2.8",

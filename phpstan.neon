@@ -5,4 +5,3 @@ parameters:
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
     - '%Call to an undefined method Illuminate\\\Cache\\\CacheManager::remember\(\).%'
-    - '%Parameter #1 \$function of function call_user_func_array expects callable\(\)\: mixed, array\(hisorange\\BrowserDetect\\Contracts\\ResultInterface, string\) given\.%'
