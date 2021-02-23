@@ -23,16 +23,6 @@ jobs:
       - name: Composer update
         run: composer self-update >/dev/null 2>&1
 
-      - name: Lock laravel/framework version
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        env:
-          LARAVEL_VERSION: ${{ matrix.laravel-version }}
-        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
-
-      - name: Vendor update
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer update --prefer-source --no-interaction
-
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
@@ -42,9 +32,19 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
+      - name: Lock laravel/framework version
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Vendor update
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer update --prefer-source --no-interaction
 
       - name: Run test suites
         run: composer run-script test
