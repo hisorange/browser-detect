@@ -44,7 +44,7 @@ class Parser implements ParserInterface
     /**
      * Singleton used in standalone mode.
      *
-     * @var self
+     * @var self|null
      */
     protected static $instance;
 
