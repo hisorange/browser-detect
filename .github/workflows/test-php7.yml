@@ -69,10 +69,11 @@ jobs:
       - name: Vendor update
         run: composer update --prefer-source --no-interaction
 
-      - name: Run test suite
+      - name: Run test suites
         run: composer run-script test
-      # - name: Analyze/phpcs/Coveralls
-      #   run: |
-      #     "if [ $LARAVEL_VERSION = '8.0' ]; then vendor/bin/phpstan analyse -c phpstan.neon ./src/; fi"
-      #     "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/phpcs --standard=PSR12 ./src/; fi"
-      #     "if [ $LARAVEL_VERSION = '8.0' ]; then php vendor/bin/coveralls -v; fi"
+
+      - name: Analyze
+        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
+      
+      - name: phpcs
+        run: php vendor/bin/phpcs --standard=PSR12 ./src/
