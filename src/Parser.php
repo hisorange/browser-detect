@@ -15,7 +15,7 @@ use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
  *
  * @package hisorange\BrowserDetect
  */
-class Parser implements ParserInterface
+final class Parser implements ParserInterface
 {
     /**
      * @var CacheManager|null
@@ -44,7 +44,7 @@ class Parser implements ParserInterface
     /**
      * Singleton used in standalone mode.
      *
-     * @var self
+     * @var self|null
      */
     protected static $instance;
 
@@ -58,19 +58,11 @@ class Parser implements ParserInterface
     public function __construct($cache = null, $request = null, array $config = [])
     {
         if ($cache !== null) {
-            if ($cache instanceof CacheManager) {
-                $this->cache   = $cache;
-            } else {
-                throw new InvalidArgumentException('Invalid cache manager instance!');
-            }
+            $this->cache   = $cache;
         }
 
         if ($request !== null) {
-            if ($request instanceof Request) {
-                $this->request = $request;
-            } else {
-                throw new InvalidArgumentException('Invalid request instance!');
-            }
+            $this->request = $request;
         }
 
         $this->config = array_replace_recursive(
@@ -107,6 +99,7 @@ class Parser implements ParserInterface
 
         // Reflect a method.
         if (method_exists($result, $method)) {
+            /* @phpstan-ignore-next-line */
             return call_user_func_array([$result, $method], $params);
         }
 
@@ -129,6 +122,7 @@ class Parser implements ParserInterface
             static::$instance = new static();
         }
 
+        /* @phpstan-ignore-next-line */
         return call_user_func_array([static::$instance, $method], $params);
     }
 
@@ -208,7 +202,7 @@ class Parser implements ParserInterface
      */
     protected function process(string $agent): ResultInterface
     {
-        return (new Pipeline)
+        return (new Pipeline())
             ->pipe(new Stages\UAParser())
             ->pipe(new Stages\MobileDetect())
             ->pipe(new Stages\CrawlerDetect())

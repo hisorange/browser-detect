@@ -53,26 +53,6 @@ class ParserTest extends TestCase
     }
 
     /**
-     * @covers ::__construct()
-     */
-    public function testBadCacheProvider()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new Parser("invalid");
-    }
-
-    /**
-     * @covers ::__construct()
-     */
-    public function testBadRequestProvider()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        new Parser(null, "invalid");
-    }
-
-    /**
      * @covers ::__callStatic()
      * @covers ::getUserAgentString()
      */

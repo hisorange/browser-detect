@@ -1,0 +1,59 @@
+name: Latest
+
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+jobs:
+  matrix-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version: [7.4, 8.0]
+        laravel-version: [8.28]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Composer update
+        run: composer self-update >/dev/null 2>&1
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Lock laravel/framework version
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Vendor update
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer update --prefer-source --no-interaction
+
+      - name: Run test suites
+        run: composer run-script test
+
+      - name: Analyze
+        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
+      
+      - name: phpcs
+        run: php vendor/bin/phpcs --standard=PSR12 ./src/
+
+      - name: Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: php vendor/bin/php-coveralls -v
