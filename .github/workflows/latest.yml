@@ -53,4 +53,8 @@ jobs:
         run: php vendor/bin/phpcs --standard=PSR12 ./src/
 
       - name: Coveralls
+        env:
+            GITHUB_RUN_ID: ${{ github.run_id }}
+            GITHUB_EVENT_NAME: ${{ github.event_name }}
+            COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: php vendor/bin/php-coveralls -v
