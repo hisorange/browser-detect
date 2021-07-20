@@ -1,3 +1,4 @@
+![Browser Detection Logo](https://user-images.githubusercontent.com/3441017/126362397-d9767164-4f44-4d41-a3cd-b669e10e95dc.png)
 ## Browser Detection v4.4 by _[hisorange](https://hisorange.me)_
 
 [![Latest Stable Version](https://poser.pugx.org/hisorange/browser-detect/v/stable)](https://packagist.org/packages/hisorange/browser-detect)
