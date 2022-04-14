@@ -1,3 +1,9 @@
+### Change in 4.5.0
+
+---
+
+- New shortcut call for deviceType (by @mylesduncanking)
+
 ### Changes in 4.4.0
 
 ---
