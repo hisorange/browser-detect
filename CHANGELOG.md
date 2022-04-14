@@ -3,6 +3,8 @@
 ---
 
 - New shortcut call for deviceType (by @mylesduncanking)
+- Testing on PHP 8.1
+- Testing with Laravel 9.x
 
 ### Changes in 4.4.0
 
