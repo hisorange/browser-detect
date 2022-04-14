@@ -40,11 +40,6 @@ class Result implements ResultInterface
     protected $isBot = false;
 
     /**
-     * @var string
-     */
-    protected $deviceType = '';
-
-    /**
      * @var bool
      */
     protected $isChrome = false;
