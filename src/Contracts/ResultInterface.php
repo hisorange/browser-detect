@@ -47,6 +47,13 @@ interface ResultInterface extends JsonSerializable
     public function isDesktop(): bool;
 
     /**
+     * What type of device is this: Mobile, Tablet, Desktop, Bot
+     *
+     * @return string
+     */
+    public function deviceType(): string;
+
+    /**
      * Is this a crawler / bot.
      *
      * @return bool

@@ -40,6 +40,11 @@ class Result implements ResultInterface
     protected $isBot = false;
 
     /**
+     * @var string
+     */
+    protected $deviceType = '';
+
+    /**
      * @var bool
      */
     protected $isChrome = false;
@@ -222,6 +227,19 @@ class Result implements ResultInterface
     public function isBot(): bool
     {
         return $this->isBot;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function deviceType(): string
+    {
+        foreach (['Mobile', 'Tablet', 'Desktop', 'Bot'] as $deviceType) {
+            if ($this->{'is' . $deviceType}()) {
+                return $deviceType;
+            }
+        }
+        return 'Unknown';
     }
 
     /**
