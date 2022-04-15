@@ -11,7 +11,8 @@
     "user agent",
     "mobile",
     "tablet",
-    "analyize",
+    "analyse",
+    "php",
     "hisorange"
   ],
   "homepage": "https://github.com/hisorange/browser-detect",
