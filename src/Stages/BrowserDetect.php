@@ -36,21 +36,21 @@ class BrowserDetect implements StageInterface
         }
 
         // Popular browser vendors.
-        if (false !== stripos($payload->getValue('browserFamily'), 'chrom')) {
+        if (false !== stripos($payload->getValue('browserFamily') ?? '', 'chrom')) {
             $payload->setValue('isChrome', true);
-        } elseif (false !== stripos($payload->getValue('browserFamily'), 'firefox')) {
+        } elseif (false !== stripos($payload->getValue('browserFamily') ?? '', 'firefox')) {
             $payload->setValue('isFirefox', true);
-        } elseif (false !== stripos($payload->getValue('browserFamily'), 'opera')) {
+        } elseif (false !== stripos($payload->getValue('browserFamily') ?? '', 'opera')) {
             $payload->setValue('isOpera', true);
-        } elseif (false !== stripos($payload->getValue('browserFamily'), 'safari')) {
+        } elseif (false !== stripos($payload->getValue('browserFamily') ?? '', 'safari')) {
             $payload->setValue('isSafari', true);
         } elseif (
-            false !== stripos($payload->getValue('browserFamily'), 'explorer')
-            || false !== stripos($payload->getValue('browserFamily'), 'ie')
-            || false !== stripos($payload->getValue('browserFamily'), 'trident')
+            false !== stripos($payload->getValue('browserFamily') ?? '', 'explorer')
+            || false !== stripos($payload->getValue('browserFamily') ?? '', 'ie')
+            || false !== stripos($payload->getValue('browserFamily') ?? '', 'trident')
         ) {
             $payload->setValue('isIE', true);
-        } elseif (false !== stripos($payload->getValue('browserFamily'), 'edge')) {
+        } elseif (false !== stripos($payload->getValue('browserFamily') ?? '', 'edge')) {
             $payload->setValue('isEdge', true);
         }
 
@@ -97,16 +97,16 @@ class BrowserDetect implements StageInterface
         ));
 
         // Popular os vendors.
-        if (false !== stripos($payload->getValue('platformFamily'), 'windows')) {
+        if (false !== stripos($payload->getValue('platformFamily') ?? '', 'windows')) {
             $payload->setValue('isWindows', true);
-        } elseif (false !== stripos($payload->getValue('platformFamily'), 'android')) {
+        } elseif (false !== stripos($payload->getValue('platformFamily') ?? '', 'android')) {
             $payload->setValue('isAndroid', true);
         } elseif (
-            false !== stripos($payload->getValue('platformFamily'), 'mac')
-            || false !== stripos($payload->getValue('platformFamily'), 'ios')
+            false !== stripos($payload->getValue('platformFamily') ?? '', 'mac')
+            || false !== stripos($payload->getValue('platformFamily') ?? '', 'ios')
         ) {
             $payload->setValue('isMac', true);
-        } elseif (false !== stripos($payload->getValue('platformFamily'), 'linux')) {
+        } elseif (false !== stripos($payload->getValue('platformFamily') ?? '', 'linux')) {
             $payload->setValue('isLinux', true);
         }
 
