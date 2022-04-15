@@ -1,35 +1,10 @@
 <?php
 require_once '../vendor/autoload.php';
 
-use Illuminate\Http\Request;
-use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Parser;
-use Illuminate\Container\Container;
-use Illuminate\Filesystem\Filesystem;
 
-// Create a service container
-$container = new Container;
-
-$container['config'] = [
-    'cache.default' => 'file',
-    'cache.stores.file' => [
-        'driver' => 'file',
-        'path' => __DIR__ . '/cache'
-    ]
-];
-
-$container['files'] = new Filesystem;
-
-// Create the CacheManager
-$cacheManager = new CacheManager($container);
-
-// Create a request from server variables, and bind it to the container; optional
-$request = Request::capture();
-$container->instance('Illuminate\Http\Request', $request);
-
-$detector = new Parser($cacheManager, $request);
-
-$agentString = $_GET['user-agent'] ?? $request->server('HTTP_USER_AGENT');
+$detector = new Parser(null, null);
+$agentString = $_GET['agent'] ?? $_SERVER['HTTP_USER_AGENT'];
 
 $result = $detector->parse($agentString);
 
