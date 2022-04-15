@@ -8,7 +8,6 @@ use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
-use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Manages the parsing mechanism.
