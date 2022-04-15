@@ -191,7 +191,7 @@ $commons = [
         <tbody>
           <?php foreach ($segment['elements'] as $e) { ?>
             <tr>
-              <td class="border border-gray-300 px-4 w-1/4 font-bold">
+              <td class="border border-gray-300 px-4 w-1/3 lg:w-1/4 font-bold">
                 <h3><?php echo $e[0] ?>:</h3>
               </td>
               <td class="border border-gray-300 px-4"><?php
@@ -207,7 +207,7 @@ $commons = [
                                                           break;
                                                       }
                                                       ?></td>
-              <td class="border border-gray-300 text-right w-1/4 py-1"><code class="text-gray-600 bg-gray-200 rounded rounded-md py-1 px-2 font-mono m-1 text-sm">Browser::<?php echo $e[1] ?>()</code></td>
+              <td class="border border-gray-300 text-right w-1/4 py-1 hidden lg:table-cell"><code class="text-gray-600 bg-gray-200 rounded rounded-md py-1 px-2 font-mono m-1 text-sm">Browser::<?php echo $e[1] ?>()</code></td>
             </tr>
           <?php } ?>
         </tbody>
