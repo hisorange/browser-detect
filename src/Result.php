@@ -229,7 +229,7 @@ class Result implements ResultInterface
      */
     public function deviceType(): string
     {
-        foreach (['Mobile', 'Tablet', 'Desktop', 'Bot'] as $deviceType) {
+        foreach (['Mobile', 'Tablet', 'Bot', 'Desktop'] as $deviceType) {
             if ($this->{'is' . $deviceType}()) {
                 return $deviceType;
             }
