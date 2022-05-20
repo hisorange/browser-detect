@@ -44,7 +44,10 @@ class BrowserDetect implements StageInterface
         }
 
         // Prerender mobile bot checker
-        if (stripos($payload->getValue('userAgent'), 'Prerender') !== false && stripos($payload->getValue('userAgent'), 'Android') !== false) {
+        if (
+            stripos($payload->getValue('userAgent'), 'Prerender') !== false &&
+            stripos($payload->getValue('userAgent'), 'Android') !== false
+        ) {
             $payload->setValue('isBot', true);
             $payload->setValue('isMobile', true);
             $payload->setValue('isTable', false);
