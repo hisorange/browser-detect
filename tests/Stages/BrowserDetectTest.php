@@ -75,7 +75,8 @@ class BrowserDetectTest extends TestCase
         $stage  = new BrowserDetect;
         $payload = new Payload('Unknown');
 
-        $payload->setValue('userAgent', 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
+        $payload->setValue('userAgent', 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko)' .
+            'Chrome/W.X.Y.Z Mobile Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
         $result = $stage($payload);
 
         $this->assertTrue($result->isBot());
@@ -94,7 +95,8 @@ class BrowserDetectTest extends TestCase
     public function testInApp()
     {
         $stage  = new BrowserDetect;
-        $payload = new Payload('Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36');
+        $payload = new Payload('Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) ' .
+            'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36');
         $result = $stage($payload);
         $this->assertTrue($result->isInApp());
 
