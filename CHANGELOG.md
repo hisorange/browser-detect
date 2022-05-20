@@ -1,3 +1,9 @@
+### Change in 4.5.1
+
+---
+
+- Added Prerender as bot
+
 ### Change in 4.5.0
 
 ---

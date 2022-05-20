@@ -47,6 +47,44 @@ class BrowserDetectTest extends TestCase
     }
 
     /**
+     * Check if the Prerender agents are recognized as desktop bot
+     *
+     * @return void
+     */
+    public function testPrerenderBot()
+    {
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Unknown');
+
+        $payload->setValue('userAgent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/W.X.Y.Z Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
+        $result = $stage($payload);
+
+        $this->assertTrue($result->isBot());
+        $this->assertFalse($result->isMobile());
+        $this->assertFalse($result->isTablet());
+        $this->assertTrue($result->isDesktop());
+    }
+
+    /**
+     * Check if the Prerender agents are recognized as desktop bot
+     *
+     * @return void
+     */
+    public function testPrerenderMobileBot()
+    {
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Unknown');
+
+        $payload->setValue('userAgent', 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/W.X.Y.Z Mobile Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
+        $result = $stage($payload);
+
+        $this->assertTrue($result->isBot());
+        $this->assertTrue($result->isMobile());
+        $this->assertFalse($result->isTablet());
+        $this->assertFalse($result->isDesktop());
+    }
+
+    /**
      * Check for inApp browsers.
      *
      * @return void

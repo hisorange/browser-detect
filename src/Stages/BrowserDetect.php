@@ -21,7 +21,7 @@ class BrowserDetect implements StageInterface
     public function __invoke(PayloadInterface $payload): ResultInterface
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
-        if (! $payload->getValue('isMobile') && ! $payload->getValue('isTablet')) {
+        if (!$payload->getValue('isMobile') && !$payload->getValue('isTablet')) {
             $payload->setValue('isMobile', false);
             $payload->setValue('isTablet', false);
             $payload->setValue('isDesktop', true);
@@ -32,6 +32,22 @@ class BrowserDetect implements StageInterface
         } else {
             $payload->setValue('isMobile', true);
             $payload->setValue('isTablet', false);
+            $payload->setValue('isDesktop', false);
+        }
+
+        // Prerender desktop bot checker
+        if (strpos($payload->getValue('userAgent'), 'Prerender') !== false) {
+            $payload->setValue('isBot', true);
+            $payload->setValue('isMobile', false);
+            $payload->setValue('isTable', false);
+            $payload->setValue('isDesktop', true);
+        }
+
+        // Prerender mobile bot checker
+        if (stripos($payload->getValue('userAgent'), 'Prerender') !== false && stripos($payload->getValue('userAgent'), 'Android') !== false) {
+            $payload->setValue('isBot', true);
+            $payload->setValue('isMobile', true);
+            $payload->setValue('isTable', false);
             $payload->setValue('isDesktop', false);
         }
 
@@ -61,9 +77,9 @@ class BrowserDetect implements StageInterface
                 implode(
                     '.',
                     [
-                    $payload->getValue('browserVersionMajor'),
-                    $payload->getValue('browserVersionMinor'),
-                    $payload->getValue('browserVersionPatch'),
+                        $payload->getValue('browserVersionMajor'),
+                        $payload->getValue('browserVersionMinor'),
+                        $payload->getValue('browserVersionPatch'),
                     ]
                 )
             )
@@ -71,8 +87,8 @@ class BrowserDetect implements StageInterface
 
         $payload->setValue('browserName', trim(
             $payload->getValue('browserFamily') .
-            ' ' .
-            $payload->getValue('browserVersion')
+                ' ' .
+                $payload->getValue('browserVersion')
         ));
 
         // Human readable platform version.
@@ -82,9 +98,9 @@ class BrowserDetect implements StageInterface
                 implode(
                     '.',
                     [
-                    $payload->getValue('platformVersionMajor'),
-                    $payload->getValue('platformVersionMinor'),
-                    $payload->getValue('platformVersionPatch'),
+                        $payload->getValue('platformVersionMajor'),
+                        $payload->getValue('platformVersionMinor'),
+                        $payload->getValue('platformVersionPatch'),
                     ]
                 )
             )
@@ -92,8 +108,8 @@ class BrowserDetect implements StageInterface
 
         $payload->setValue('platformName', trim(
             $payload->getValue('platformFamily') .
-            ' ' .
-            $payload->getValue('platformVersion')
+                ' ' .
+                $payload->getValue('platformVersion')
         ));
 
         // Popular os vendors.
