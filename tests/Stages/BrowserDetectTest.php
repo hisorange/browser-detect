@@ -84,25 +84,62 @@ class BrowserDetectTest extends TestCase
     }
 
     /**
-     * Check for inApp browsers.
+     * Check for WebView inApp browsers.
      *
      * @return void
      * @throws ExpectationFailedException
      * @throws InvalidArgumentException
      */
-    public function testInApp()
+    public function testInAppWebView()
     {
         $stage  = new BrowserDetect;
-        $payload = new Payload('Mozilla/5.0 (Linux; Android 4.4; Nexus 5 Build/_BuildID_) ' .
-            'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/30.0.0.0 Mobile Safari/537.36');
+        $payload = new Payload('WebView');
         $result = $stage($payload);
         $this->assertTrue($result->isInApp());
 
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) ' .
+            'AppleWebKit/602.1.32 (KHTML, like Gecko) Mobile/14A403 Twitter for iPhone');
+        $result = $stage($payload);
+        $this->assertTrue($result->isInApp());
 
         $stage  = new BrowserDetect;
-        $payload = new Payload('Mozilla/5.0 AppleWebKit/537.36');
+        $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) ' .
+            'AppleWebKit/602.2.14 (KHTML, like Gecko) Mobile/14B100 MicroMessenger/6.3.30 NetType/WIFI Language/en');
         $result = $stage($payload);
-        $this->assertFalse($result->isInApp());
+        $this->assertTrue($result->isInApp());
+    }
+
+    /**
+     * Check for Apple inApp browsers.
+     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
+    public function testInAppApple()
+    {
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_5 like Mac OS X) ' .
+            'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13G36');
+        $result = $stage($payload);
+        $this->assertTrue($result->isInApp());
+    }
+
+    /**
+     * Check for Andorid inApp browsers.
+     *
+     * @return void
+     * @throws ExpectationFailedException
+     * @throws InvalidArgumentException
+     */
+    public function testInAppAndroid()
+    {
+        $stage  = new BrowserDetect;
+        $payload = new Payload('Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) ' .
+            'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36');
+        $result = $stage($payload);
+        $this->assertTrue($result->isInApp());
     }
 
     /**
