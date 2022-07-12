@@ -54,9 +54,8 @@ class BrowserDetectTest extends TestCase
     public function testPrerenderBot()
     {
         $stage  = new BrowserDetect;
-        $payload = new Payload('Unknown');
+        $payload = new Payload('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/W.X.Y.Z Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
 
-        $payload->setValue('userAgent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/W.X.Y.Z Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
         $result = $stage($payload);
 
         $this->assertTrue($result->isBot());
@@ -73,10 +72,9 @@ class BrowserDetectTest extends TestCase
     public function testPrerenderMobileBot()
     {
         $stage  = new BrowserDetect;
-        $payload = new Payload('Unknown');
-
-        $payload->setValue('userAgent', 'Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko)' .
+        $payload = new Payload('Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko)' .
             'Chrome/W.X.Y.Z Mobile Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
+
         $result = $stage($payload);
 
         $this->assertTrue($result->isBot());
