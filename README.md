@@ -46,7 +46,7 @@ if (Browser::isFirefox() || Browser::isOpera()) {
     $response .= '<script src="firefox-fix.js"></script>';
 }
 
-// Sometime You may want to serve different content based on the OS.
+// Sometimes You may want to serve different content based on the OS.
 if (Browser::isAndroid()) {
     $response .= '<a>Install our Android App!</a>';
 } elseif (Browser::isMac() && Browser::isMobile()) {
@@ -83,7 +83,7 @@ Easy peasy, ain't it?
 
 ---
 
-The following matrix is has been continuously tested by the great and awesome **Github Actions**!
+The following matrix is has been continuously tested by the great and awesome **GitHub Actions**!
 
 |    -----    | Browser Detect 1.x | Browser Detect 2.x | Browser Detect 3.x | Browser Detect 4.x |
 | :---------: | :----------------: | :----------------: | :----------------: | :----------------: |
@@ -179,7 +179,7 @@ use hisorange\BrowserDetect\Parser;
 
 $browser = new Parser(null, null, [
     'cache' => [
-        'interval' => 86400 // This will overide the default configuration.
+        'interval' => 86400 // This will override the default configuration.
     ]
 ]);
 
@@ -195,28 +195,28 @@ But You can customize the cache and security values.
 
 The code is designed to be an easy to use style,
 so every call You make on the **Browser** facade will access the result object and get the data for You,
-but You can parse agents other then the current user's.
+but You can parse agents other than the current user's.
 
 ```php
 // When You call the detect function You will get a result object, from the current user's agent.
 $result = Browser::detect();
 
-// If You wana get browser details from a user agent other then the current user call the parse function.
+// If You wanna get browser details from a user agent other than the current user call the parse function.
 $result = Browser::parse('Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14');
 ```
 
 Worthy notion! The parser only parsing each user agent string once and then caches it,
-it uses an inmemory runtime cache for multiple calls in a single page load;
+it uses an in-memory runtime cache for multiple calls in a single page load;
 And it will use the application's cache to persist the result for a week or so,
 this should provide You with a sufficient caching mechanism so the detection will
-cost less than **0.02 millisecond**, this was tested with a 80,000 fake visit.
+cost less than **0.02 millisecond**, this was tested with an 80,000 fake visit.
 
 ### Community
 
 ---
 
-At the time of this writing, the library is getting closer to be 7 year old. I have implemented
-every user request which was feasable, and running out of ideas for the future. By this statement
+At the time of this writing, the library is getting closer to be 7 years old. I have implemented
+every user request which was feasible, and running out of ideas for the future. By this statement
 I am declaring this as the last feature release at version 4.2, from now on I will maintain compatibility
 with new Laravel and PHP versions, but not planning to do any new features.
 
