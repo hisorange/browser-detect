@@ -11,7 +11,7 @@ jobs:
       fail-fast: true
       matrix:
         php-version: [8.1]
-        laravel-version: [9.8.1]
+        laravel-version: [9.39.0]
 
     steps:
       - uses: actions/checkout@v2
