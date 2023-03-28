@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
@@ -40,7 +41,7 @@ class UAParserTest extends TestCase
      *
      * @return array
      */
-    public function provideAgent()
+    public static function provideAgent()
     {
         return [
             [

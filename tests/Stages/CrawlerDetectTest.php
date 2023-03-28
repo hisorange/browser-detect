@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
@@ -36,7 +37,7 @@ class CrawlerDetectTest extends TestCase
      *
      * @return array
      */
-    public function provideAgents()
+    public static function provideAgents()
     {
         return [
             ['NotGoingToMatch', false],

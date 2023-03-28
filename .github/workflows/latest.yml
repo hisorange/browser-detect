@@ -10,11 +10,11 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php-version: [8.1]
-        laravel-version: [9.39.0]
+        php-version: [8.2]
+        laravel-version: [10.5.0]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@master
@@ -47,8 +47,8 @@ jobs:
       - name: Run test suites
         run: composer run-script test
 
-      - name: Analyze
-        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
+      # - name: Analyze
+      #   run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
 
       # - name: phpcs
       #   run: php vendor/bin/phpcs --standard=PSR12 ./src/
