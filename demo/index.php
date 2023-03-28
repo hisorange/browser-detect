@@ -66,7 +66,6 @@ $details = [
     'elements' => [
       ['Device Family', 'deviceFamily', 'string'],
       ['Device Model', 'deviceModel', 'string'],
-      ['Mobile Grade', 'mobileGrade', 'string'],
     ]
   ],
   [

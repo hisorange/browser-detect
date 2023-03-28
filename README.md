@@ -149,7 +149,6 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 | **Device related functions**            |                                                                         |               |
 | Browser::deviceFamily()                 | Device's vendor like Samsung, Apple, Huawei.                            |  _(string)_   |
 | Browser::deviceModel()                  | Device's brand name like iPad, iPhone, Nexus.                           |  _(string)_   |
-| Browser::mobileGrade()                  | Device's mobile grade in scale of A,B,C for performance.                |  _(string)_   |
 | **Browser vendor related functions**    |                                                                         |               |
 | Browser::isChrome()                     | Is this a chrome browser.                                               |  _(boolean)_  |
 | Browser::isFirefox()                    | Is this a firefox browser.                                              |  _(boolean)_  |

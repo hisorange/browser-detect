@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  * @method static string deviceFamily()
  * @method static string deviceModel()
  * @method static string deviceType()
- * @method static string mobileGrade()
  * @method static string platformName()
  * @method static string platformVersion()
  * @method static string userAgent()

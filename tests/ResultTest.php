@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test;
 
 use hisorange\BrowserDetect\Result;
@@ -68,7 +69,6 @@ class ResultTest extends TestCase
             'isAndroid'            => false,
             'deviceFamily'         => 'Unknown',
             'deviceModel'          => '',
-            'mobileGrade'          => '',
         ];
 
         $this->assertSame($expected, $actual);
@@ -115,7 +115,6 @@ class ResultTest extends TestCase
      * @covers ::isAndroid()
      * @covers ::deviceFamily()
      * @covers ::deviceModel()
-     * @covers ::mobileGrade()
      */
     public function testUserAgent()
     {
@@ -153,7 +152,6 @@ class ResultTest extends TestCase
         $this->assertSame(!!$value, $result->isAndroid());
         $this->assertSame($value, $result->deviceFamily());
         $this->assertSame($value, $result->deviceModel());
-        $this->assertSame($value, $result->mobileGrade());
     }
 
     /**
@@ -193,7 +191,6 @@ class ResultTest extends TestCase
             'isAndroid',
             'deviceFamily',
             'deviceModel',
-            'mobileGrade',
         ];
     }
 

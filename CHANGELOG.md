@@ -1,3 +1,11 @@
+### Changes in 5.0.0
+
+---
+
+- Support for Laravel 10.x
+- Upgrade to MobileDetect 3.x
+- Remove the outdated "mobileGrade" feature
+
 ### Changes in 4.5.2
 
 ---
