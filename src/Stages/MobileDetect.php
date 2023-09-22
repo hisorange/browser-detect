@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use Mobile_Detect;
+use Detection\MobileDetect as Mobile_Detect;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
@@ -26,11 +26,9 @@ class MobileDetect implements StageInterface
         // Need to test for tablet first, because most of the tablet are mobile too.
         if ($result->isTablet()) {
             $payload->setValue('isTablet', true);
-            $payload->setValue('mobileGrade', (string) $result->mobileGrade());
             $payload->setValue('deviceModel', (string) $this->filter($result, Mobile_Detect::getTabletDevices()));
         } elseif ($result->isMobile()) {
             $payload->setValue('isMobile', true);
-            $payload->setValue('mobileGrade', (string) $result->mobileGrade());
             $payload->setValue('deviceModel', (string) $this->filter($result, Mobile_Detect::getPhoneDevices()));
         }
 

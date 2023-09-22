@@ -147,7 +147,7 @@ class BrowserDetectTest extends TestCase
      *
      * @return array
      */
-    public function provideScenarios()
+    public static function provideScenarios()
     {
         return [
             [

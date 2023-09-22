@@ -170,11 +170,6 @@ class Result implements ResultInterface
     protected $deviceModel = '';
 
     /**
-     * @var string
-     */
-    protected $mobileGrade = '';
-
-    /**
      * @inheritdoc
      */
     public function __construct(array $result)
@@ -451,14 +446,6 @@ class Result implements ResultInterface
     public function deviceModel(): string
     {
         return $this->deviceModel;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function mobileGrade(): string
-    {
-        return $this->mobileGrade;
     }
 
     /**

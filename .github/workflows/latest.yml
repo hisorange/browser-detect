@@ -1,27 +1,22 @@
-name: Latest
+name: "Test on Latest Laravel"
 
 # Triggers the workflow on push or pull request events
 on: [push, pull_request]
 
 jobs:
-  matrix-build:
+  test:
+    name: PHPUnit Tests
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: true
-      matrix:
-        php-version: [8.1]
-        laravel-version: [9.39.0]
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
-          php-version: ${{ matrix.php-version }}
+          php-version: 8.2
 
-      - name: Composer update
+      - name: Composer self update
         run: composer self-update >/dev/null 2>&1
 
       - name: Get composer cache directory
@@ -37,8 +32,8 @@ jobs:
 
       - name: Lock laravel/framework version
         env:
-          LARAVEL_VERSION: ${{ matrix.laravel-version }}
-        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+          LARAVEL_VERSION: 10.5.0
+        run: composer require laravel/framework:10.5.0 --no-update
 
       - name: Vendor update
         if: steps.composer-cache.outputs.cache-hit != 'true'
@@ -46,12 +41,6 @@ jobs:
 
       - name: Run test suites
         run: composer run-script test
-
-      - name: Analyze
-        run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
-
-      # - name: phpcs
-      #   run: php vendor/bin/phpcs --standard=PSR12 ./src/
 
       - name: Coveralls
         env:

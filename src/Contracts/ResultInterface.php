@@ -253,13 +253,6 @@ interface ResultInterface extends JsonSerializable
     public function deviceModel(): string;
 
     /**
-     * Device's mobile grade in scale of A,B,C for performance.
-     *
-     * @return string
-     */
-    public function mobileGrade(): string;
-
-    /**
      * Export the result's data into an array.
      *
      * @return array

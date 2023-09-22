@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test;
 
 use Illuminate\Support\Facades\Blade;
@@ -14,7 +15,7 @@ class BladeTest extends TestCase
     /**
      * @return array
      */
-    public function directiveProvider()
+    public static function directiveProvider()
     {
         return [['mobile'], ['desktop'], ['tablet']];
     }
@@ -22,7 +23,7 @@ class BladeTest extends TestCase
     /**
      * @dataProvider directiveProvider
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testDirectives($directive)
     {
@@ -35,7 +36,7 @@ class BladeTest extends TestCase
     /**
      * @return array
      */
-    public function directiveValuedProvider()
+    public static function directiveValuedProvider()
     {
         return [['mobile', false], ['desktop', true], ['tablet', false]];
     }
@@ -43,7 +44,7 @@ class BladeTest extends TestCase
     /**
      * @dataProvider directiveValuedProvider
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testCheckingDirectives($directive, $expected)
     {
@@ -52,7 +53,7 @@ class BladeTest extends TestCase
 
     /**
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testBrowserDirectiveResult()
     {
@@ -61,7 +62,7 @@ class BladeTest extends TestCase
     }
 
     /**
-     * @covers ::<protected>registerDirectives()
+     * @covers ::registerDirectives()
      */
     public function testBrowserDirective()
     {

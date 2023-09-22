@@ -1,4 +1,5 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test\Stages;
 
 use hisorange\BrowserDetect\Payload;
@@ -17,7 +18,7 @@ class DeviceDetectorTest extends TestCase
      * @dataProvider provideAgents
      *
      * @covers ::__invoke()
-     * @covers ::<protected>parseVersion()
+     * @covers ::parseVersion()
      *
      * @param string $agent
      * @param array  $changes
@@ -39,7 +40,7 @@ class DeviceDetectorTest extends TestCase
      *
      * @return array
      */
-    public function provideAgents()
+    public static function provideAgents()
     {
         return [
 

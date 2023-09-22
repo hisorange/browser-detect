@@ -1,9 +1,10 @@
 <?php
+
 namespace hisorange\BrowserDetect\Test;
 
+use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Parser;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
-use hisorange\BrowserDetect\Exceptions\InvalidArgumentException;
 
 /**
  * Class ParserTest
@@ -14,8 +15,8 @@ class ParserTest extends TestCase
 {
     /**
      * @covers ::detect()
-     * @covers ::<protected>key()
-     * @covers ::<protected>process()
+     * @covers ::makeHashKey()
+     * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
      */
@@ -82,7 +83,7 @@ class ParserTest extends TestCase
      *
      * @return \hisorange\BrowserDetect\Contracts\ParserInterface
      */
-    protected function getParser()
+    protected function getParser(): ParserInterface
     {
         return $this->app->make('browser-detect');
     }
@@ -91,8 +92,8 @@ class ParserTest extends TestCase
      * @dataProvider provideAgents
      * @param string $agent
      * @covers ::parse()
-     * @covers ::<protected>key()
-     * @covers ::<protected>process()
+     * @covers ::makeHashKey()
+     * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
      */
@@ -108,7 +109,7 @@ class ParserTest extends TestCase
     /**
      * @return array
      */
-    public function provideAgents()
+    public static function provideAgents()
     {
         return [
             ['Unknown'],
