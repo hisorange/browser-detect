@@ -5,6 +5,7 @@ on: workflow_dispatch
 
 jobs:
   matrix-build:
+    name: PHPUnit Tests Matrix
     runs-on: ubuntu-latest
 
     strategy:

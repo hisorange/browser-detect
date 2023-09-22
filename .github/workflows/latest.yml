@@ -5,6 +5,7 @@ on: [push, pull_request]
 
 jobs:
   test:
+    name: PHPUnit Tests
     runs-on: ubuntu-latest
 
     steps:
