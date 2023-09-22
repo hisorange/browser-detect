@@ -18,7 +18,7 @@ class MobileDetectTest extends TestCase
      * @dataProvider provideAgents
      *
      * @covers ::__invoke()
-     * @covers ::<protected>filter()
+     * @covers ::filter()
      *
      * @param string $agent
      * @param array  $changes

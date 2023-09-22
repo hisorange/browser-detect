@@ -15,8 +15,8 @@ class ParserTest extends TestCase
 {
     /**
      * @covers ::detect()
-     * @covers ::<protected>key()
-     * @covers ::<protected>process()
+     * @covers ::key()
+     * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
      */
@@ -92,8 +92,8 @@ class ParserTest extends TestCase
      * @dataProvider provideAgents
      * @param string $agent
      * @covers ::parse()
-     * @covers ::<protected>key()
-     * @covers ::<protected>process()
+     * @covers ::key()
+     * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
      */

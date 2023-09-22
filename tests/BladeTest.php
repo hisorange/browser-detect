@@ -23,7 +23,7 @@ class BladeTest extends TestCase
     /**
      * @dataProvider directiveProvider
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testDirectives($directive)
     {
@@ -44,7 +44,7 @@ class BladeTest extends TestCase
     /**
      * @dataProvider directiveValuedProvider
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testCheckingDirectives($directive, $expected)
     {
@@ -53,7 +53,7 @@ class BladeTest extends TestCase
 
     /**
      * @param string $directive
-     * @covers       ::<protected>registerDirectives()
+     * @covers       ::registerDirectives()
      */
     public function testBrowserDirectiveResult()
     {
@@ -62,7 +62,7 @@ class BladeTest extends TestCase
     }
 
     /**
-     * @covers ::<protected>registerDirectives()
+     * @covers ::registerDirectives()
      */
     public function testBrowserDirective()
     {

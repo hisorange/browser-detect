@@ -18,7 +18,7 @@ class DeviceDetectorTest extends TestCase
      * @dataProvider provideAgents
      *
      * @covers ::__invoke()
-     * @covers ::<protected>parseVersion()
+     * @covers ::parseVersion()
      *
      * @param string $agent
      * @param array  $changes
