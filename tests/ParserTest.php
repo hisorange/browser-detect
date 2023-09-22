@@ -15,7 +15,7 @@ class ParserTest extends TestCase
 {
     /**
      * @covers ::detect()
-     * @covers ::key()
+     * @covers ::makeHashKey()
      * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
@@ -92,7 +92,7 @@ class ParserTest extends TestCase
      * @dataProvider provideAgents
      * @param string $agent
      * @covers ::parse()
-     * @covers ::key()
+     * @covers ::makeHashKey()
      * @covers ::process()
      * @throws \PHPUnit_Framework_Exception
      * @throws \PHPUnit\Framework\Exception
