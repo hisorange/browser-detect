@@ -174,7 +174,7 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 If You are using Laravel then after installation run the following command:
 
 ```sh
-// Will copy a config file to ~/app/config/browser-detect.php
+# Will copy a config file to ~/app/config/browser-detect.php
 php artisan vendor:publish
 ```
 
