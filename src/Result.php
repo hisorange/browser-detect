@@ -459,7 +459,7 @@ class Result implements ResultInterface
     /**
      * @inheritdoc
      */
-    public function toArray()
+    public function toArray(): array
     {
         return get_object_vars($this);
     }

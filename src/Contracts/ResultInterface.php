@@ -257,5 +257,5 @@ interface ResultInterface extends JsonSerializable
      *
      * @return array
      */
-    public function toArray();
+    public function toArray(): array;
 }
