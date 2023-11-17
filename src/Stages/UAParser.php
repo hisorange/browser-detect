@@ -7,7 +7,7 @@ use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
- * Main parser to get the most of the info about the browser and it's operating system.
+ * Main parser to get the most of the info about the browser, and it's an operating system.
  *
  * @package hisorange\BrowserDetect\Stages
  */

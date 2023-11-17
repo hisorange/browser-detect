@@ -7,7 +7,7 @@ use hisorange\BrowserDetect\Contracts\ResultInterface;
 /**
  * The object is used for safely accessing the
  * result of the parsing, this is necessary
- * to allow us to change the implementaion
+ * to allow us to change the implementation
  * behind the values.
  *
  * @package hisorange\BrowserDetect

@@ -70,7 +70,7 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Only binding can occure here!
+     * Only binding can occur here!
      *
      * @inheritdoc
      */
