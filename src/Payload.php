@@ -46,9 +46,9 @@ class Payload implements PayloadInterface
     {
         if (array_key_exists($key, $this->store)) {
             return $this->store[$key];
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -69,7 +69,7 @@ class Payload implements PayloadInterface
         return array_merge(
             $this->store,
             [
-            'userAgent' => $this->agent,
+                'userAgent' => $this->agent,
             ]
         );
     }

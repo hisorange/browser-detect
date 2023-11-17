@@ -51,13 +51,13 @@ final class Parser implements ParserInterface
      * Parser constructor.
      *
      * @param CacheManager $cache
-     * @param Request      $request
-     * @param array        $config
+     * @param Request $request
+     * @param array $config
      */
     public function __construct($cache = null, $request = null, array $config = [])
     {
         if ($cache !== null) {
-            $this->cache   = $cache;
+            $this->cache = $cache;
         }
 
         if ($request !== null) {
@@ -85,12 +85,12 @@ final class Parser implements ParserInterface
     /**
      * Reflect calls to the result object.
      *
-     * @throws \hisorange\BrowserDetect\Exceptions\BadMethodCallException
-     *
      * @param string $method
-     * @param array  $params
+     * @param array $params
      *
      * @return mixed
+     * @throws \hisorange\BrowserDetect\Exceptions\BadMethodCallException
+     *
      */
     public function __call(string $method, array $params)
     {
@@ -150,9 +150,9 @@ final class Parser implements ParserInterface
     {
         if ($this->request !== null) {
             return $this->request->userAgent() ?? '';
-        } else {
-            return isset($_SERVER['HTTP_USER_AGENT']) ? ((string) $_SERVER['HTTP_USER_AGENT']) : '';
         }
+
+        return isset($_SERVER['HTTP_USER_AGENT']) ? ((string)$_SERVER['HTTP_USER_AGENT']) : '';
     }
 
     /**
@@ -185,7 +185,7 @@ final class Parser implements ParserInterface
     /**
      * Create a unique cache key for the user agent.
      *
-     * @param  string $agent
+     * @param string $agent
      * @return string
      */
     protected function makeHashKey(string $agent): string
@@ -196,7 +196,7 @@ final class Parser implements ParserInterface
     /**
      * Pipe the payload through the stages.
      *
-     * @param  string $agent
+     * @param string $agent
      * @return ResultInterface
      */
     protected function process(string $agent): ResultInterface
