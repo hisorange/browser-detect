@@ -55,7 +55,7 @@ class BrowserDetect implements StageInterface
         }
 
         // Popular browser vendors.
-        if (false !== stripos($payload->getValue('browserFamily') ?? '', 'chrom')) {
+        if (false !== stripos($payload->getValue('browserFamily') ?? '', 'chrome')) {
             $payload->setValue('isChrome', true);
         } elseif (false !== stripos($payload->getValue('browserFamily') ?? '', 'firefox')) {
             $payload->setValue('isFirefox', true);
