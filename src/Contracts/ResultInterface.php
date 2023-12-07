@@ -26,21 +26,21 @@ interface ResultInterface extends JsonSerializable
     public function userAgent(): string;
 
     /**
-     * Is this a mobile device.
+     * Is this a mobile device?
      *
      * @return bool
      */
     public function isMobile(): bool;
 
     /**
-     * Is this a tablet device.
+     * Is this a tablet device?
      *
      * @return bool
      */
     public function isTablet(): bool;
 
     /**
-     * Is this a desktop computer.
+     * Is this a desktop computer?
      *
      * @return bool
      */
@@ -54,7 +54,7 @@ interface ResultInterface extends JsonSerializable
     public function deviceType(): string;
 
     /**
-     * Is this a crawler / bot.
+     * Is this a crawler / bot?
      *
      * @return bool
      */
@@ -89,7 +89,7 @@ interface ResultInterface extends JsonSerializable
     public function isSafari(): bool;
 
     /**
-     * Is this browser an Microsoft Edge?
+     * Is this browser a Microsoft Edge?
      *
      * @return bool
      */
@@ -103,14 +103,14 @@ interface ResultInterface extends JsonSerializable
     public function isIE(): bool;
 
     /**
-     * Is this browser an android in app browser?
+     * Is this browser an android in-app browser?
      *
      * @return bool
      */
     public function isInApp(): bool;
 
     /**
-     * Is this an Internet Explorer X (or lower version).
+     * Is this an Internet Explorer X (or lower version)?
      *
      * @param integer $version
      * @param string  $operator
@@ -120,7 +120,7 @@ interface ResultInterface extends JsonSerializable
     public function isIEVersion(int $version, string $operator = '='): bool;
 
     /**
-     * Build a human readable browser name: Internet Explorer 7, Firefox 3.6
+     * Build a human-readable browser name: Internet Explorer 7, Firefox 3.6
      *
      * @return string
      */
@@ -134,7 +134,7 @@ interface ResultInterface extends JsonSerializable
     public function browserFamily(): string;
 
     /**
-     * Build human readable browser version. (cuts the trailing .0 parts)
+     * Build a human-readable browser version. (Cuts the trailing .0 parts)
      *
      * @return string
      */
@@ -169,7 +169,7 @@ interface ResultInterface extends JsonSerializable
     public function browserEngine(): string;
 
     /**
-     * Operating system's human friendly name like Windows XP, MacOS 10.
+     * Operating system's human-friendly name like Windows XP, macOS 10.
      *
      * @return string
      */
@@ -183,7 +183,7 @@ interface ResultInterface extends JsonSerializable
     public function platformFamily(): string;
 
     /**
-     * Build human readable os version. (cuts the trailing .0 parts)
+     * Build a human-readable os version. (cuts the trailing .0 parts)
      *
      * @return string
      */
@@ -225,7 +225,7 @@ interface ResultInterface extends JsonSerializable
     public function isLinux(): bool;
 
     /**
-     * Is this a mac operating system?
+     * Is this a Mac operating system?
      *
      * @return bool
      */

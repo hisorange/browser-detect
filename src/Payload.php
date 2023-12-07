@@ -5,7 +5,7 @@ namespace hisorange\BrowserDetect;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
 /**
- * This class is passed down in the pipeline
+ * This class is passed down in the pipeline,
  * and each stage makes the changes on this
  * state carrier object.
  *
