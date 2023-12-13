@@ -91,7 +91,7 @@ class DeviceDetector implements StageInterface
      * @param  string $prefix
      * @return array
      */
-    protected function parseVersion(string $version, string $prefix)
+    protected function parseVersion(string $version, string $prefix): array
     {
         $response = [];
 
