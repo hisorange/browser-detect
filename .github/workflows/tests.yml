@@ -13,11 +13,7 @@ jobs:
   test:
     name: PHPUnit Tests
     runs-on: ubuntu-latest
-
-  matrix-build:
-    name: PHPUnit Tests Matrix
-    runs-on: ubuntu-latest
-
+    
     strategy:
       fail-fast: false
       matrix:
