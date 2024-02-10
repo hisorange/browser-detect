@@ -15,15 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         php-version: [8.2, 8.3]
-        # these versions supports php8 in their composer.json
         laravel-version:
           [
-            9.52,
-            10.1,
-            10.2,
-            10.3,
-            10.4,
-            "^10", # Test latest version
+            "9.*", # Test latest version
+            "10.*", # Test latest version
           ]
 
     steps:
@@ -43,7 +38,9 @@ jobs:
         run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
 
       - name: Vendor update
-        run: composer update --prefer-source --no-interaction
+        run:
+          composer config minimum-stability dev
+          composer update --prefer-stable --prefer-dist --no-progress
 
       - name: Run test suites
         run: composer run-script test
