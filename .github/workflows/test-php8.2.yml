@@ -1,7 +1,10 @@
 name: PHP >8.2
 
-# Manual run
-on: workflow_dispatch
+# Run on push, PR and manually
+on: 
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   matrix-build:
