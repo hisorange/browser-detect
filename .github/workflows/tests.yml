@@ -1,0 +1,68 @@
+name: "Tests"
+
+# Triggers the workflow on push or pull request events
+on: 
+  push:
+    branches:
+      - stable
+      - develop
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: PHPUnit Tests
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: [8.1, 8.2, 8.3]
+        laravel-version:
+          [
+            "9.*", # Test Laravel 9
+            "10.*", # Test latest version
+          ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Composer self update
+        run: composer self-update >/dev/null 2>&1
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ matrix.laravel-version }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-${{ matrix.laravel-version }}-${{ matrix.php-version }}-
+      
+      - name: Install dependencies
+        run: composer install --prefer-dist
+
+      - name: Lock laravel/framework version
+        env:
+          LARAVEL_VERSION: ${{ matrix.laravel-version }}
+        run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
+
+      - name: Run simple test suites
+        if: matrix.laravel-version == '9.*'
+        run: composer run-script test-dev
+
+      - name: Run test suites
+        if: matrix.laravel-version != '9.*'
+        run: composer run-script test
+
+      - name: Coveralls
+        if: matrix.laravel-version != '9.*'
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: php vendor/bin/php-coveralls -v
