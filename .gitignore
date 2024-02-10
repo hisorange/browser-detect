@@ -8,3 +8,6 @@ demo/cache
 .coveralls.yml export-ignore
 phpstan.neon export-ignore
 phpunit.xml export-ignore
+
+# Packages should not include a lockfile
+composer.lock

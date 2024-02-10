@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [8.2, 8.3]
+        php-version: [8.1, 8.2, 8.3]
         laravel-version:
           [
             "9.*", # Test Laravel 9
@@ -36,28 +36,33 @@ jobs:
 
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
+      
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-lock
 
       - name: Lock laravel/framework version
         env:
           LARAVEL_VERSION: ${{ matrix.laravel-version }}
         run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
 
-      - name: Vendor update
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer update --prefer-stable --no-interaction
+      - name: Run simple test suites
+        if: matrix.laravel-version == '9.*'
+        run: composer run-script test-dev
 
       - name: Run test suites
+        if: matrix.laravel-version != '9.*'
         run: composer run-script test
 
       - name: Coveralls
+        if: matrix.laravel-version != '9.*'
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: php vendor/bin/php-coveralls -v
