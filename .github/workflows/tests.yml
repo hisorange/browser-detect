@@ -1,6 +1,6 @@
-name: PHP tests
+name: "Test on S"
 
-# Run on push, PR and manually
+# Triggers the workflow on push or pull request events
 on: 
   push:
     branches:
@@ -10,6 +10,10 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    name: PHPUnit Tests
+    runs-on: ubuntu-latest
+
   matrix-build:
     name: PHPUnit Tests Matrix
     runs-on: ubuntu-latest
@@ -20,10 +24,9 @@ jobs:
         php-version: [8.2, 8.3]
         laravel-version:
           [
-            "9.*", # Test latest version
+            "9.*", # Test Laravel 9
             "10.*", # Test latest version
           ]
-
     steps:
       - uses: actions/checkout@v3
 
@@ -32,8 +35,19 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
 
-      - name: Composer update
+      - name: Composer self update
         run: composer self-update >/dev/null 2>&1
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
 
       - name: Lock laravel/framework version
         env:
@@ -41,15 +55,13 @@ jobs:
         run: composer require laravel/framework:${{ matrix.laravel-version }} --no-update
 
       - name: Vendor update
-        run:
-          composer config minimum-stability dev &&
-          composer update --prefer-stable --prefer-dist --no-progress
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer update --prefer-source --no-interaction
 
       - name: Run test suites
         run: composer run-script test
 
-      # - name: Analyze
-      #   run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
-
-      # - name: phpcs
-      #   run: php vendor/bin/phpcs --standard=PSR12 ./src/
+      - name: Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: php vendor/bin/php-coveralls -v
