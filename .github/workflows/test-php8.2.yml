@@ -1,4 +1,4 @@
-name: PHP8.2
+name: PHP >8.2
 
 # Manual run
 on: workflow_dispatch
@@ -11,16 +11,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: [8.2]
+        php-version: [8.2, 8.3]
         # these versions supports php8 in their composer.json
         laravel-version:
           [
             9.52,
-            10.0,
             10.1,
             10.2,
             10.3,
             10.4,
+            "^10", # Test latest version
           ]
 
     steps:
