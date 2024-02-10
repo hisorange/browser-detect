@@ -1,8 +1,11 @@
-name: PHP >8.2
+name: PHP tests
 
 # Run on push, PR and manually
 on: 
   push:
+    branches:
+      - stable
+      - develop
   pull_request:
   workflow_dispatch:
 
