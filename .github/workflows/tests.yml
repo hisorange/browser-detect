@@ -46,7 +46,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       
       - name: Install dependencies
-        run: composer install --prefer-dist --no-lock
+        run: composer install --prefer-dist
 
       - name: Lock laravel/framework version
         env:
