@@ -52,7 +52,7 @@ jobs:
 
       - name: Vendor update
         if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer update --prefer-source --no-interaction
+        run: composer update --prefer-stable --no-interaction
 
       - name: Run test suites
         run: composer run-script test
