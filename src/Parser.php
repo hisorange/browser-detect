@@ -13,6 +13,7 @@ use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
  * Manages the parsing mechanism.
  *
  * @package hisorange\BrowserDetect
+ * @mixin ResultInterface
  */
 final class Parser implements ParserInterface
 {
