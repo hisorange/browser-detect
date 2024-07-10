@@ -10,7 +10,7 @@ namespace hisorange\BrowserDetect\Contracts;
 interface ParserInterface
 {
     /**
-     * Get a result object from the current visitors user agent string.
+     * Get a result object from the current visitor user agent string.
      *
      * @return ResultInterface
      */

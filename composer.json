@@ -24,7 +24,7 @@
     "php": "^8.1",
     "ua-parser/uap-php": "~3.9",
     "league/pipeline": "^1.0",
-    "mobiledetect/mobiledetectlib": "~3.74",
+    "mobiledetect/mobiledetectlib": "~4.0",
     "jaybizzle/crawler-detect": "~1.2",
     "matomo/device-detector": "^6.0"
   },
@@ -55,7 +55,7 @@
     }
   },
   "scripts": {
-    "test-dev": "phpunit --coverage-text",
+    "test-dev": "phpunit",
     "test": "phpunit --coverage-clover ./tests/logs/clover.xml"
   }
 }

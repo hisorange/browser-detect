@@ -28,7 +28,7 @@ interface PayloadInterface
 
     /**
      * Get a value if exists in the data schema,
-     * returns null if the key does not exists.
+     * returns null if the key does not exist.
      *
      * @param string $key Temporary data key.
      *

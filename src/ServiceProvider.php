@@ -70,13 +70,13 @@ class ServiceProvider extends BaseServiceProvider
     }
 
     /**
-     * Only binding can occure here!
+     * Only binding can occur here!
      *
      * @inheritdoc
      */
     public function register(): void
     {
-        $this->app->singleton('browser-detect', function ($app) {
+        $this->app->bind('browser-detect', function ($app) {
             return new Parser($app->make('cache'), $app->make('request'), $app->make('config')['browser-detect'] ?? []);
         });
     }

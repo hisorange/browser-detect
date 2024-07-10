@@ -89,7 +89,7 @@ Easy peasy, ain't it?
 
 ---
 
-The following matrix is has been continuously tested by the great and awesome **GitHub Actions**!
+The following matrix has been continuously tested by the great and awesome **GitHub Actions**!
 
 |    -----     | Browser Detect 1.x | Browser Detect 2.x | Browser Detect 3.x | Browser Detect 4.x | Browser Detect 5.x |
 | :----------: | :----------------: | :----------------: | :----------------: | :----------------: | :----------------: |
@@ -174,7 +174,7 @@ Every call on the **Browser** facade is proxied to a result object, so the follo
 If You are using Laravel then after installation run the following command:
 
 ```sh
-// Will copy a config file to ~/app/config/browser-detect.php
+# Will copy a config file to ~/app/config/browser-detect.php
 php artisan vendor:publish
 ```
 

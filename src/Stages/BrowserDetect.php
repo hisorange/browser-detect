@@ -73,7 +73,7 @@ class BrowserDetect implements StageInterface
             $payload->setValue('isEdge', true);
         }
 
-        // Human readable browser version.
+        // Human-readable browser version.
         $payload->setValue(
             'browserVersion',
             $this->trimVersion(
@@ -94,7 +94,7 @@ class BrowserDetect implements StageInterface
                 $payload->getValue('browserVersion')
         ));
 
-        // Human readable platform version.
+        // Human-readable platform version.
         $payload->setValue(
             'platformVersion',
             $this->trimVersion(
