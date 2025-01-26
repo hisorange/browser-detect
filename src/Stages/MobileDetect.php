@@ -2,6 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use Closure;
 use Detection\MobileDetect as Mobile_Detect;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
@@ -13,11 +14,7 @@ use hisorange\BrowserDetect\Contracts\PayloadInterface;
  */
 class MobileDetect implements StageInterface
 {
-    /**
-     * @param  PayloadInterface $payload
-     * @return PayloadInterface
-     */
-    public function __invoke(PayloadInterface $payload): PayloadInterface
+    public function __invoke(PayloadInterface $payload, Closure $next)
     {
         $result = new Mobile_Detect();
         $result->setHttpHeaders(['HTTP_FAKE_HEADER' => 'Mobile\Detect\Header']);
@@ -35,7 +32,7 @@ class MobileDetect implements StageInterface
         $payload->setValue('platformFamily', $this->filter($result, Mobile_Detect::getOperatingSystems()));
         $payload->setValue('browserFamily', $this->filter($result, Mobile_Detect::getBrowsers()));
 
-        return $payload;
+        return $next($payload);
     }
 
     /**

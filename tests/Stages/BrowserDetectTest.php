@@ -2,7 +2,9 @@
 
 namespace hisorange\BrowserDetect\Test\Stages;
 
+use Closure;
 use hisorange\BrowserDetect\Payload;
+use hisorange\BrowserDetect\Result;
 use hisorange\BrowserDetect\Test\TestCase;
 use hisorange\BrowserDetect\Stages\BrowserDetect;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
@@ -37,7 +39,7 @@ class BrowserDetectTest extends TestCase
             $payload->setValue($k, $v);
         }
 
-        $result = $stage($payload);
+        $result = $stage($payload, $this->getResultClosure());
 
         $this->assertInstanceOf(ResultInterface::class, $result);
 
@@ -56,7 +58,7 @@ class BrowserDetectTest extends TestCase
         $stage  = new BrowserDetect;
         $payload = new Payload('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/W.X.Y.Z Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
 
-        $result = $stage($payload);
+        $result = $stage($payload, $this->getResultClosure());
 
         $this->assertTrue($result->isBot());
         $this->assertFalse($result->isMobile());
@@ -75,7 +77,7 @@ class BrowserDetectTest extends TestCase
         $payload = new Payload('Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko)' .
             'Chrome/W.X.Y.Z Mobile Safari/537.36 Prerender (+https://github.com/prerender/prerender)');
 
-        $result = $stage($payload);
+        $result = $stage($payload, $this->getResultClosure());
 
         $this->assertTrue($result->isBot());
         $this->assertTrue($result->isMobile());
@@ -92,21 +94,23 @@ class BrowserDetectTest extends TestCase
      */
     public function testInAppWebView()
     {
+        $next = fn ($payload) => new Result($payload->toArray());
+
         $stage  = new BrowserDetect;
         $payload = new Payload('WebView');
-        $result = $stage($payload);
+        $result = $stage($payload, $next);
         $this->assertTrue($result->isInApp());
 
         $stage  = new BrowserDetect;
         $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_1 like Mac OS X) ' .
             'AppleWebKit/602.1.32 (KHTML, like Gecko) Mobile/14A403 Twitter for iPhone');
-        $result = $stage($payload);
+        $result = $stage($payload, $next);
         $this->assertTrue($result->isInApp());
 
         $stage  = new BrowserDetect;
         $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 10_1_1 like Mac OS X) ' .
             'AppleWebKit/602.2.14 (KHTML, like Gecko) Mobile/14B100 MicroMessenger/6.3.30 NetType/WIFI Language/en');
-        $result = $stage($payload);
+        $result = $stage($payload, $next);
         $this->assertTrue($result->isInApp());
     }
 
@@ -122,7 +126,7 @@ class BrowserDetectTest extends TestCase
         $stage  = new BrowserDetect;
         $payload = new Payload('Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_5 like Mac OS X) ' .
             'AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13G36');
-        $result = $stage($payload);
+        $result = $stage($payload, $this->getResultClosure());
         $this->assertTrue($result->isInApp());
     }
 
@@ -138,7 +142,7 @@ class BrowserDetectTest extends TestCase
         $stage  = new BrowserDetect;
         $payload = new Payload('Mozilla/5.0 (Linux; Android 5.1.1; Nexus 5 Build/LMY48B; wv) ' .
             'AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/43.0.2357.65 Mobile Safari/537.36');
-        $result = $stage($payload);
+        $result = $stage($payload, $this->getResultClosure());
         $this->assertTrue($result->isInApp());
     }
 

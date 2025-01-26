@@ -2,6 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use Closure;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use DeviceDetector\Parser\Device\AbstractDeviceParser;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
@@ -13,11 +14,7 @@ use hisorange\BrowserDetect\Contracts\PayloadInterface;
  */
 class DeviceDetector implements StageInterface
 {
-    /**
-     * @param  PayloadInterface $payload
-     * @return PayloadInterface
-     */
-    public function __invoke(PayloadInterface $payload): PayloadInterface
+    public function __invoke(PayloadInterface $payload, Closure $next)
     {
         // Skipping on bots, the detector is set to ignore bot details.
         if (! $payload->getValue('isBot')) {
@@ -81,7 +78,7 @@ class DeviceDetector implements StageInterface
             }
         }
 
-        return $payload;
+        return $next($payload);
     }
 
     /**

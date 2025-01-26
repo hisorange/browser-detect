@@ -29,7 +29,7 @@ class UAParserTest extends TestCase
         $stage  = new UAParser;
         $result = new Payload($agent);
 
-        $stage($result);
+        $stage($result, $this->getNext());
 
         foreach ($changes as $key => $expected) {
             $this->assertSame($expected, $result->getValue($key), 'Changes are not matched ' . print_r($changes, true) . ' with ' . $key . ' being ' . var_export($result->getValue($key), true));

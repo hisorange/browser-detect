@@ -2,7 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
-use hisorange\BrowserDetect\Result;
+use Closure;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
@@ -18,7 +18,7 @@ class BrowserDetect implements StageInterface
      * @param  PayloadInterface $payload
      * @return ResultInterface
      */
-    public function __invoke(PayloadInterface $payload): ResultInterface
+    public function __invoke(PayloadInterface $payload, Closure $next)
     {
         // Fix issue when the device is detected at tablet and mobile in the same time.
         if (!$payload->getValue('isMobile') && !$payload->getValue('isTablet')) {
@@ -132,7 +132,7 @@ class BrowserDetect implements StageInterface
         # Request: https://github.com/hisorange/browser-detect/issues/156
         $payload->setValue('isInApp', $this->detectIsInApp($payload));
 
-        return new Result($payload->toArray());
+        return $next($payload);
     }
 
     /**

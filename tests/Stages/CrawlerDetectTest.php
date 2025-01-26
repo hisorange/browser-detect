@@ -27,7 +27,7 @@ class CrawlerDetectTest extends TestCase
         $stage  = new CrawlerDetect;
         $result = new Payload($agent);
 
-        $stage($result);
+        $stage($result, $this->getNext());
 
         $this->assertSame($expected, $result->getValue('isBot'), sprintf('User agent "%s" failing the crawler test.', $agent));
     }

@@ -1,7 +1,10 @@
 <?php
 namespace hisorange\BrowserDetect\Test;
 
+use Closure;
 use hisorange\BrowserDetect\Facade;
+use hisorange\BrowserDetect\Payload;
+use hisorange\BrowserDetect\Result;
 use hisorange\BrowserDetect\ServiceProvider;
 
 /**
@@ -37,5 +40,15 @@ class TestCase extends \Orchestra\Testbench\TestCase
         return [
             'Browser' => Facade::class,
         ];
+    }
+
+    protected function getNext(): Closure
+    {
+        return fn (Payload $payload) => $payload;
+    }
+
+    protected function getResultClosure(): Closure
+    {
+        return fn (Payload $payload) => new Result($payload->toArray());
     }
 }

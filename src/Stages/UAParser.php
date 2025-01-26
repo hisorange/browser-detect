@@ -2,6 +2,8 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use Closure;
+use UAParser\Exception\FileNotFoundException;
 use UAParser\Parser;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
@@ -14,12 +16,9 @@ use hisorange\BrowserDetect\Contracts\PayloadInterface;
 class UAParser implements StageInterface
 {
     /**
-     * @throws \UAParser\Exception\FileNotFoundException
-     *
-     * @param  PayloadInterface $payload
-     * @return PayloadInterface
+     * @throws FileNotFoundException
      */
-    public function __invoke(PayloadInterface $payload): PayloadInterface
+    public function __invoke(PayloadInterface $payload, Closure $next)
     {
         $parser = Parser::create();
         $result = $parser->parse($payload->getAgent());
@@ -43,6 +42,6 @@ class UAParser implements StageInterface
             $payload->setValue('deviceModel', (string) $result->device->model);
         }
 
-        return $payload;
+        return $next($payload);
     }
 }

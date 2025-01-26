@@ -2,6 +2,7 @@
 
 namespace hisorange\BrowserDetect\Stages;
 
+use Closure;
 use hisorange\BrowserDetect\Contracts\StageInterface;
 use hisorange\BrowserDetect\Contracts\PayloadInterface;
 
@@ -12,18 +13,14 @@ use hisorange\BrowserDetect\Contracts\PayloadInterface;
  */
 class CrawlerDetect implements StageInterface
 {
-    /**
-     * @param  PayloadInterface $payload
-     * @return PayloadInterface
-     */
-    public function __invoke(PayloadInterface $payload): PayloadInterface
+    public function __invoke(PayloadInterface $payload, Closure $next)
     {
-        $crawler          = new \Jaybizzle\CrawlerDetect\CrawlerDetect(
+        $crawler = new \Jaybizzle\CrawlerDetect\CrawlerDetect(
             ['HTTP_FAKE_HEADER' => 'Crawler\Detect'],
             $payload->getAgent()
         );
         $payload->setValue('isBot', $crawler->isCrawler());
 
-        return $payload;
+        return $next($payload);
     }
 }

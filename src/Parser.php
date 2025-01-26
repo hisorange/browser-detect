@@ -3,11 +3,11 @@
 namespace hisorange\BrowserDetect;
 
 use Illuminate\Http\Request;
-use League\Pipeline\Pipeline;
 use Illuminate\Cache\CacheManager;
 use hisorange\BrowserDetect\Contracts\ParserInterface;
 use hisorange\BrowserDetect\Contracts\ResultInterface;
 use hisorange\BrowserDetect\Exceptions\BadMethodCallException;
+use Illuminate\Support\Facades\Pipeline;
 
 /**
  * Manages the parsing mechanism.
@@ -201,12 +201,14 @@ final class Parser implements ParserInterface
      */
     protected function process(string $agent): ResultInterface
     {
-        return (new Pipeline())
-            ->pipe(new Stages\UAParser())
-            ->pipe(new Stages\MobileDetect())
-            ->pipe(new Stages\CrawlerDetect())
-            ->pipe(new Stages\DeviceDetector())
-            ->pipe(new Stages\BrowserDetect())
-            ->process(new Payload($agent));
+        return Pipeline::send(new Payload($agent))
+            ->through([
+                Stages\UAParser::class,
+                Stages\MobileDetect::class,
+                Stages\CrawlerDetect::class,
+                Stages\DeviceDetector::class,
+                Stages\BrowserDetect::class,
+            ])
+            ->then(fn (Payload $payload) => new Result($payload->toArray()));
     }
 }
