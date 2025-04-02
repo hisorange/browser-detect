@@ -23,6 +23,7 @@ jobs:
             "9.*", # Test Laravel 9
             "10.*", # Test Laravel 10
             "11.*", # Test  Laravel 11
+            "12.*", # Test  Laravel 12
           ]
     steps:
       - uses: actions/checkout@v4
