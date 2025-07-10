@@ -54,7 +54,7 @@ final class Parser implements ParserInterface
      * @param Request      $request
      * @param array        $config
      */
-    public function __construct($cache = null, $request = null, array $config = [])
+    public function __construct(?CacheManager $cache = null, ?Request $request = null, array $config = [])
     {
         if ($cache !== null) {
             $this->cache   = $cache;
