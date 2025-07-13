@@ -21,10 +21,10 @@
     }
   ],
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "ua-parser/uap-php": "~3.9",
-    "league/pipeline": "^1.0",
-    "mobiledetect/mobiledetectlib": "~4.0",
+    "league/pipeline": "^1.1",
+    "mobiledetect/mobiledetectlib": "~4.8",
     "jaybizzle/crawler-detect": "~1.2",
     "matomo/device-detector": "^6.0"
   },
