@@ -1,61 +1,61 @@
 {
-  "name": "hisorange/browser-detect",
-  "description": "Browser & Mobile detection package for Laravel.",
-  "keywords": [
-    "laravel",
-    "user-agent",
-    "browser",
-    "mobile",
-    "detect",
-    "tablet",
-    "user agent",
-    "analyse",
-    "hisorange"
-  ],
-  "homepage": "https://github.com/hisorange/browser-detect",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Varga Zsolt",
-      "email": "hello@hisorange.me"
+    "name": "hisorange/browser-detect",
+    "description": "Browser & Mobile detection package for Laravel.",
+    "keywords": [
+        "laravel",
+        "user-agent",
+        "browser",
+        "mobile",
+        "detect",
+        "tablet",
+        "user agent",
+        "analyse",
+        "hisorange"
+    ],
+    "homepage": "https://github.com/hisorange/browser-detect",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Varga Zsolt",
+            "email": "hello@hisorange.me"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ua-parser/uap-php": "~3.9",
+        "league/pipeline": "^1.0",
+        "mobiledetect/mobiledetectlib": "~4.0",
+        "jaybizzle/crawler-detect": "~1.2",
+        "matomo/device-detector": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0 || ~10.0 || ^12.5.12",
+        "orchestra/testbench": "~7.0 || ~8.0 || ^11.0",
+        "php-coveralls/php-coveralls": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hisorange\\BrowserDetect\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "hisorange\\BrowserDetect\\Test\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "hisorange\\BrowserDetect\\ServiceProvider"
+            ],
+            "aliases": {
+                "Browser": "hisorange\\BrowserDetect\\Facade"
+            }
+        }
+    },
+    "scripts": {
+        "test-dev": "phpunit",
+        "test": "phpunit --coverage-clover ./tests/logs/clover.xml"
     }
-  ],
-  "require": {
-    "php": "^8.1",
-    "ua-parser/uap-php": "~3.9",
-    "league/pipeline": "^1.0",
-    "mobiledetect/mobiledetectlib": "~4.0",
-    "jaybizzle/crawler-detect": "~1.2",
-    "matomo/device-detector": "^6.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~9.0 || ~10.0",
-    "orchestra/testbench": "~7.0 || ~8.0",
-    "php-coveralls/php-coveralls": "~2.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "hisorange\\BrowserDetect\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "hisorange\\BrowserDetect\\Test\\": "tests/"
-    }
-  },
-  "minimum-stability": "stable",
-  "extra": {
-    "laravel": {
-      "providers": [
-        "hisorange\\BrowserDetect\\ServiceProvider"
-      ],
-      "aliases": {
-        "Browser": "hisorange\\BrowserDetect\\Facade"
-      }
-    }
-  },
-  "scripts": {
-    "test-dev": "phpunit",
-    "test": "phpunit --coverage-clover ./tests/logs/clover.xml"
-  }
 }
