@@ -1,27 +1,21 @@
 name: PHP8.2
 
-# Manual run
 on: workflow_dispatch
 
 jobs:
   matrix-build:
     name: PHPUnit Tests Matrix
+
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        php-version: [8.2]
-        # these versions supports php8 in their composer.json
-        laravel-version:
-          [
-            9.52,
-            10.0,
-            10.1,
-            10.2,
-            10.3,
-            10.4,
-          ]
+        php-version: [8.2, '8.3', '8.4', '8.5']
+        laravel-version: [9.52, 10.0, 10.1, 10.2, 10.3, 10.4, '13.0']
+        exclude:
+          - laravel-version: '13.0'
+            php-version: 8.2
 
     steps:
       - uses: actions/checkout@v3
@@ -44,9 +38,3 @@ jobs:
 
       - name: Run test suites
         run: composer run-script test
-
-      # - name: Analyze
-      #   run: vendor/bin/phpstan analyse -c phpstan.neon ./src/
-
-      # - name: phpcs
-      #   run: php vendor/bin/phpcs --standard=PSR12 ./src/
