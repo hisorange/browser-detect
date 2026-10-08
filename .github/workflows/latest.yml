@@ -21,8 +21,8 @@ jobs:
 
       - name: Lock laravel/framework version
         env:
-          LARAVEL_VERSION: 12.69.3
-        run: composer require laravel/framework:12.69.3 --no-update -W
+          LARAVEL_VERSION: 13.35.0
+        run: composer require laravel/framework:13.35.0 --no-update -W
 
       - name: Vendor update
         run: composer update --prefer-source --no-interaction

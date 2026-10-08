@@ -8,7 +8,11 @@ return [
         /**
          * Cache prefix, the user agent string will be hashed and appended at the end.
          */
-        'prefix' => 'bd4_'
+        'prefix' => 'bd4_',
+        // Laravel 13 fix
+        'serializable_classes' => [
+            \hisorange\BrowserDetect\Result::class,
+        ],
     ],
     'security' => [
         /**
