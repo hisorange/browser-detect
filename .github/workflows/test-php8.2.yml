@@ -13,14 +13,8 @@ jobs:
       matrix:
         php-version: [8.2]
         # these versions supports php8 in their composer.json
-        laravel-version:
-          [
-            9.52,
-            10.0,
-            10.1,
-            10.2,
-            10.3,
-            10.4,
+        laravel-version: [
+            11.57, # Last release
           ]
 
     steps:

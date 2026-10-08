@@ -30,7 +30,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "~9.0 || ~10.0",
-    "orchestra/testbench": "~7.0 || ~8.0",
+    "orchestra/testbench": "~7.0 || ~8.0 || ~9.0",
     "php-coveralls/php-coveralls": "~2.0"
   },
   "autoload": {
@@ -57,5 +57,12 @@
   "scripts": {
     "test-dev": "phpunit",
     "test": "phpunit --coverage-clover ./tests/logs/clover.xml"
+  },
+  "config": {
+    "policy": {
+      "advisories": {
+        "block": false
+      }
+    }
   }
 }

@@ -1,3 +1,11 @@
+### Changes in 5.0.1
+
+---
+
+- Support for Laravel 11.x
+- Test on PHP 8.3 too
+- Upgraded the test harness to orchestra/testbench 9.x
+
 ### Changes in 5.0.0
 
 ---
