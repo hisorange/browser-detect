@@ -1,4 +1,4 @@
-name: PHP8.2
+name: PHP8.3
 
 # Manual run
 on: workflow_dispatch
@@ -18,7 +18,7 @@ jobs:
           ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@master
