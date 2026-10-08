@@ -1,3 +1,10 @@
+### Changes in 6.0.0
+---
+
+- Upgraded to PHP 8.5
+- Minimum Laravel version is 13.x
+
+
 ### Changes in 5.1.0
 
 ---
