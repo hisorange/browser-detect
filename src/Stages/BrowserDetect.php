@@ -39,7 +39,7 @@ class BrowserDetect implements StageInterface
         if (strpos($payload->getAgent(), 'Prerender') !== false) {
             $payload->setValue('isBot', true);
             $payload->setValue('isMobile', false);
-            $payload->setValue('isTable', false);
+            $payload->setValue('isTablet', false);
             $payload->setValue('isDesktop', true);
         }
 
@@ -50,7 +50,7 @@ class BrowserDetect implements StageInterface
         ) {
             $payload->setValue('isBot', true);
             $payload->setValue('isMobile', true);
-            $payload->setValue('isTable', false);
+            $payload->setValue('isTablet', false);
             $payload->setValue('isDesktop', false);
         }
 

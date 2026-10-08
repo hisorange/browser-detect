@@ -1,3 +1,14 @@
+### Changes in 5.1.0
+
+---
+
+- Support for Laravel 11.x
+- Support for Laravel 12.x
+- Support for Laravel 13.x
+- Test on PHP 8.3 too
+- Upgraded the test harness to orchestra/testbench 10.x
+- General modernization to use the newest dependencies
+
 ### Changes in 5.0.0
 
 ---
