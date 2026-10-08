@@ -30,7 +30,7 @@ Yep, it's ready to be used by You! ^.^
 In Your code just call the **Browser** facade:
 
 ```php
-use Browser;
+use hisorange\BrowserDetect\Facade as Browser;
 
 // Determine the user's device type is simple as this:
 $isMobile = Browser::isMobile();
