@@ -3,7 +3,6 @@
 ## Browser Detection v5.0 by _[hisorange](https://hisorange.me)_
 
 [![Latest Stable Version](https://poser.pugx.org/hisorange/browser-detect/v/stable)](https://packagist.org/packages/hisorange/browser-detect)
-[![Build](https://github.com/hisorange/browser-detect/actions/workflows/latest.yml/badge.svg?branch=stable)](https://github.com/hisorange/browser-detect/actions/workflows/latest.yml)
 [![Coverage Status](https://coveralls.io/repos/github/hisorange/browser-detect/badge.svg)](https://coveralls.io/github/hisorange/browser-detect)
 [![Total Downloads](https://poser.pugx.org/hisorange/browser-detect/downloads)](https://packagist.org/packages/hisorange/browser-detect)
 [![License](https://poser.pugx.org/hisorange/browser-detect/license)](https://packagist.org/packages/hisorange/browser-detect)
